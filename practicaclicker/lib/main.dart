@@ -10,6 +10,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+        title: "Clicker",
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Clicker"),
+          ),
+        ));
+  }
+}
+
+class StatesApp extends StatefulWidget {
+  @override
+  StatesAppState createState() => StatesAppState();
+}
+
+class StatesAppState extends State<StatesApp> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }
