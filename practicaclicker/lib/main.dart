@@ -1,5 +1,5 @@
-import 'package:clicker_aplicacion/clicker.dart';
 import 'package:flutter/material.dart';
+import 'package:practicaclicker/clicker.dart';
 import 'login.dart';
 
 void main() {
