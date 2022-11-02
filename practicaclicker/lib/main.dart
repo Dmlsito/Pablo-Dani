@@ -1,4 +1,6 @@
+import 'package:clicker_aplicacion/clicker.dart';
 import 'package:flutter/material.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,24 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Clicker",
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Clicker"),
-          ),
-        ));
-  }
-}
-
-class StatesApp extends StatefulWidget {
-  @override
-  StatesAppState createState() => StatesAppState();
-}
-
-class StatesAppState extends State<StatesApp> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+      title: "Clicker",
+      initialRoute: "/Clicker",
+      routes: {
+        "/Clicker": (BuildContext context) => ClickerMain(),
+        "/Login": (BuildContext context) => Login(),
+      },
+    );
   }
 }
