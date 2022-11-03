@@ -20,8 +20,15 @@ class StatesApp extends StatefulWidget {
 }
 
 class StatesAppState extends State<StatesApp> {
+  int num = 50;
+  int indexItem = 0;
+  //Lista de los items
+  List<Widget> items = [
+    Item1(),
+    Item2(),
+    Item3(),
+  ];
   @override
-  int contador = 100;
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
@@ -59,18 +66,52 @@ class StatesAppState extends State<StatesApp> {
           ])),
       appBar: AppBar(
           title: Center(child: Text("Clicker", textAlign: TextAlign.center))),
-    );
-  }
+      //Explicacion: ya teniendo controlado el index de los items del navigationsBar he creado una lista de Widgets, los cuales estan definidos abajo,
+      //entonces, imaginemonos que queremos utilizar el item1, lo unico que tenemos que hacer el clickar en el item1
+      //se guardara el index de este en la variable indexItem dsp se llama en un container a la lista pasandole el indexItem, esto se correspondera al Widget Item1
+      body: Container(child: items[indexItem]),
+      //Explicacion: el currentIndex  es el index que representara cada BottomNavigationBarItemm de la lista items, como nosotros queremos
+      // que al clickar en un item "lo tengamos", tenemos que poder gestionar ese currentIndex, para eso creamos una variable llamda indexItem,
+      //con el metodo onTap decimos que el index del item que estemos clicando se guarde en esa variable y luego fuera el onTap decimo que el currentIndex es igual a indexItem
 
-  void disminuir() {
-    setState(() {
-      contador--;
-    });
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: indexItem,
+        onTap: (index) {
+          setState(() {
+            indexItem = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Item1"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Item2"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Item3"),
+        ],
+      ),
+    );
   }
 }
 
+class Item1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text("Item1"));
+  }
+}
 
-//Lo que teniamos antes aqui comentado -> 
+class Item2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text("Item2"));
+  }
+}
+
+class Item3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text("Item3"));
+  }
+}
+//Lo que teniamos antes aqui comentado ->
 //  body: Center(
 //         child: Column(children: [
 //           InkWell(
