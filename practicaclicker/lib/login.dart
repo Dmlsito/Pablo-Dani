@@ -26,21 +26,13 @@ class Login extends StatelessWidget {
                   )),
             ),
             ListTile(
-              title: Text("Item 1"),
+              title: Text("Ranking"),
               leading: Icon(Icons.integration_instructions),
             ),
             ListTile(
-              title: Text("Item 2"),
+              title: Text("Contacto DEVS"),
               leading: Icon(Icons.integration_instructions),
-            ),
-            ListTile(
-              title: Text("Item 3"),
-              leading: Icon(Icons.integration_instructions),
-            ),
-            ListTile(
-              title: Text("ITEM DE PRUEBA DE GITHUB"),
-              leading: Icon(Icons.integration_instructions),
-            ),
+            ),            
           ])),
     );
   }
