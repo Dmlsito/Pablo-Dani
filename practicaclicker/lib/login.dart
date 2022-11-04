@@ -32,7 +32,7 @@ class Login extends StatelessWidget {
             ListTile(
               title: Text("Contacto DEVS"),
               leading: Icon(Icons.integration_instructions),
-            ),            
+            ),
           ])),
     );
   }

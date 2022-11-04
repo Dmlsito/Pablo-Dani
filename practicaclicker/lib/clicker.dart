@@ -1,9 +1,8 @@
-// ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables
+// ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:footer/footer.dart';
-import 'package:footer/footer_view.dart';
+import 'package:practicaclicker/mundos.dart';
 
 import 'main.dart';
 
@@ -60,28 +59,38 @@ class StatesAppState extends State<StatesApp> {
           ])),
       appBar: AppBar(
           title: Center(child: Text("Clicker", textAlign: TextAlign.center))),
-      //Explicacion: ya teniendo controlado el index de los items del navigationsBar he creado una lista de Widgets, los cuales estan definidos abajo,
-      //entonces, imaginemonos que queremos utilizar el item1, lo unico que tenemos que hacer el clickar en el item1
-      //se guardara el index de este en la variable indexItem dsp se llama en un container a la lista pasandole el indexItem, esto se correspondera al Widget Item1
+
+      //
+      //
       body: Center(
         child: Column(
           children: [
+            //Container with world´s title
             Container(
-              child: Text(
-                "Mundo 1",
-                textAlign: TextAlign.right,
-              ),
+              alignment: Alignment.topRight,
+              child: Text("Mundo 1", style: TextStyle(fontSize: 25)),
             ),
+            //Container with monster´s image
             Container(
+              margin: EdgeInsets.only(top: 50),
               child: imagenClick(),
             ),
-            Container(child: Text("Barra de vida")),
+            //Container with life bar
             Container(
-              child: Text("Monedas"),
+                margin: EdgeInsets.only(top: 8),
+                child: Text("Barra de vida", style: TextStyle(fontSize: 25))),
+            //Container with coins and amount
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              alignment: Alignment.bottomLeft,
+              margin: EdgeInsets.only(top: 60),
+              child: Text("Monedas: ", style: TextStyle(fontSize: 25)),
             ),
           ],
         ),
       ),
+
+      //Footer
       floatingActionButton: Container(
         child: Scroll(),
       ),
@@ -89,6 +98,7 @@ class StatesAppState extends State<StatesApp> {
   }
 }
 
+//Clase scroll
 class Scroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -141,43 +151,21 @@ class Scroll extends StatelessWidget {
   }
 }
 
+//Clase imagen
 class imagenClick extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       InkWell(
         onTap: () {},
+        // ignore: sized_box_for_whitespace
         child: Container(
           // ignore: prefer_const_constructors
-          child: Image.asset('images/monstruo.png'),
-          height: 100,
-          width: 100,
+          child: Image.asset('assets/monstruo.png'),
+          height: 300,
+          width: 300,
         ),
       ),
     ]);
   }
 }
-
-
-
-//Lo que teniamos antes aqui comentado ->
-//  body: Center(
-//         child: Column(children: [
-//           InkWell(
-//             onTap: () {
-//               disminuir();
-//             },
-//             child: Container(
-//               // ignore: prefer_const_constructors
-//               child: FadeInImage(
-//                   image: NetworkImage(
-//                       'https://cdn.pixabay.com/photo/2017/02/09/21/08/wings-2053515__340.png'),
-//                   height: 100,
-//                   width: 100,
-//                   placeholder: NetworkImage(
-//                       'https://cdn.pixabay.com/photo/2017/02/09/21/08/wings-2053515__340.png')),
-//             ),
-//           ),
-//           Text(contador.toString()),
-//         ]),
-//       ),
