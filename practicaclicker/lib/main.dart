@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practicaclicker/clicker.dart';
+
+import 'clicker.dart';
 import 'login.dart';
 
 void main() {
