@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Clicker",
-      initialRoute: "/Clicker",
+      initialRoute: "/Login",
       routes: {
         "/Clicker": (BuildContext context) => ClickerMain(),
         "/Login": (BuildContext context) => Login(),

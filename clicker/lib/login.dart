@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'datos.dart';
 import 'main.dart';
 
 class Login extends StatelessWidget {
@@ -34,6 +35,43 @@ class Login extends StatelessWidget {
               leading: Icon(Icons.integration_instructions),
             ),
           ])),
+      body: Container(child: LoginStates()),
     );
+  }
+}
+
+class LoginStates extends StatefulWidget {
+  @override
+  LoginStatesState createState() => LoginStatesState();
+}
+
+class LoginStatesState extends State<LoginStates> {
+  //Creamos el objeto db que extendera de la clase Mysql
+  var db = new Mysql();
+  //Esta es la variable donde vamos a guardar la informacion que nos devolvera la BDD, en este caso como prueba le pedimos el nombre
+  var nombre = "";
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: FloatingActionButton(
+            onPressed: () {
+              setNombre();
+            },
+            child: Icon(Icons.abc)));
+  }
+
+//Esta funcion lo que va a hacer es hacer una consulta a la BBDD y l e
+  void setNombre() {
+    db.getConnection().then((conn) {
+      //Esta va a ser nuestra consulta
+      String sql = "SELECT Nombre FROM Usuarios";
+      conn.query(sql).then((results) {
+        for (var row in results) {
+          setState(() {
+            nombre = row[0];
+          });
+        }
+      });
+    });
   }
 }
