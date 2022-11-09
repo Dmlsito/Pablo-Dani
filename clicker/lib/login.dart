@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mysql1/mysql1.dart';
+import 'package:http/http.dart' as http;
 
 import 'datos.dart';
 import 'main.dart';
@@ -17,8 +18,37 @@ class LoginStatesState extends State<LoginStates> {
   var db = new Mysql();
   //Esta es la variable donde vamos a guardar la informacion que nos devolvera
   //la BDD, en este caso como prueba le pedimos el nombre
-  var nombre = "";
-  @override
+  // var nombre = "";
+
+  TextEditingController nombre = TextEditingController();
+  TextEditingController monedas = TextEditingController(); 
+ 
+  Future<void> insertConsulta() async {
+    //Si los campos estan vacios entonces se puede realiar el insert
+    if(nombre.text == "" || monedas.text == ""){
+       try{
+        String url = "http://10.0.2.2/CLICKER/consultas.php";
+        var res = await http.post(Uri.parse(url), body: {
+          "nombre": nombre.text,
+          "monedas": monedas.text
+        });
+        // var response = jsonDecode(res.body);
+        // if(response["exito"] == "true"){
+        //   print("Insertado con exito");
+        // }
+        // else{
+        //   print("Problemitas en el paraiso");
+        // }
+        }catch(e){
+        print(e);
+       }
+       //Si contienen valores le indicamos un mensaje de error
+    }
+      else{
+      print("Los campos ya estan ocupados");
+    }
+  }
+   @override
   Widget build(Object context) {
     return Scaffold(
       drawer: Drawer(
@@ -49,14 +79,18 @@ class LoginStatesState extends State<LoginStates> {
       body: Center(
         child: Column(
           children: [
+            //Contenedor nombre
             Container(
               child: Form(
                 child: TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      nombre = value.toString();
-                    }
-                  },
+                  controller: nombre
+                ),
+              ),
+            ),
+             Container(
+              child: Form(
+                child: TextFormField(
+                  controller: monedas
                 ),
               ),
             ),
@@ -67,7 +101,7 @@ class LoginStatesState extends State<LoginStates> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             //setNombre();
-            funcionRegistrar();
+           insertConsulta();
           },
           child: Icon(Icons.abc)),
 
@@ -75,35 +109,35 @@ class LoginStatesState extends State<LoginStates> {
     );
   }
 
-  void comparaUsuario() {
-    String nombreComparar;
-    db.getConnection().then((conn) {
-      String sqlConsulta = "select nombre from usuarios";
-      conn.query(sqlConsulta).then((results) {
-        for (var row in results) {
-          for (int i = 0; i > results.length; i++) {
-            nombreComparar = row[i];
-            if (nombre == nombreComparar) {
-              funcionLogin();
-            } else {
-              setState(() {
-                nombre = row[i];
-              });
-              funcionRegistrar();
-            }
-          }
-        }
-      });
-    });
-  }
+  // void comparaUsuario() {
+  //   String nombreComparar;
+  //   db.getConnection().then((conn) {
+  //     String sqlConsulta = "select nombre from usuarios";
+  //     conn.query(sqlConsulta).then((results) {
+  //       for (var row in results) {
+  //         for (int i = 0; i > results.length; i++) {
+  //           nombreComparar = row[i];
+  //           if (nombre == nombreComparar) {
+  //             funcionLogin();
+  //           } else {
+  //             setState(() {
+  //               nombre = row[i];
+  //             });
+  //             funcionRegistrar();
+  //           }
+  //         }
+  //       }
+  //     });
+  //   });
+  // }
 
-  void funcionLogin() {}
+  // void funcionLogin() {}
 
-  void funcionRegistrar() {
-    db.getConnection().then((conn) {
-      String sqlConsulta1 =
-          "insert into usuarios (nombre) values ('esto es una prueba2')";
-      conn.query(sqlConsulta1).then((results) {});
-    });
-  }
+  // void funcionRegistrar() {
+  //   db.getConnection().then((conn) {
+  //     String sqlConsulta1 =
+  //         "insert into usuarios (nombre) values ('esto es una prueba2')";
+  //     conn.query(sqlConsulta1).then((results) {});
+  //   });
+  // }
 }
