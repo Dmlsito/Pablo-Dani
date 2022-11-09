@@ -75,25 +75,10 @@ class LoginStatesState extends State<LoginStates> {
     );
   }
 
-//Esta funcion lo que va a hacer es hacer una consulta a la BBDD y l e
-  // void setNombre() {
-  //   db.getConnection().then((conn) {
-  //     //Esta va a ser nuestra consulta
-  //     String sql = "SELECT Nombre FROM Usuarios";
-  //     conn.query(sql).then((results) {
-  //       for (var row in results) {
-  //         setState(() {
-  //           nombre = row[0];
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-
   void comparaUsuario() {
     String nombreComparar;
     db.getConnection().then((conn) {
-      String sqlConsulta = "SELECT Nombre FROM Usuarios";
+      String sqlConsulta = "select nombre from usuarios";
       conn.query(sqlConsulta).then((results) {
         for (var row in results) {
           for (int i = 0; i > results.length; i++) {
@@ -117,7 +102,7 @@ class LoginStatesState extends State<LoginStates> {
   void funcionRegistrar() {
     db.getConnection().then((conn) {
       String sqlConsulta1 =
-          "INSERT INTO usuarios (nombre) VALUES ('esto es una prueba')";
+          "insert into usuarios (nombre) values ('esto es una prueba2')";
       conn.query(sqlConsulta1).then((results) {});
     });
   }
