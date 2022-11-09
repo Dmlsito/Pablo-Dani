@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/Login",
       routes: {
         "/Clicker": (BuildContext context) => ClickerMain(),
-        "/Login": (BuildContext context) => Login(),
+        "/Login": (BuildContext context) => LoginStates(),
       },
     );
   }

@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
-import 'package:clicker/datos.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

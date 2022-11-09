@@ -2,11 +2,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mysql1/mysql1.dart';
 
 import 'datos.dart';
 import 'main.dart';
 
-class Login extends StatelessWidget {
+class LoginStates extends StatefulWidget {
+  @override
+  LoginStatesState createState() => LoginStatesState();
+}
+
+class LoginStatesState extends State<LoginStates> {
+  //Creamos el objeto db que extendera de la clase Mysql
+  var db = new Mysql();
+  //Esta es la variable donde vamos a guardar la informacion que nos devolvera
+  //la BDD, en este caso como prueba le pedimos el nombre
+  var nombre = "";
   @override
   Widget build(Object context) {
     return Scaffold(
@@ -35,43 +46,79 @@ class Login extends StatelessWidget {
               leading: Icon(Icons.integration_instructions),
             ),
           ])),
-      body: Container(child: LoginStates()),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              child: Form(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      nombre = value.toString();
+                    }
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            //setNombre();
+            funcionRegistrar();
+          },
+          child: Icon(Icons.abc)),
+
+      //Container(child: LoginStates()),
     );
-  }
-}
-
-class LoginStates extends StatefulWidget {
-  @override
-  LoginStatesState createState() => LoginStatesState();
-}
-
-class LoginStatesState extends State<LoginStates> {
-  //Creamos el objeto db que extendera de la clase Mysql
-  var db = new Mysql();
-  //Esta es la variable donde vamos a guardar la informacion que nos devolvera la BDD, en este caso como prueba le pedimos el nombre
-  var nombre = "";
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: FloatingActionButton(
-            onPressed: () {
-              setNombre();
-            },
-            child: Icon(Icons.abc)));
   }
 
 //Esta funcion lo que va a hacer es hacer una consulta a la BBDD y l e
-  void setNombre() {
+  // void setNombre() {
+  //   db.getConnection().then((conn) {
+  //     //Esta va a ser nuestra consulta
+  //     String sql = "SELECT Nombre FROM Usuarios";
+  //     conn.query(sql).then((results) {
+  //       for (var row in results) {
+  //         setState(() {
+  //           nombre = row[0];
+  //         });
+  //       }
+  //     });
+  //   });
+  // }
+
+  void comparaUsuario() {
+    String nombreComparar;
     db.getConnection().then((conn) {
-      //Esta va a ser nuestra consulta
-      String sql = "SELECT Nombre FROM Usuarios";
-      conn.query(sql).then((results) {
+      String sqlConsulta = "SELECT Nombre FROM Usuarios";
+      conn.query(sqlConsulta).then((results) {
         for (var row in results) {
-          setState(() {
-            nombre = row[0];
-          });
+          for (int i = 0; i > results.length; i++) {
+            nombreComparar = row[i];
+            if (nombre == nombreComparar) {
+              funcionLogin();
+            } else {
+              setState(() {
+                nombre = row[i];
+              });
+              funcionRegistrar();
+            }
+          }
         }
       });
+    });
+  }
+
+  void funcionLogin() {}
+
+  void funcionRegistrar() {
+    db.getConnection().then((conn) {
+      String sqlConsulta1 =
+          "INSERT INTO usuarios (nombre) VALUES ('esto es una prueba')";
+      conn.query(sqlConsulta1).then((results) {});
     });
   }
 }
