@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mysql1/mysql1.dart';
+// import 'package:mysql1/mysql1.dart';
 import 'clicker.dart';
 import 'login.dart';
 
