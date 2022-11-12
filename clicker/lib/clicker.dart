@@ -1,9 +1,11 @@
 // ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'package:clicker/mundos.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart';
 import 'main.dart';
+import 'monstruo.dart';
 
 class ClickerMain extends StatelessWidget {
   @override
@@ -20,8 +22,80 @@ class StatesApp extends StatefulWidget {
 }
 
 class StatesAppState extends State<StatesApp> {
+  
+
   @override
   Widget build(BuildContext context) {
+
+    //Variables para cambiar de monstruo
+    int indicador =1;
+    int contador =0;
+    //Variable para recoger la vida del monstruo
+    int vida=0;
+    
+    // Lista de monstruos y los objetos monstruo creados
+     
+    monstruo monstruo1 = monstruo(nombre: "Pablo", vida: 1000, imagenRuta: "assets/pequeñoCola1.png", identificador: 1);
+    monstruo monstruo2 = monstruo(nombre: "Daniel", vida: 2000, imagenRuta: "assets/monstruo2.png", identificador: 2);
+    monstruo monstruo3 = monstruo(nombre: "Nelson", vida: 4000, imagenRuta: "assets/plantaCarnivora3.png", identificador: 3);
+    List <monstruo> listaMonstruos =[monstruo1,monstruo2,monstruo3];
+
+
+
+
+    // Funcion para restar vida en funcion a clicks
+    // Resto 1 de vida por click
+    // En el primer if, cuando vida llegue a 0, contador suma 1 vez, como hay 3 monstruos por mundo, 
+    // cuando ese contador sea 3, indicador que es la variable que nos dice en que mundo estamos,
+    // suma 1, para indicarnos que hemos pasado al siguiente mundo
+
+    void vidaResta(){
+      vida--;
+      
+      if(vida==0){
+        setState(() {
+          contador ++;
+        });
+       
+      }
+      if(contador==3){
+
+        setState(() {
+          indicador++;
+          contador =0;
+        }); 
+
+      }
+
+    }
+
+
+    // De la lista de monstruos, comparo la variable mundo con el indicador, si son iguales 
+    String  seleccionarImagen(){
+      
+      String rutaImagen1="";
+      monstruo monstruoComparacion;
+        for(int i =0; i<listaMonstruos.length;i++){
+          monstruoComparacion=listaMonstruos[i];
+          if(monstruoComparacion.identificador==indicador){
+            rutaImagen1=monstruoComparacion.imagenRuta;
+          }
+          
+          }
+
+        return rutaImagen1;
+    }
+
+
+    // FUNCION EN CONSTRUCCION PARA SELECCIONAR EL MONSTRUO
+    // monstruo seleccionarMonstruo(){
+    //    monstruo monstruoSeleccionado;
+
+
+    //   return monstruoSeleccionado;
+    // }
+
+    
     return Scaffold(
       drawer: Drawer(
           //Borde redondeado
@@ -72,12 +146,34 @@ class StatesAppState extends State<StatesApp> {
             //Container with monster´s image
             Container(
               margin: EdgeInsets.only(top: 50),
-              child: imagenClick(),
+              child: Column(children: [
+            InkWell(
+            onTap: () {
+            // vidaResta();
+            },
+            // ignore: sized_box_for_whitespace
+            child: Container(
+          // ignore: prefer_const_constructors 
+            child:Image.asset(seleccionarImagen()),
+            height: 300,
+            width: 300, 
+            // 
+          ),
+        ),
+        ]),
             ),
             //Container with life bar
             Container(
-                margin: EdgeInsets.only(top: 8),
-                child: Text("Barra de vida", style: TextStyle(fontSize: 25))),
+                // margin: EdgeInsets.only(top: 8),
+                // child: Text("Barra de vida", style: TextStyle(fontSize: 25))
+                 child: LinearProgressIndicator(
+                 // value: vida;
+                  backgroundColor: Colors.red,
+
+
+                 ),             
+
+                  ),
             //Container with coins and amount
             Container(
               padding: EdgeInsets.only(left: 10),
@@ -95,7 +191,10 @@ class StatesAppState extends State<StatesApp> {
       ),
     );
   }
+
+  
 }
+
 
 //Clase scroll
 class Scroll extends StatelessWidget {
@@ -150,21 +249,32 @@ class Scroll extends StatelessWidget {
   }
 }
 
-//Clase imagen
-class imagenClick extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      InkWell(
-        onTap: () {},
-        // ignore: sized_box_for_whitespace
-        child: Container(
-          // ignore: prefer_const_constructors
-          child: Image.asset('assets/monstruo.png'),
-          height: 300,
-          width: 300,
-        ),
-      ),
-    ]);
-  }
-}
+// //Clase imagen
+// class imagenClick extends StatelessWidget {
+ 
+//   @override
+//   Widget build(BuildContext context) {
+//   int contador=0;
+//   String rutaImagen="";
+//   // Lista de monstruos
+//   monstruo monstruo1 = monstruo(nombre: "Pablo", vida: 1000, imagenRuta: "assets/pequeñoCola1.png", mundo: 1);
+//   monstruo monstruo2 = monstruo(nombre: "Daniel", vida: 2000, imagenRuta: "assets/monstruo2.png", mundo: 1);
+//   monstruo monstruo3 = monstruo(nombre: "Nelson", vida: 4000, imagenRuta: "assets/plantaCarnivora3.png", mundo: 1);
+//   List <monstruo> listaMonstruos =[monstruo1,monstruo2,monstruo3];
+
+//     seleccionarImagen(listaMonstruos);
+//     return Column(children: [
+//       InkWell(
+//         onTap: () {
+//           // vidaResta();
+//         },
+//         // ignore: sized_box_for_whitespace
+//         child: Container(
+//           // ignore: prefer_const_constructors
+//           child: Image.asset(rutaImagen),
+//           height: 300,
+//           width: 300,
+//         ),
+//       ),
+//     ]);
+//   }
