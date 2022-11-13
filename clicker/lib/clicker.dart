@@ -160,7 +160,7 @@ class imagenClick extends StatelessWidget {
         // ignore: sized_box_for_whitespace
         child: Container(
           // ignore: prefer_const_constructors
-          child: Image.asset('assets/monstruo.png'),
+          child: Image.asset('assets/imagenes/monstruo.png'),
           height: 300,
           width: 300,
         ),

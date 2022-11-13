@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, unused_import, unnecessary_import
-
+import "Usuario.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:mysql1/mysql1.dart';
@@ -16,7 +16,10 @@ class LoginStates extends StatefulWidget {
 class LoginStatesState extends State<LoginStates> {
   @override
   Widget build(BuildContext context) {
-    GlobalKey formKey = GlobalKey();
+    final TextEditingController nombre = TextEditingController();
+    final TextEditingController contrasena = TextEditingController();
+
+    GlobalKey formKey = GlobalKey<FormState>();
 
     return MaterialApp(
         home: Container(
@@ -59,22 +62,29 @@ class LoginStatesState extends State<LoginStates> {
                       children: [
                         Container(
                             margin: EdgeInsets.only(top: 100),
-                            child: Text("BIENVENIDO",
+                            child: Text("Bienvenido",
                                 style: TextStyle(fontSize: 40))),
                         //Introduccion nombre
                         Container(
                           decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage("assets/imagenes/Marco.png"),
+                                  fit: BoxFit.cover),
                               color: Colors.white,
                               border: Border.all(
                                 color: Colors.black,
                               )),
                           margin: EdgeInsets.only(left: 80, right: 80, top: 80),
                           child: TextFormField(
+                            keyboardType: TextInputType.text,
+                            //Recogemos lo que se escribe en la variable nombre
+                            controller: nombre,
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Es necesario ingresar una contraseña";
+                              if (value!.isNotEmpty) {
+                                return "Te falta esto";
                               }
-                              return null;
+                              return "Te falta esto";
                             },
                           ),
                         ),
@@ -87,12 +97,12 @@ class LoginStatesState extends State<LoginStates> {
                                 color: Colors.black,
                               )),
                           margin: EdgeInsets.only(left: 80, right: 80, top: 50),
-                          child: TextFormField(validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Es necesario ingresar una contraseña";
-                            }
-                            return null;
-                          }),
+                          child: TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {}
+                                return "Es necesario ingresar una contraseña";
+                              },
+                              controller: contrasena),
                         ),
 
                         Container(
@@ -102,7 +112,7 @@ class LoginStatesState extends State<LoginStates> {
                             height: 40.0,
                             color: Colors.lightBlue,
                             onPressed: () {
-                              login(context);
+                              login(context, nombre, contrasena);
                             },
                             child: Text("Login",
                                 style: TextStyle(color: Colors.white)),
@@ -116,7 +126,9 @@ class LoginStatesState extends State<LoginStates> {
                 )));
   }
 
-  void login(BuildContext context) {
-    Navigator.of(context).pushNamed("/Clicker");
+  void login(BuildContext context, final TextEditingController nombre,
+      final TextEditingController contrasena) {
+    Navigator.of(context).pushNamed("/Clicker",
+        arguments: Usuario(nombre: nombre.text, contrasena: contrasena.text));
   }
 }
