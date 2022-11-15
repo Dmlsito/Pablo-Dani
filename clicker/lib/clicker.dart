@@ -149,6 +149,7 @@ class Scroll extends StatelessWidget {
     );
   }
 }
+
 //Clase imagen
 class imagenClick extends StatelessWidget {
   @override
@@ -166,4 +167,11 @@ class imagenClick extends StatelessWidget {
       ),
     ]);
   }
+}
+
+class Usuario {
+  String nombre = "";
+  String contrasena = "";
+
+  Usuario({required this.nombre, required this.contrasena});
 }

@@ -7,11 +7,7 @@ class Mysql {
 
   Future<MySqlConnection> getConnection() async {
     var settings = new ConnectionSettings(
-        host: "aws-eu-west-2.connect.psdb.cloud",
-        port: 3306,
-        user: "c6x9qp3c8s6plywpvv7b",
-        password: "pscale_pw_y4ZSRbYVl6A1IOXUlNh6toLkqEHoGi5URjnK7cdZLbw",
-        db: " nelsonesmipadredb");
+        host: "", port: 3306, user: "", password: "", db: "");
     return await MySqlConnection.connect(settings);
   }
 }
