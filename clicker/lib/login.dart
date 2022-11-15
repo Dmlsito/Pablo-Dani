@@ -25,7 +25,7 @@ class LoginStatesState extends State<LoginStates> {
         home: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/imagenes/prueba.jpg"),
+                    image: AssetImage("assets/griton.png"),
                     fit: BoxFit.cover)),
             child: Scaffold(
                 //Hacemos transparante el fondo para que se muestre la imagen

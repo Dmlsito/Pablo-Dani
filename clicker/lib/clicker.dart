@@ -149,7 +149,6 @@ class Scroll extends StatelessWidget {
     );
   }
 }
-
 //Clase imagen
 class imagenClick extends StatelessWidget {
   @override
@@ -160,7 +159,7 @@ class imagenClick extends StatelessWidget {
         // ignore: sized_box_for_whitespace
         child: Container(
           // ignore: prefer_const_constructors
-          child: Image.asset('assets/imagenes/monstruo.png'),
+          child: Image.asset('assets/plantaCarnivora3.png'),
           height: 300,
           width: 300,
         ),

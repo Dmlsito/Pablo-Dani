@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class monstruo {
+  
   String nombre;
   int vida;
   String imagenRuta;
