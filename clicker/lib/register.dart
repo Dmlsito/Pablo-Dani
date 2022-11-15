@@ -1,16 +1,17 @@
-// ignore_for_file: prefer_const_constructors, unused_import
-
 import "Usuario.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:mysql1/mysql1.dart';
+// import 'package:http/http.dart' as http;
+
 import 'main.dart';
 
-class LoginStates extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  LoginStatesState createState() => LoginStatesState();
+  RegisterState createState() => RegisterState();
 }
 
-class LoginStatesState extends State<LoginStates> {
+class RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController nombre = TextEditingController();
@@ -22,8 +23,7 @@ class LoginStatesState extends State<LoginStates> {
         home: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/tioAltavoz.png"),
-                    fit: BoxFit.cover)),
+                    image: AssetImage("assets/griton.png"), fit: BoxFit.cover)),
             child: Scaffold(
                 //Hacemos transparante el fondo para que se muestre la imagen
                 backgroundColor: Colors.transparent,
@@ -109,7 +109,7 @@ class LoginStatesState extends State<LoginStates> {
                             height: 40.0,
                             color: Colors.lightBlue,
                             onPressed: () {
-                              login(context, nombre, contrasena);
+                              login(context);
                             },
                             child: Text("Login",
                                 style: TextStyle(color: Colors.white)),
@@ -123,9 +123,9 @@ class LoginStatesState extends State<LoginStates> {
                 )));
   }
 
-  void login(BuildContext context, final TextEditingController nombre,
-      final TextEditingController contrasena) {
-    Navigator.of(context).pushNamed("/Clicker",
-        arguments: Usuario(nombre: nombre.text, contrasena: contrasena.text));
+  void login(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      "/Login",
+    );
   }
 }

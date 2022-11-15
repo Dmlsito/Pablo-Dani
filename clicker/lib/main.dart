@@ -1,3 +1,4 @@
+import 'package:clicker/register.dart';
 import 'package:flutter/material.dart';
 import 'clicker.dart';
 import 'login.dart';
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Clicker",
-      initialRoute: "/Clicker",
+      initialRoute: "/Register",
       routes: {
         "/Clicker": (BuildContext context) => ClickerMain(),
         "/Login": (BuildContext context) => LoginStates(),
+        "/Register": (BuildContext context) => Register()
       },
     );
   }
