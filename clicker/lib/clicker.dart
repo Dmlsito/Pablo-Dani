@@ -29,75 +29,89 @@ class StatesAppState extends State<StatesApp> {
   Widget build(BuildContext context) {
 
     //Variables para cambiar de monstruo
-    int indicador =1;
+    int mundo =1;
     int contador =0;
-    //Variable para recoger la vida del monstruo
-    int vida=0;
+    int monedas=0;
     
     // Lista de monstruos y los objetos monstruo creados
+    // Los identificadores de cada monstruo 1,2,3... cada 3 identificadores es un mundo, por lo que, los identificadores: 1,2 y 3 corresponden al mundo 1 asi sucesivamente.
+    // Mundo 1; Identificadores: 1,2,3 // Mundo 2;  Iden: 4,5,6 // Mundo 3; Iden: 7,8,9
      
-    monstruo monstruo1 = monstruo(nombre: "Pablo", vida: 1000, imagenRuta: "assets/pequeñoCola1.png", identificador: 1);
-    monstruo monstruo2 = monstruo(nombre: "Daniel", vida: 2000, imagenRuta: "assets/monstruo2.png", identificador: 2);
-    monstruo monstruo3 = monstruo(nombre: "Nelson", vida: 4000, imagenRuta: "assets/plantaCarnivora3.png", identificador: 3);
+    monstruo monstruo1 = monstruo(nombre: "Pablo", vida: 1000, imagenRuta: "assets/pequeñoCola1.png", identificador: 1, mundo: 1);
+    monstruo monstruo2 = monstruo(nombre: "Daniel", vida: 2000, imagenRuta: "assets/monstruo2.png", identificador: 2,mundo: 1);
+    monstruo monstruo3 = monstruo(nombre: "Nelson", vida: 4000, imagenRuta: "assets/plantaCarnivora3.png", identificador: 3,mundo: 1);
+    monstruo monstruo4 = monstruo(nombre: "Laura", vida: 8000, imagenRuta: "assets/monstruo1Mundo2.png", identificador: 1,mundo: 2);
+    monstruo monstruo5 = monstruo(nombre: "Hugo", vida: 16000, imagenRuta: "assets/monstruo2Mundo2.png", identificador: 2,mundo: 2);
+    monstruo monstruo6 = monstruo(nombre: "Daniel", vida: 32000, imagenRuta: "assets/monstruo3Mundo2.png", identificador: 3,mundo: 2);
+    monstruo monstruo7 = monstruo(nombre: "Oscar", vida: 64000, imagenRuta: "assets/monstruo1Mundo3.png", identificador: 1,mundo: 3);
+    monstruo monstruo8 = monstruo(nombre: "Alfonso", vida: 128000, imagenRuta: "assets/monstruo2Mundo3.png", identificador: 2,mundo: 3);
+    monstruo monstruo9 = monstruo(nombre: "Suso", vida: 256000, imagenRuta: "assets/monstruo3Mundo3.png", identificador: 3,mundo: 3);
   
-    List <monstruo> listaMonstruos =[monstruo1,monstruo2,monstruo3];
+    List <monstruo> listaMonstruos =[monstruo1,monstruo2,monstruo3,monstruo4,monstruo5,monstruo6,monstruo7,monstruo8,monstruo9];
 
-    // Funcion para restar vida en funcion a clicks
-    // Resto 1 de vida por click
-    // En el primer if, cuando vida llegue a 0, contador suma 1 vez, como hay 3 monstruos por mundo, 
-    // cuando ese contador sea 3, indicador que es la variable que nos dice en que mundo estamos,
-    // suma 1, para indicarnos que hemos pasado al siguiente mundo
+   //Variable para recoger la vida del primer monstruo
+    int vida = monstruo1.vida;
+    String rutaMonstruo = monstruo1.imagenRuta;
+
+
 
     void vidaResta(){
-      vida--;
-      
+      // Resto uno de vida y sumo 5 monedas
+      setState(() {
+      vida=vida-100;
+      monedas=monedas+5;
+
       if(vida==0){
-        setState(() {
-          contador ++;
-        });
+        // Cuento los monstruos que mueren
+        contador++;
+        // Recorro la lista de monstruos cuando la vida llegue a 0
+        for(int i=0;i<listaMonstruos.length;i++){
+          // Comparo el contador (que es igual al identificador de cada monstruo),
+          // cuando este esta en ese contador y en ese mundo, seteo la vida que ha de mostrar y la imagen
+          // a la del siguiente monstruo en funcion al contador (que es lo que relaciono con el idenficador de cada monstruo)
+            if(contador==listaMonstruos[i].identificador && listaMonstruos[i].mundo==mundo){
+              vida=listaMonstruos[i].vida;
+              rutaMonstruo=listaMonstruos[i].imagenRuta;
+            }
+        }
+        // Si han muerto 3 monstruos, el mundo suma 1 porque pasamos al siguiente mundo
+        if(contador==3){
+          mundo++;
+          contador=0;
+        }
+
+      }
+      }
        
-      }
-      if(contador==3){
-
-        setState(() {
-          indicador++;
-          contador =0;
-        }); 
-
-      }
-
+      );
     }
 
 
     // De la lista de monstruos, comparo la variable mundo con el indicador, si son iguales 
-    String  seleccionarImagen(){
+    // No creo que nos valga, por que luego no está actualizando cuando la vida del monstruo baja a 0
+    // String  seleccionarImagen(){
       
-      String rutaImagen1="";
-      monstruo monstruoComparacion;
-        for(int i =0; i<listaMonstruos.length;i++){
-          monstruoComparacion=listaMonstruos[i];
-          if(monstruoComparacion.identificador==indicador){
-            rutaImagen1=monstruoComparacion.imagenRuta;
-          }
+    //   String rutaImagen1="";
+    //   monstruo monstruoComparacion;
+    //     for(int i =0; i<listaMonstruos.length;i++){
+    //       monstruoComparacion=listaMonstruos[i];
+    //       if(monstruoComparacion.identificador==identificador){
+    //         rutaImagen1=monstruoComparacion.imagenRuta;
+    //       }
           
-          }
+    //       }
 
-        return rutaImagen1;
-    }
+    //     return rutaImagen1;
+    // }
 
 
-    // FUNCION EN CONSTRUCCION PARA SELECCIONAR EL MONSTRUO
+
+   // FUNCION EN CONSTRUCCION PARA SELECCIONAR EL MONSTRUO
     //     monstruo seleccionarMonstruo(){
     //     monstruo monstruoSeleccionado;
-    //     // Parte para la bbdd y recuperar partida con vuestro anterior
-
-
-
-
-    //     // Parte para la bbdd y recuperar partida con vuestro anterior
 
     //     for(int i =0; i<listaMonstruos.length;i++){
-
+        
 
 
     //     }
@@ -159,12 +173,14 @@ class StatesAppState extends State<StatesApp> {
               child: Column(children: [
             InkWell(
             onTap: () {
-            // vidaResta();
+             vidaResta();
+             // Este print es para probar
+             print("He pulsado");
             },
             // ignore: sized_box_for_whitespace
             child: Container(
           // ignore: prefer_const_constructors 
-            child:Image.asset(seleccionarImagen()),
+             child:Image.asset(rutaMonstruo),
             height: 300,
             width: 300, 
             // 
