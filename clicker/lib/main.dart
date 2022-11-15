@@ -1,7 +1,4 @@
-// import 'package:mysql1/mysql1.dart';
-
 import 'package:flutter/material.dart';
-
 import 'clicker.dart';
 import 'login.dart';
 
@@ -17,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Clicker",
-      initialRoute: "/Login",
+      initialRoute: "/Clicker",
       routes: {
         "/Clicker": (BuildContext context) => ClickerMain(),
         "/Login": (BuildContext context) => LoginStates(),

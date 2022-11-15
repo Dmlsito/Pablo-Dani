@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 // import 'package:mysql1/mysql1.dart';
 // import 'package:http/http.dart' as http;
 
-import 'datos.dart';
 import 'main.dart';
 
 class LoginStates extends StatefulWidget {
