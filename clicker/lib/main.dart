@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import 'package:clicker/MainPage.dart';
+=======
+import 'register.dart';
+>>>>>>> 93ebd9a84719e69305f3a92b48446013c566afc3
 import 'package:flutter/material.dart';
 import 'clicker.dart';
 import 'login.dart';
