@@ -73,11 +73,14 @@ List<monstruo> listaMonstruos = [
 ];
 // Vida inicial
 int vida = listaMonstruos[contador].vida;
+double v = 12;
 // Ruta de imagen inicial
 String rutaMonstruo = listaMonstruos[contador].imagenRuta;
+// Contador para cambiar de monstruo
 int contador = 0;
 int monedas = 0;
 int mundo = 1;
+int golpe = 10;
 
 class StatesApp extends StatefulWidget {
   @override
@@ -88,9 +91,10 @@ class StatesAppState extends State<StatesApp> {
   @override
   Widget build(BuildContext context) {
     void vidaResta() {
+      v = v - 0.1;
       // Resto uno de vida y sumo 5 monedas
       setState(() {
-        vida = vida - 100;
+        vida = vida - golpe;
         print(vida);
         monedas = monedas + 5;
         print(monedas);
@@ -181,11 +185,14 @@ class StatesAppState extends State<StatesApp> {
             ),
             //Container with life bar
             Container(
+              width: 300,
+              height: 20,
               // margin: EdgeInsets.only(top: 8),
               // child: Text("Barra de vida", style: TextStyle(fontSize: 25))
               child: LinearProgressIndicator(
                 // value: vida;
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.green,
+                value: v,
               ),
             ),
             //Container with coins and amount
@@ -209,6 +216,13 @@ class StatesAppState extends State<StatesApp> {
 
 //Clase scroll
 class Scroll extends StatelessWidget {
+  // Ejemplo de como hacer una mejora para compra
+  void mejora1() {
+    if (monedas > 20) {
+      golpe = golpe + 10;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -219,8 +233,24 @@ class Scroll extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           Container(
-            width: 160.0,
-            color: Colors.red,
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    // Este print es para probar
+                    mejora1();
+                  },
+                  // ignore: sized_box_for_whitespace
+                  child: Container(
+                    // ignore: prefer_const_constructors
+                    child: Image.asset("assets/CofreTesoro.png"),
+                    height: 50,
+                    width: 50,
+                    //
+                  ),
+                ),
+              ],
+            ),
           ),
           Container(
             width: 160.0,
