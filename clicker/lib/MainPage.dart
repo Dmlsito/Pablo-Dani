@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import "Usuario.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class RegisterState extends State<Register> {
         home: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/griton.png"), fit: BoxFit.cover)),
+                    image: AssetImage("assets/fondoPrueba.jpg"), fit: BoxFit.cover)),
             child: Scaffold(
                 //Hacemos transparante el fondo para que se muestre la imagen
                 backgroundColor: Colors.transparent,
@@ -79,9 +81,9 @@ class RegisterState extends State<Register> {
                             controller: nombre,
                             validator: (value) {
                               if (value!.isNotEmpty) {
-                                return "Te falta esto";
+                                return "Ingrese un nombre porfavor";
                               }
-                              return "Te falta esto";
+                              return null;
                             },
                           ),
                         ),
@@ -96,8 +98,11 @@ class RegisterState extends State<Register> {
                           margin: EdgeInsets.only(left: 80, right: 80, top: 50),
                           child: TextFormField(
                               validator: (value) {
-                                if (value!.isEmpty) {}
-                                return "Es necesario ingresar una contraseña";
+                                if (value!.isNotEmpty) {
+                                   return "Es necesario ingresar una contraseña";
+                                }
+                                return null;
+                                
                               },
                               controller: contrasena),
                         ),
@@ -109,9 +114,22 @@ class RegisterState extends State<Register> {
                             height: 40.0,
                             color: Colors.lightBlue,
                             onPressed: () {
-                              login(context);
+                              login(context, nombre, contrasena);
                             },
                             child: Text("Login",
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: MaterialButton(
+                            minWidth: 200.0,
+                            height: 40.0,
+                            color: Colors.lightBlue,
+                            onPressed: () {
+                              register(context);
+                            },
+                            child: Text("Register",
                                 style: TextStyle(color: Colors.white)),
                           ),
                         )
@@ -123,9 +141,14 @@ class RegisterState extends State<Register> {
                 )));
   }
 
-  void login(BuildContext context) {
+  void register(BuildContext context) {
     Navigator.of(context).pushNamed(
       "/Login",
     );
+  }
+   void login(BuildContext context, final TextEditingController nombre,
+      final TextEditingController contrasena) {
+    Navigator.of(context).pushNamed("/Clicker",
+        arguments: Usuario(nombre: nombre.text, contrasena: contrasena.text));
   }
 }

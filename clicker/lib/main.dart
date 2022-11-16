@@ -1,4 +1,4 @@
-import 'package:clicker/register.dart';
+import 'package:clicker/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'clicker.dart';
 import 'login.dart';
