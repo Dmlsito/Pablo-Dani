@@ -48,31 +48,38 @@ List<monstruo> listaMonstruos = [
   ),
   monstruo(
     nombre: "Adrian",
-    vida: 32000,
+    vida: 1000,
     imagenRuta: "assets/monstruo3Mundo2.png",
     identificador: 6,
   ),
   monstruo(
     nombre: "Oscar",
-    vida: 64000,
+    vida: 640,
     imagenRuta: "assets/monstruo1Mundo3.png",
     identificador: 7,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 128000,
+    vida: 1280,
     imagenRuta: "assets/monstruo2Mundo3.png",
     identificador: 8,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 256000,
+    vida: 2560,
     imagenRuta: "assets/monstruo3Mundo3.png",
     identificador: 9,
   ),
 ];
+List<String> listaMundos = [
+  "assets/fondoPrueba.jpg",
+  "assets/dragon.png",
+  "assets/fondoPrueba2.jpg"
+];
 // Vida inicial
 int vida = listaMonstruos[contador].vida;
+int indexImagen = 0;
+
 double v = 12;
 // Ruta de imagen inicial
 String rutaMonstruo = listaMonstruos[contador].imagenRuta;
@@ -81,6 +88,7 @@ int contador = 0;
 int monedas = 0;
 int mundo = 1;
 int golpe = 10;
+int contadorMundos = 0;
 
 class StatesApp extends StatefulWidget {
   @override
@@ -96,15 +104,22 @@ class StatesAppState extends State<StatesApp> {
     void vidaResta() {
       // Resto uno de vida y sumo 5 monedas
       setState(() {
-        vida = vida - 100;
+        vida = vida - 400;
         print(vida.toString());
         monedas = monedas + 5;
         print(monedas.toString());
 
-        if (vida == 0) {
+        if (vida < 0) {
           contador++;
           vida = listaMonstruos[contador].vida;
           rutaMonstruo = listaMonstruos[contador].imagenRuta;
+          //Controlamos que si ha matado mas de 3 mundos pero menos de 6 el mundo se actualizara
+          if (contador >= 3 && contador <= 6) {
+            indexImagen = 1;
+          }
+          if (contador >= 6) {
+            indexImagen = 2;
+          }
         }
       });
     }
@@ -113,7 +128,7 @@ class StatesAppState extends State<StatesApp> {
         home: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/fondoPrueba.jpg"),
+                    image: AssetImage(listaMundos[indexImagen]),
                     fit: BoxFit.cover)),
             child: Scaffold(
               backgroundColor: Colors.transparent,
