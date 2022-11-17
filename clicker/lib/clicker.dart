@@ -1,10 +1,11 @@
-// ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last
-
+// ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last, avoid_print
+import "mejoras.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'monstruo.dart';
+import 'dart:math';
 
 class ClickerMain extends StatelessWidget {
   @override
@@ -76,19 +77,35 @@ List<String> listaMundos = [
   "assets/dragon.png",
   "assets/fondoPrueba2.jpg"
 ];
-// Vida inicial
-int vida = listaMonstruos[contador].vida;
-int indexImagen = 0;
 
 double v = 12;
+
 // Ruta de imagen inicial
 String rutaMonstruo = listaMonstruos[contador].imagenRuta;
+int indexImagen = 0;
+// Vida inicial
+int vida = listaMonstruos[contador].vida;
+
 // Contador para cambiar de monstruo
 int contador = 0;
-int monedas = 0;
-int mundo = 1;
-int golpe = 10;
-int contadorMundos = 0;
+int monedasJugador = 0;
+int monedasRecibidas = 5;
+int golpeSencillo = 100;
+int golpeGlobal = golpeGlobal + golpeSencillo;
+int golpeCritico = 1000;
+bool probabilidadCritico = true;
+int temporizadorDeCritico = 0;
+
+//Variables para controlar las mejoras
+bool mejora1 = false;
+bool mejora2 = false;
+bool mejora3 = false;
+bool mejora4 = false;
+bool mejora5 = false;
+bool mejora6 = false;
+bool mejora7 = false;
+bool mejora8 = false;
+bool mejora9 = false;
 
 class StatesApp extends StatefulWidget {
   @override
@@ -104,11 +121,11 @@ class StatesAppState extends State<StatesApp> {
     void vidaResta() {
       // Resto uno de vida y sumo 5 monedas
       setState(() {
-        vida = vida - 400;
-        print(vida.toString());
-        monedas = monedas + 5;
-        print(monedas.toString());
-
+        temporizadorDeCritico++;
+        vida = vida - golpeGlobal;
+        print("Vida: " + vida.toString());
+        monedasJugador = monedasJugador + monedasRecibidas;
+        print("Monedas: " + monedasJugador.toString());
         if (vida < 0) {
           contador++;
           vida = listaMonstruos[contador].vida;
@@ -122,6 +139,15 @@ class StatesAppState extends State<StatesApp> {
           }
         }
       });
+    }
+
+    //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
+    void critico() {
+      Random random = Random();
+      int rng = random.nextInt(10);
+      temporizadorDeCritico > 10 && rng == 4
+          ? golpeGlobal = golpeCritico
+          : golpeGlobal = golpeSencillo;
     }
 
     return MaterialApp(
@@ -186,9 +212,8 @@ class StatesAppState extends State<StatesApp> {
                       child: Column(children: [
                         InkWell(
                           onTap: () {
+                            critico();
                             vidaResta();
-                            // Este print es para probar
-                            print("Se resta la vida");
                           },
                           // ignore: sized_box_for_whitespace
                           child: Container(
@@ -229,7 +254,7 @@ class StatesAppState extends State<StatesApp> {
                       padding: EdgeInsets.only(left: 10),
                       alignment: Alignment.bottomLeft,
                       margin: EdgeInsets.only(top: 50),
-                      child: Text("Monedas: " + monedas.toString(),
+                      child: Text("Monedas: " + monedasJugador.toString(),
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     Container(
@@ -251,12 +276,7 @@ class StatesAppState extends State<StatesApp> {
 
 //Clase scroll
 class Scroll extends StatelessWidget {
-  // Ejemplo de como hacer una mejora para compra
-  void mejora1() {
-    if (monedas > 20) {
-      golpe = golpe + 10;
-    }
-  }
+  Mejoras mejoraJuego = Mejoras();
 
   @override
   Widget build(BuildContext context) {
@@ -275,6 +295,14 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    mejora1 = true;
+                    //Incrementacion del golpe sencillo
+                    golpeSencillo = mejoraJuego.mejora1(mejora1, golpeSencillo);
+                    print("Compra de mejora1");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -296,6 +324,15 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    mejora2 = true;
+                    //Indicamos que las monedas se duplican
+                    monedasRecibidas =
+                        mejoraJuego.mejora2(mejora2, monedasRecibidas);
+                    print("Compra de mejora2");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -316,6 +353,12 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    mejora3 = true;
+                    print("Compra de mejora 3");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -336,6 +379,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -355,6 +403,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -374,6 +427,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -393,6 +451,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -412,6 +475,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -431,6 +499,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -450,6 +523,11 @@ class Scroll extends StatelessWidget {
                       fit: BoxFit.cover)),
               width: 160.0,
               child: Container(
+                child: InkWell(
+                  onTap: () {
+                    print("Compra de mejora");
+                  },
+                ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
