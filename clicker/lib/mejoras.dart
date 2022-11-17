@@ -2,7 +2,7 @@ import 'dart:math';
 
 class Mejoras {
   //Doble de ataque
-  int mejora1(bool mejora1, int golpeSencillo) {
+  double mejora1(bool mejora1, double golpeSencillo) {
     if (mejora1 == true) {
       golpeSencillo = golpeSencillo * 2;
     }

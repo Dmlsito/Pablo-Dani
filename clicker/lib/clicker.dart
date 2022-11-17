@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'monstruo.dart';
 import 'dart:math';
+import 'dart:async';
 
 class ClickerMain extends StatelessWidget {
   @override
@@ -84,17 +85,33 @@ double v = 12;
 String rutaMonstruo = listaMonstruos[contador].imagenRuta;
 int indexImagen = 0;
 // Vida inicial
-int vida = listaMonstruos[contador].vida;
+double vida = listaMonstruos[contador].vida;
+// Timers
+Timer ?  timer1;
+// Timer ? timer2;
+
+// Variables para dps
+double danoDps1 =1;
+// double danoDps2 =1;
+
+// Variables de tiempo para controlar los timers
+int segundos1 =0;
+// int segundos2=0;
+
+
+Mejoras mejoraJuego = Mejoras();
+
 
 // Contador para cambiar de monstruo
 int contador = 0;
 int monedasJugador = 0;
 int monedasRecibidas = 5;
-int golpeSencillo = 100;
-int golpeGlobal = golpeGlobal + golpeSencillo;
-int golpeCritico = 1000;
+double golpeSencillo = 100;
+double golpeGlobal = golpeGlobal + golpeSencillo;
+double golpeCritico = 1000;
 bool probabilidadCritico = true;
 int temporizadorDeCritico = 0;
+
 
 //Variables para controlar las mejoras
 bool mejora1 = false;
@@ -108,13 +125,14 @@ bool mejora8 = false;
 bool mejora9 = false;
 
 class StatesApp extends StatefulWidget {
+
   @override
   StatesAppState createState() => StatesAppState();
 }
 
 class StatesAppState extends State<StatesApp> {
-//Variables para cambiar de monstruo
-  int vida = listaMonstruos[contador].vida;
+// //Variables para cambiar de monstruo
+//   double vida = listaMonstruos[contador].vida;
 
   @override
   Widget build(BuildContext context) {
@@ -140,6 +158,21 @@ class StatesAppState extends State<StatesApp> {
         }
       });
     }
+     void dps1(){
+      timer1=Timer.periodic(Duration(seconds: 1), (timer) {
+        segundos1 +=1;
+        // Como implementamos esto?????????¿?
+        setState(() {
+          vida=vida-danoDps1;
+          monedasJugador=monedasJugador+5;
+        });
+       });
+
+
+
+        }
+
+    
 
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
     void critico() {
@@ -265,22 +298,9 @@ class StatesAppState extends State<StatesApp> {
                               image: AssetImage("assets/fondoScroll.jpg"),
                               fit: BoxFit.cover)),
                       margin: EdgeInsets.only(top: 35),
-                      child: Scroll(),
-                    )
-                  ],
-                ),
-              ),
-            )));
-  }
-}
-
-//Clase scroll
-class Scroll extends StatelessWidget {
-  Mejoras mejoraJuego = Mejoras();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
+                       child:
+                       // Scroll()
+                        Container(
       margin: const EdgeInsets.symmetric(vertical: 20.0),
       height: 170.0,
       child: ListView(
@@ -355,6 +375,7 @@ class Scroll extends StatelessWidget {
               child: Container(
                 child: InkWell(
                   onTap: () {
+                    dps1();
                     mejora3 = true;
                     print("Compra de mejora 3");
                   },
@@ -538,6 +559,294 @@ class Scroll extends StatelessWidget {
               )),
         ],
       ),
-    );
+    ),
+                    )
+                  ],
+                ),
+              ),
+            )));
   }
 }
+
+// //Clase scroll
+// class Scroll extends StatelessWidget {
+//   Mejoras mejoraJuego = Mejoras();
+//   // Función para daño por tiempo
+//     void dps1(){
+//       timer1=Timer.periodic(Duration(seconds: 1), (timer) {
+//         segundos1 +=1;
+//         // Como implementamos esto?????????¿?
+//         setState(() {
+//           vida=vida-danoDps1;
+//           monedasJugador=monedasJugador+5;
+//         });
+//        });
+
+
+
+//     }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Container(
+  //     margin: const EdgeInsets.symmetric(vertical: 20.0),
+  //     height: 170.0,
+  //     child: ListView(
+  //       // This next line does the trick.
+  //       scrollDirection: Axis.horizontal,
+  //       children: <Widget>[
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   mejora1 = true;
+  //                   //Incrementacion del golpe sencillo
+  //                   golpeSencillo = mejoraJuego.mejora1(mejora1, golpeSencillo);
+  //                   print("Compra de mejora1");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         //Este SizedBox se utiliza para separar cada container
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   mejora2 = true;
+  //                   //Indicamos que las monedas se duplican
+  //                   monedasRecibidas =
+  //                       mejoraJuego.mejora2(mejora2, monedasRecibidas);
+  //                   print("Compra de mejora2");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   dps1();
+  //                   mejora3 = true;
+  //                   print("Compra de mejora 3");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //         SizedBox(
+  //           width: 10,
+  //         ),
+  //         Container(
+  //             decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 image: DecorationImage(
+  //                     image: AssetImage("assets/fondoItems.jpg"),
+  //                     fit: BoxFit.cover)),
+  //             width: 160.0,
+  //             child: Container(
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   print("Compra de mejora");
+  //                 },
+  //               ),
+  //               decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                       color: Color.fromARGB(255, 255, 208, 0), width: 4),
+  //                   image: DecorationImage(
+  //                       image: AssetImage("assets/dragon.png"),
+  //                       fit: BoxFit.cover)),
+  //             )),
+  //       ],
+  //     ),
+  //   );
+ // }
+//  }

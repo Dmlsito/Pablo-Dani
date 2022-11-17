@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class monstruo {
   String nombre;
-  int vida;
+  double vida;
   String imagenRuta;
   int identificador;
 
