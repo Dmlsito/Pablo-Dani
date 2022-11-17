@@ -233,7 +233,7 @@ class StatesAppState extends State<StatesApp> {
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     Container(
-                      height: 200,
+                      height: 180,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white, width: 2),
                           image: DecorationImage(
@@ -262,7 +262,7 @@ class Scroll extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20.0),
-      height: 185.0,
+      height: 170.0,
       child: ListView(
         // This next line does the trick.
         scrollDirection: Axis.horizontal,
