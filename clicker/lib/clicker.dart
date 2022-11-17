@@ -74,9 +74,9 @@ List<monstruo> listaMonstruos = [
   ),
 ];
 List<String> listaMundos = [
-  "assets/fondoPrueba.jpg",
-  "assets/dragon.png",
-  "assets/fondoPrueba2.jpg"
+  "assets/Mundo1.jpg",
+  "assets/Mundo2.jpg",
+  "assets/Mundo3.jpg"
 ];
 
 double v = 12;
@@ -87,20 +87,18 @@ int indexImagen = 0;
 // Vida inicial
 double vida = listaMonstruos[contador].vida;
 // Timers
-Timer ?  timer1;
+Timer? timer1;
 // Timer ? timer2;
 
 // Variables para dps
-double danoDps1 =1;
+double danoDps1 = 1;
 // double danoDps2 =1;
 
 // Variables de tiempo para controlar los timers
-int segundos1 =0;
+int segundos1 = 0;
 // int segundos2=0;
 
-
 Mejoras mejoraJuego = Mejoras();
-
 
 // Contador para cambiar de monstruo
 int contador = 0;
@@ -111,7 +109,6 @@ double golpeGlobal = golpeGlobal + golpeSencillo;
 double golpeCritico = 1000;
 bool probabilidadCritico = true;
 int temporizadorDeCritico = 0;
-
 
 //Variables para controlar las mejoras
 bool mejora1 = false;
@@ -125,7 +122,6 @@ bool mejora8 = false;
 bool mejora9 = false;
 
 class StatesApp extends StatefulWidget {
-
   @override
   StatesAppState createState() => StatesAppState();
 }
@@ -158,21 +154,17 @@ class StatesAppState extends State<StatesApp> {
         }
       });
     }
-     void dps1(){
-      timer1=Timer.periodic(Duration(seconds: 1), (timer) {
-        segundos1 +=1;
+
+    void dps1() {
+      timer1 = Timer.periodic(Duration(seconds: 1), (timer) {
+        segundos1 += 1;
         // Como implementamos esto?????????¿?
         setState(() {
-          vida=vida-danoDps1;
-          monedasJugador=monedasJugador+5;
+          vida = vida - danoDps1;
+          monedasJugador = monedasJugador + 5;
         });
-       });
-
-
-
-        }
-
-    
+      });
+    }
 
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
     void critico() {
@@ -298,268 +290,309 @@ class StatesAppState extends State<StatesApp> {
                               image: AssetImage("assets/fondoScroll.jpg"),
                               fit: BoxFit.cover)),
                       margin: EdgeInsets.only(top: 35),
-                       child:
-                       // Scroll()
-                        Container(
-      margin: const EdgeInsets.symmetric(vertical: 20.0),
-      height: 170.0,
-      child: ListView(
-        // This next line does the trick.
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    mejora1 = true;
-                    //Incrementacion del golpe sencillo
-                    golpeSencillo = mejoraJuego.mejora1(mejora1, golpeSencillo);
-                    print("Compra de mejora1");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          //Este SizedBox se utiliza para separar cada container
-          SizedBox(
-            width: 10,
-          ),
+                      child:
+                          // Scroll()
+                          Container(
+                        margin: const EdgeInsets.symmetric(vertical: 20.0),
+                        height: 170.0,
+                        child: ListView(
+                          // This next line does the trick.
+                          scrollDirection: Axis.horizontal,
+                          children: <Widget>[
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      mejora1 = true;
+                                      //Incrementacion del golpe sencillo
+                                      golpeSencillo = mejoraJuego.mejora1(
+                                          mejora1, golpeSencillo);
+                                      print("Compra de mejora1");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            //Este SizedBox se utiliza para separar cada container
+                            SizedBox(
+                              width: 10,
+                            ),
 
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    mejora2 = true;
-                    //Indicamos que las monedas se duplican
-                    monedasRecibidas =
-                        mejoraJuego.mejora2(mejora2, monedasRecibidas);
-                    print("Compra de mejora2");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      mejora2 = true;
+                                      //Indicamos que las monedas se duplican
+                                      monedasRecibidas = mejoraJuego.mejora2(
+                                          mejora2, monedasRecibidas);
+                                      print("Compra de mejora2");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
 
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    dps1();
-                    mejora3 = true;
-                    print("Compra de mejora 3");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      dps1();
+                                      mejora3 = true;
+                                      print("Compra de mejora 3");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
 
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/fondoItems.jpg"),
-                      fit: BoxFit.cover)),
-              width: 160.0,
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    print("Compra de mejora");
-                  },
-                ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Color.fromARGB(255, 255, 208, 0), width: 4),
-                    image: DecorationImage(
-                        image: AssetImage("assets/dragon.png"),
-                        fit: BoxFit.cover)),
-              )),
-        ],
-      ),
-    ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/fondoItems.jpg"),
+                                        fit: BoxFit.cover)),
+                                width: 160.0,
+                                child: Container(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print("Compra de mejora");
+                                    },
+                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 255, 208, 0),
+                                          width: 4),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/dragon.png"),
+                                          fit: BoxFit.cover)),
+                                )),
+                          ],
+                        ),
+                      ),
                     )
                   ],
                 ),

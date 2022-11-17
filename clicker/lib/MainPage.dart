@@ -25,7 +25,8 @@ class RegisterState extends State<Register> {
         home: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/fondoPrueba.jpg"), fit: BoxFit.cover)),
+                    image: AssetImage("assets/FondoLogin.jpg"),
+                    fit: BoxFit.cover)),
             child: Scaffold(
                 //Hacemos transparante el fondo para que se muestre la imagen
                 backgroundColor: Colors.transparent,
@@ -99,10 +100,9 @@ class RegisterState extends State<Register> {
                           child: TextFormField(
                               validator: (value) {
                                 if (value!.isNotEmpty) {
-                                   return "Es necesario ingresar una contraseña";
+                                  return "Es necesario ingresar una contraseña";
                                 }
                                 return null;
-                                
                               },
                               controller: contrasena),
                         ),
@@ -146,7 +146,8 @@ class RegisterState extends State<Register> {
       "/Login",
     );
   }
-   void login(BuildContext context, final TextEditingController nombre,
+
+  void login(BuildContext context, final TextEditingController nombre,
       final TextEditingController contrasena) {
     Navigator.of(context).pushNamed("/Clicker",
         arguments: Usuario(nombre: nombre.text, contrasena: contrasena.text));
