@@ -141,6 +141,7 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador + monedasRecibidas;
         print("Monedas: " + monedasJugador.toString());
         if (vida < 0) {
+          final snackBar = SnackBar(content: const Text("Has matado al monstruo"));
           contador++;
           vida = listaMonstruos[contador].vida;
           rutaMonstruo = listaMonstruos[contador].imagenRuta;
@@ -237,8 +238,13 @@ class StatesAppState extends State<StatesApp> {
                       child: Column(children: [
                         InkWell(
                           onTap: () {
+                             if(vida == 0){
+                              final snackBar = SnackBar(content: const Text("Has matado al monstruo"));
+                            }
                             critico();
                             vidaResta();
+                            
+                          
                           },
                           // ignore: sized_box_for_whitespace
                           child: Container(
@@ -284,11 +290,7 @@ class StatesAppState extends State<StatesApp> {
                     ),
                     Container(
                       height: 180,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          image: DecorationImage(
-                              image: AssetImage("assets/fondoScroll.jpg"),
-                              fit: BoxFit.cover)),
+                      
                       margin: EdgeInsets.only(top: 35),
                       child:
                           // Scroll()
@@ -310,12 +312,17 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      
                                       mejora1 = true;
+                                      // Scaffold.of(context).showSnackBar(
+                                      // final snackBarMejora1 = SnackBar(content: const Text("Has matado al monstruo"));
+                            
                                       //Incrementacion del golpe sencillo
                                       golpeSencillo = mejoraJuego.mejora1(
                                           mejora1, golpeSencillo);
                                       print("Compra de mejora1");
                                     },
+                                    
                                   ),
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
@@ -597,6 +604,7 @@ class StatesAppState extends State<StatesApp> {
                   ],
                 ),
               ),
+              
             )));
   }
 }

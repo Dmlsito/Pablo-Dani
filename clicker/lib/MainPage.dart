@@ -84,7 +84,7 @@ class RegisterState extends State<Register> {
                               if (value!.isNotEmpty) {
                                 return "Ingrese un nombre porfavor";
                               }
-                              return null;
+                              // return null;
                             },
                           ),
                         ),
@@ -149,6 +149,7 @@ class RegisterState extends State<Register> {
 
   void login(BuildContext context, final TextEditingController nombre,
       final TextEditingController contrasena) {
+        
     Navigator.of(context).pushNamed("/Clicker",
         arguments: Usuario(nombre: nombre.text, contrasena: contrasena.text));
   }
