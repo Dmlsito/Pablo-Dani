@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Clicker",
-      initialRoute: "/Register",
+      initialRoute: "/Login",
       routes: {
         "/Clicker": (BuildContext context) => ClickerMain(),
-        "/Login": (BuildContext context) => LoginStates(),
+        "/Login": (BuildContext context) => MainPage(),
         "/Register": (BuildContext context) => Register()
       },
     );
