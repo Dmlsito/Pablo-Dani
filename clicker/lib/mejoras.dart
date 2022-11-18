@@ -18,12 +18,12 @@ class Mejoras {
   }
 
   //Aparicion de una imagen aleatoria en la pantalla
-  String mejora3(bool mejora3) {
+  String mejora4(bool mejora4) {
     String ruta = "assets/CofreTesoro.png";
     return ruta;
   }
 
-  void mejora4(bool mejora4) {}
+  void mejora3(bool mejora3) {}
   void mejora5(bool mejora5) {}
   void mejora6(bool mejora6) {}
   void mejora7(bool mejora7) {}
