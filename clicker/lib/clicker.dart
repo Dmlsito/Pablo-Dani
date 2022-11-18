@@ -118,9 +118,9 @@ bool mejora2 = false;
 int precioMejora3 = 100;
 int contadorMejora3 = 0;
 
-//Mensaje snackbar
-
+//Mensajes snackbar
 String mensajeMaximaMejora = "Nivel Máximo de Mejora Alcanzado";
+String mejoraComprada = "Mejora comprada";
 
 class StatesApp extends StatefulWidget {
   @override
@@ -142,8 +142,7 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador + monedasRecibidas;
         print("Monedas: " + monedasJugador.toString());
         if (vida < 0) {
-          final snackBar =
-              SnackBar(content: const Text("Has matado al monstruo"));
+          
           contador++;
           vida = listaMonstruos[contador].vida;
           rutaMonstruo = listaMonstruos[contador].imagenRuta;
@@ -158,7 +157,7 @@ class StatesAppState extends State<StatesApp> {
       });
     }
 
-    void mostrarMaximaMejora(BuildContext context, String mensaje) {
+    void mostrarMaximaMejora(BuildContext context, String mensajeMaximaMejora) {
       final snb = SnackBar(
         content: Row(
           children: [
@@ -167,6 +166,21 @@ class StatesAppState extends State<StatesApp> {
               width: 20,
             ),
             Text(mensajeMaximaMejora)
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
+     void mostrarMejoraComprada(BuildContext context, String mejoraComprada) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text(mejoraComprada)
           ],
         ),
       );
@@ -216,6 +230,7 @@ class StatesAppState extends State<StatesApp> {
                   children: [
                     //Container with world´s title
                     Container(
+                      margin: EdgeInsets.only(top: 40),
                       alignment: Alignment.topRight,
                       child: Text("Mundo 1",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -226,11 +241,7 @@ class StatesAppState extends State<StatesApp> {
                       child: Column(children: [
                         InkWell(
                           onTap: () {
-                            if (vida == 0) {
-                              final snackBar = SnackBar(
-                                  content:
-                                      const Text("Has matado al monstruo"));
-                            }
+                            
                             critico();
                             vidaResta();
                           },
@@ -277,13 +288,25 @@ class StatesAppState extends State<StatesApp> {
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     Container(
-                      height: 180,
-                      margin: EdgeInsets.only(top: 35),
+                      margin: EdgeInsets.only(right: 0, left: 0,top: 70 ),
+                      height: 3,
+                      
+                      decoration: BoxDecoration(border:Border.all(color:Colors.white, width: 4))
+                      ),
+                    Container(
+                      decoration: BoxDecoration(
+                        
+                          image: DecorationImage(
+                            image:
+                            AssetImage("assets/fondoScroll.jpg"),
+                                        fit: BoxFit.cover)),
+                      height: 200,
+                      margin: EdgeInsets.only(),
                       child:
                           // Scroll()
                           Container(
                         margin: const EdgeInsets.symmetric(vertical: 20.0),
-                        height: 170.0,
+                        height: 220.0,
                         child: ListView(
                           // This next line does the trick.
                           scrollDirection: Axis.horizontal,
@@ -295,14 +318,12 @@ class StatesAppState extends State<StatesApp> {
                                         image:
                                             AssetImage("assets/fondoItems.jpg"),
                                         fit: BoxFit.cover)),
-                                width: 160.0,
+                                width: 100,
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
                                       mejora1 = true;
-                                      // Scaffold.of(context).showSnackBar(
-                                      // final snackBarMejora1 = SnackBar(content: const Text("Has matado al monstruo"));
-
+                                     mostrarMejoraComprada(context,mejoraComprada);
                                       //Incrementacion del golpe sencillo
                                       golpeSencillo = mejoraJuego.mejora1(
                                           mejora1, golpeSencillo);
@@ -326,17 +347,20 @@ class StatesAppState extends State<StatesApp> {
                             ),
 
                             Container(
+                              
                                 decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
                                     image: DecorationImage(
                                         image:
                                             AssetImage("assets/fondoItems.jpg"),
                                         fit: BoxFit.cover)),
-                                width: 160.0,
+                                
+                                width: 120,
                                 child: Container(
+                                  
                                   child: InkWell(
                                     onTap: () {
                                       mejora2 = true;
+                                      mostrarMejoraComprada(context,mejoraComprada);
                                       //Indicamos que las monedas se duplican
                                       monedasRecibidas = mejoraJuego.mejora2(
                                           mejora2, monedasRecibidas);
@@ -344,7 +368,7 @@ class StatesAppState extends State<StatesApp> {
                                     },
                                   ),
                                   decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
+                                      
                                       border: Border.all(
                                           color:
                                               Color.fromARGB(255, 255, 208, 0),
@@ -369,6 +393,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context,mejoraComprada);
                                       if (contadorMejora3 == 0 &&
                                           monedasJugador > precioMejora3) {
                                         contadorMejora3++;
