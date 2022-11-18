@@ -79,7 +79,7 @@ List<String> listaMundos = [
   "assets/Mundo3.jpg"
 ];
 
-double v = 12;
+
 
 // Ruta de imagen inicial
 String rutaMonstruo = listaMonstruos[contador].imagenRuta;
@@ -118,7 +118,32 @@ bool mejora2 = false;
 int precioMejora3 = 100;
 int contadorMejora3 = 0;
 
+<<<<<<< HEAD
 //Mensajes snackbar
+=======
+// Variable para comparar con la vidaMax de un monstruo e
+// ir actualizando la barra de vida
+double v = 1;
+
+// Casos de vidaMax para comparacion
+double vidaMax100= vida;
+double vidaMax90 = (vida*0.9);
+double vidaMax80 = (vida*0.8);
+double vidaMax70 = (vida*0.7);
+double vidaMax60 = (vida*0.6);
+double vidaMax50 = (vida*0.5);
+double vidaMax40 = (vida*0.4);
+double vidaMax30 = (vida*0.3);
+double vidaMax20 = (vida*0.2);
+double vidaMax10 = (vida*0.1);
+// En el caso 0 no necesito esta variable
+
+// Variable Color para la barra de vida
+Color ColorValue = Colors.greenAccent;
+
+//Mensaje snackbar
+
+>>>>>>> ae557c9cfda16e59c8c08fbeafeb8cdadcf902bc
 String mensajeMaximaMejora = "Nivel Máximo de Mejora Alcanzado";
 String mejoraComprada = "Mejora comprada";
 
@@ -144,8 +169,20 @@ class StatesAppState extends State<StatesApp> {
         if (vida < 0) {
           
           contador++;
+          // Cambiamos de monstruo en función al contador por lo que asignamos a las variables su vida y su ruta de imagen
           vida = listaMonstruos[contador].vida;
           rutaMonstruo = listaMonstruos[contador].imagenRuta;
+          // Actualizo las variables para barra de vida
+           vidaMax90 = (vida*0.9);
+           vidaMax80 = (vida*0.8);
+           vidaMax70 = (vida*0.7);
+           vidaMax60 = (vida*0.6);
+           vidaMax50 = (vida*0.5);
+           vidaMax40 = (vida*0.4);
+           vidaMax30 = (vida*0.3);
+           vidaMax20 = (vida*0.2);
+           vidaMax10 = (vida*0.1);
+          v=1;
           //Controlamos que si ha matado mas de 3 mundos pero menos de 6 el mundo se actualizara
           if (contador >= 3 && contador <= 6) {
             indexImagen = 1;
@@ -154,6 +191,7 @@ class StatesAppState extends State<StatesApp> {
             indexImagen = 2;
           }
         }
+       
       });
     }
 
@@ -217,6 +255,50 @@ class StatesAppState extends State<StatesApp> {
           : golpeGlobal = golpeSencillo;
     }
 
+
+      double controladorBarra(v){
+      setState(() {
+        if(vida<=vidaMax100 && vida>vidaMax90){
+            v=v;
+        }
+        if(vida<=vidaMax90 && vida>vidaMax80){
+          v=v-0.1;
+        }
+        if(vida<=vidaMax80 && vida>vidaMax70){
+          v=v-0.2;
+        }
+        if(vida<=vidaMax70 && vida>vidaMax60){
+          v=v-0.3;
+        }
+        if(vida<=vidaMax60 && vida>vidaMax50){
+          v=v-0.4;
+        }
+        if(vida<=vidaMax50 && vida>vidaMax40){
+          v=v-0.5;
+        }
+        if(vida<=vidaMax40 && vida>vidaMax30){
+          v=v-0.6;
+        }
+        if(vida<=vidaMax30 && vida>vidaMax20){
+          v=v-0.7;
+        }
+        if(vida<=vidaMax20 && vida>vidaMax10){
+          v=v-0.8;
+        }
+        if(vida<=vidaMax10 && vida>0){
+          v=v-0.9;
+        }
+        if(vida==0){
+          v=0;
+
+        }
+         
+      });
+        
+      return v;
+
+    }
+
     return MaterialApp(
         home: Container(
             decoration: BoxDecoration(
@@ -259,23 +341,14 @@ class StatesAppState extends State<StatesApp> {
                     ),
                     //Container with life bar
                     Container(
-                      // margin: EdgeInsets.only(top: 8),
-                      // child: Text("Barra de vida", style: TextStyle(fontSize: 25))
-                      child: LinearProgressIndicator(
-                        // value: vida;
-                        backgroundColor: Colors.red,
-                      ),
-                    ),
-
-                    Container(
                       width: 300,
                       height: 20,
-                      // margin: EdgeInsets.only(top: 8),
-                      // child: Text("Barra de vida", style: TextStyle(fontSize: 25))
                       child: LinearProgressIndicator(
-                        // value: vida;
-                        backgroundColor: Colors.green,
-                        value: v,
+                        valueColor: AlwaysStoppedAnimation<Color>(ColorValue),
+                        backgroundColor: Colors.redAccent,
+                        value: 
+                        // Llamo a la función y como parámetro v
+                         controladorBarra(v),
                       ),
                     ),
 
