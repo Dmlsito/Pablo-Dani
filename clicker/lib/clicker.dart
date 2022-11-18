@@ -84,16 +84,17 @@ List<String> listaMundos = [
 
 // Ruta de imagen inicial
 String rutaMonstruo = listaMonstruos[contador].imagenRuta;
+// Index para identificarlo
 int indexImagen = 0;
 // Vida inicial
 double vida = listaMonstruos[contador].vida;
-// Timers
+// Timers para variables por dps
 Timer? timer1;
 // Timer ? timer2;
 
 // Variables para dps
 double danoDps1 = 5;
-// double danoDps2 =1;
+
 
 // Variables de tiempo para controlar los timers
 int segundos1 = 0;
@@ -116,6 +117,8 @@ bool mejora1 = false;
 bool mejora2 = false;
 
 // Precios mejoras
+int precioMejora1=100;
+int contadorMejora1=0;
 int precioMejora3 = 100;
 int contadorMejora3 = 0;
 
@@ -142,6 +145,7 @@ Color ColorValue = Colors.greenAccent;
 //Mensaje snackbar
 String mensajeMaximaMejora = "Nivel Máximo de Mejora Alcanzado";
 
+// Varible para música
 final player = AudioPlayer();
 
  
@@ -181,7 +185,7 @@ class StatesAppState extends State<StatesApp> {
            vidaMax30 = (vida*0.3);
            vidaMax20 = (vida*0.2);
            vidaMax10 = (vida*0.1);
-          v=1;
+           v=1;
           //Controlamos que si ha matado mas de 3 mundos pero menos de 6 el mundo se actualizara
           if (contador >= 3 && contador <= 6) {
             indexImagen = 1;
@@ -298,22 +302,47 @@ class StatesAppState extends State<StatesApp> {
               body: Center(
                 child: Column(
                   children: [
+                    
                     Container(
-                      child: IconButton(onPressed:(() => setState(() {
-                        player.play(AssetSource("musicaCruzi.mp3"));
-                      })) , icon:Icon(Icons.speaker) ),
+                                                            
+                      child: Row(
+                        children: [
+                          // Containers para control de música
+                          Container(
+                            margin: EdgeInsets.all(20), 
+                            decoration: BoxDecoration(border: Border.all(color: Colors.white)),   
+                            child: IconButton(onPressed:(() => setState(() {
+                             player.play(AssetSource("musicaCruzi.mp3"));
+                      })) ,  icon:Icon(Icons.speaker),color: Colors.white, ),
                     ),
-                    Container(
-                      child:IconButton(onPressed:(() => setState(() {
-                        player.stop();
-                      })) , icon:Icon(Icons.speaker) ),
+                          Container(
+                                  child:Text("Play",style:TextStyle(color:Colors.white))
+                                  
+                                ),
+                          Container(
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(border: Border.all(color: Colors.white)),                           
+                            child:IconButton(onPressed:(() => setState(() {
+                              player.stop();
+                      })) ,     icon:Icon(Icons.speaker),color: Colors.white, ),
                     ),
-                    //Container with world´s title
-                    Container(
-                      alignment: Alignment.topRight,
-                      child: Text("Mundo 1",
-                          style: TextStyle(fontSize: 25, color: Colors.white)),
+                          Container(
+                                  child:Text("Stop",style:TextStyle(color:Colors.white))
+                                  
+                                ),
+                                //Container with world´s title
+                          Container(
+                            margin: EdgeInsets.all(40),
+                            alignment: Alignment.topRight,
+                            child: Text("Mundo 1",
+                                style: TextStyle(fontSize: 25, color: Colors.white)),
+                          ),
+                        ],
+
                     ),
+                    ),
+                   
+                    
                     //Container with monster´s image
                     Container(
                       margin: EdgeInsets.only(top: 50),
@@ -391,8 +420,8 @@ class StatesAppState extends State<StatesApp> {
 
                                       //Incrementacion del golpe sencillo
                                       golpeSencillo = mejoraJuego.mejora1(
-                                          mejora1, golpeSencillo);
-                                      print("Compra de mejora1");
+                                       mejora1, golpeSencillo);
+                                     
                                     },
                                   ),
                                   decoration: BoxDecoration(
@@ -403,7 +432,7 @@ class StatesAppState extends State<StatesApp> {
                                           width: 4),
                                       image: DecorationImage(
                                           image:
-                                              AssetImage("assets/dragon.png"),
+                                              AssetImage("assets/espada1.png"),
                                           fit: BoxFit.cover)),
                                 )),
                             //Este SizedBox se utiliza para separar cada container
@@ -437,7 +466,8 @@ class StatesAppState extends State<StatesApp> {
                                           width: 4),
                                       image: DecorationImage(
                                           image:
-                                              AssetImage("assets/dragon.png"),
+                                          //¡¡¡¡¡¡¡¡¡ AHORA ESTE NO SE VE??????????????
+                                              AssetImage("assets/arco.png"),
                                           fit: BoxFit.cover)),
                                 )),
 
