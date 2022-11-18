@@ -17,7 +17,7 @@ class Register extends StatelessWidget {
       home: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/FondoLogin.jpg"),
+                  image: AssetImage("assets/FondoRegister.jpg"),
                   fit: BoxFit.cover)),
           child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -27,14 +27,9 @@ class Register extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 100),
-                          child: Text("Bienvenido",
-                              style: TextStyle(fontSize: 40)),
-                        ),
-                        Container(
                           height: 50,
                           margin:
-                              EdgeInsets.only(top: 100, left: 80, right: 80),
+                              EdgeInsets.only(top: 250, left: 80, right: 80),
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
@@ -71,12 +66,12 @@ class Register extends StatelessWidget {
                             },
                           ),
                         ),
-                        Container(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  login(context, nombre, contrasena);
-                                },
-                                child: Text("Login"))),
+                        OutlinedButton(
+                            onPressed: () {
+                              login(context, nombre, contrasena);
+                            },
+                            child:
+                                Text("Login", style: TextStyle(fontSize: 20))),
                       ],
                     )),
               ))),

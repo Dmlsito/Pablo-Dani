@@ -71,16 +71,22 @@ class MainPage extends StatelessWidget {
                             },
                           ),
                         ),
-                        OutlinedButton(
-                            onPressed: () {
-                              login(context, nombre, contrasena);
-                            },
-                            child: Text("Login")),
-                        OutlinedButton(
-                            onPressed: () {
-                              register(context);
-                            },
-                            child: Text("Register")),
+                        Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  login(context, nombre, contrasena);
+                                },
+                                child: Text("Login",
+                                    style: TextStyle(fontSize: 20)))),
+                        Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  register(context);
+                                },
+                                child: Text("Register",
+                                    style: TextStyle(fontSize: 20)))),
                       ],
                     )),
               ))),

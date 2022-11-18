@@ -211,6 +211,21 @@ class StatesAppState extends State<StatesApp> {
       ScaffoldMessenger.of(context).showSnackBar(snb);
     }
 
+    void mostrarMejoraComprada(BuildContext context) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text("Mejora comprada")
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
     void dps1(contadorMejora3) {
       timer1 = Timer.periodic(Duration(seconds: 1), (timer) {
         segundos1 += 1;
@@ -344,14 +359,11 @@ class StatesAppState extends State<StatesApp> {
                       child: Column(children: [
                         InkWell(
                           onTap: () {
-                            if (vida == 0) {
-                              final snackBar = SnackBar(
-                                  content:
-                                      const Text("Has matado al monstruo"));
-                            }
                             critico();
                             vidaResta();
-                            playFile("music/musicaCruzi.mp3");
+                            setState(() {
+                              playFile("music/musicaCruzi.mp3");
+                            });
                           },
                           // ignore: sized_box_for_whitespace
                           child: Container(
@@ -386,9 +398,21 @@ class StatesAppState extends State<StatesApp> {
                       child: Text("Monedas: " + monedasJugador.toString(),
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
+
                     Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
+                      ),
+                      margin: EdgeInsets.only(right: 0, left: 0, top: 50),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/fondoItems.jpg"),
+                          )),
                       height: 180,
-                      margin: EdgeInsets.only(top: 35),
+                      margin: EdgeInsets.only(top: 0),
                       child:
                           // Scroll()
                           Container(
@@ -410,6 +434,7 @@ class StatesAppState extends State<StatesApp> {
                                   child: InkWell(
                                     onTap: () {
                                       mejora1 = true;
+                                      mostrarMejoraComprada(context);
                                       // Scaffold.of(context).showSnackBar(
                                       // final snackBarMejora1 = SnackBar(content: const Text("Has matado al monstruo"));
 
@@ -446,6 +471,7 @@ class StatesAppState extends State<StatesApp> {
                                   child: InkWell(
                                     onTap: () {
                                       mejora2 = true;
+                                      mostrarMejoraComprada(context);
                                       //Indicamos que las monedas se duplican
                                       monedasRecibidas = mejoraJuego.mejora2(
                                           mejora2, monedasRecibidas);
@@ -537,6 +563,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
@@ -565,6 +592,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
@@ -593,6 +621,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
@@ -621,6 +650,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
@@ -649,6 +679,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
@@ -677,6 +708,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
@@ -705,6 +737,7 @@ class StatesAppState extends State<StatesApp> {
                                 child: Container(
                                   child: InkWell(
                                     onTap: () {
+                                      mostrarMejoraComprada(context);
                                       print("Compra de mejora");
                                     },
                                   ),
