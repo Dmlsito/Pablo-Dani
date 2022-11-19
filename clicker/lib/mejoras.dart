@@ -2,11 +2,15 @@ import 'dart:math';
 
 class Mejoras {
   //Doble de ataque
-  double mejora1(bool mejora1, double golpeSencillo) {
-    if (mejora1 == true) {
+  void mejora1(bool mejora1, double golpeSencillo, int contadorMejora1,
+      int monedasJugador, int precioMejora1) {
+    if (mejora1 == true &&
+        contadorMejora1 == 0 &&
+        monedasJugador > precioMejora1) {
       golpeSencillo = golpeSencillo * 2;
+      contadorMejora1++;
+      monedasJugador = monedasJugador - precioMejora1;
     }
-    return golpeSencillo;
   }
 
   //Obtencion del doble de monedas
