@@ -113,6 +113,9 @@ int temporizadorDeCritico = 0;
 bool mejora1 = false;
 bool mejora2 = false;
 
+//Precios globales de mejoras para imprimnir por pantalla
+int precioMejoraGlobal1 = 100;
+int precioMejoraGlobal2 = 200;
 // Precios mejoras
 int precioMejora1 = 100;
 int contadorMejora1 = 0;
@@ -120,7 +123,6 @@ int contadorMejora2 = 0;
 int precioMejora2 = 200;
 int precioMejora3 = 100;
 int contadorMejora3 = 0;
-
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
 double v = 1;
@@ -254,12 +256,21 @@ class StatesAppState extends State<StatesApp> {
     //Mejora1
     void mejora1() {
       if (contadorMejora1 == 0 && monedasJugador > precioMejora1) {
+        setState(() {
+          //Seteamos el precio de la mejora
+          precioMejoraGlobal1 = precioMejoraGlobal1 * 2;
+        });
+        print(precioMejoraGlobal1);
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 2;
         contadorMejora1++;
         monedasJugador = monedasJugador - precioMejora1;
       }
       if (contadorMejora1 == 1 && monedasJugador > (precioMejora1 * 2)) {
+        setState(() {
+          //Seteamos el precio de la mejora
+          precioMejoraGlobal1 = precioMejoraGlobal1 * 3;
+        });
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 3;
         contadorMejora1++;
@@ -279,12 +290,18 @@ class StatesAppState extends State<StatesApp> {
     //Mejora2
     void mejora2() {
       if (contadorMejora2 == 0 && monedasJugador > precioMejora2) {
+        setState(() {
+          precioMejoraGlobal2 = precioMejoraGlobal2 * 2;
+        });
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 10;
         contadorMejora2++;
         monedasJugador = monedasJugador - precioMejora2;
       }
       if (contadorMejora2 == 1 && monedasJugador > (precioMejora2 * 2)) {
+        setState(() {
+          precioMejora2 = precioMejoraGlobal2 + precioMejoraGlobal2 * 2;
+        });
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 20;
         contadorMejora2++;
@@ -419,7 +436,7 @@ class StatesAppState extends State<StatesApp> {
                                   style: TextStyle(color: Colors.white))),
                           //Container with world´s title
                           Container(
-                            margin: EdgeInsets.all(40),
+                            margin: EdgeInsets.all(30),
                             alignment: Alignment.topRight,
                             child: Text("Mundo 1",
                                 style: TextStyle(
@@ -498,6 +515,155 @@ class StatesAppState extends State<StatesApp> {
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
                           //Container con el primer item
+                          // ignore: todo
+                          //Este container contendra TODO
+                          Container(
+                              width: 160,
+                              //Columna que contendra la imagen y la fila con el precio de la mejora y la imagen de las monedas
+                              child: Column(children: [
+                                //Container donde esta la imagen
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                //Este container contendra la fila
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    //Creamos la fila
+                                    child: Row(children: [
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      //Container para mostrar la imagen
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
+
+                          SizedBox(
+                            width: 50,
+                          ),
+                          //Container del segundo item
+                          Container(
+                              width: 160.0,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora2();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image:
+                                                AssetImage("assets/arco.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 30),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(
+                                              precioMejoraGlobal2.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
+
+                          SizedBox(
+                            width: 50,
+                          ),
+                          //Container del tercer item
+                          Container(
+                              width: 160.0,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        if (contadorMejora3 == 0 &&
+                                            monedasJugador > precioMejora3) {
+                                          contadorMejora3++;
+                                          dps1(contadorMejora3);
+
+                                          monedasJugador =
+                                              monedasJugador - precioMejora3;
+                                        }
+                                        if (contadorMejora3 == 1 &&
+                                            monedasJugador >
+                                                (precioMejora3 * 2)) {
+                                          contadorMejora3++;
+                                          dps1(contadorMejora3);
+                                          monedasJugador = monedasJugador -
+                                              (precioMejora3 * 2);
+                                        }
+
+                                        if (contadorMejora3 == 2 &&
+                                            monedasJugador >
+                                                (precioMejora3 * 3)) {
+                                          contadorMejora3++;
+                                          dps1(contadorMejora3);
+                                          monedasJugador = monedasJugador -
+                                              (precioMejora3 * 3);
+                                        }
+
+                                        if (contadorMejora3 == 3) {
+                                          mostrarMaximaMejora(context);
+                                        }
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image:
+                                                AssetImage("assets/arco.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 30),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
+
+                          SizedBox(
+                            width: 50,
+                          ),
+                          //Container del cuarto item
                           Container(
                               width: 160,
                               child: Column(children: [
@@ -530,214 +696,222 @@ class StatesAppState extends State<StatesApp> {
                                               "assets/MonedasPrueba.png"))
                                     ]))
                               ])),
-                          // width: 140.0,
-                          // child: Container(
-                          //   child: InkWell(
-                          //     onTap: () {
-                          //       mejora1();
-                          //     },
-                          //   ),
-                          //   decoration: BoxDecoration(
-                          //       image: DecorationImage(
-                          //           image: AssetImage("assets/espada1.png"),
-                          //           fit: BoxFit.cover)),
-                          // )),
-                          //Este SizedBox se utiliza para separar cada container
-                          SizedBox(
-                            width: 50,
-                          ),
-                          //Container del segundo item
-                          Container(
-                              width: 140.0,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mejora2();
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
-
-                          SizedBox(
-                            width: 50,
-                          ),
-                          //Container del tercer item
-                          Container(
-                              width: 140,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    if (contadorMejora3 == 0 &&
-                                        monedasJugador > precioMejora3) {
-                                      contadorMejora3++;
-                                      dps1(contadorMejora3);
-
-                                      monedasJugador =
-                                          monedasJugador - precioMejora3;
-                                    }
-                                    if (contadorMejora3 == 1 &&
-                                        monedasJugador > (precioMejora3 * 2)) {
-                                      contadorMejora3++;
-                                      dps1(contadorMejora3);
-                                      monedasJugador =
-                                          monedasJugador - (precioMejora3 * 2);
-                                    }
-
-                                    if (contadorMejora3 == 2 &&
-                                        monedasJugador > (precioMejora3 * 3)) {
-                                      contadorMejora3++;
-                                      dps1(contadorMejora3);
-                                      monedasJugador =
-                                          monedasJugador - (precioMejora3 * 3);
-                                    }
-
-                                    if (contadorMejora3 == 3) {
-                                      mostrarMaximaMejora(context);
-                                    }
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
-
-                          SizedBox(
-                            width: 50,
-                          ),
-                          //Container del cuarto item
-                          Container(
-                              width: 140,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
                           SizedBox(
                             width: 50,
                           ),
                           //Container del quinto item
                           Container(
-                              width: 140,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
+                              width: 160,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
                           SizedBox(
                             width: 50,
                           ),
                           //Container del sexto item
                           Container(
-                              width: 140,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
+                              width: 160,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
                           SizedBox(
                             width: 50,
                           ),
                           //Container del septimo item
                           Container(
-                              width: 140.0,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
+                              width: 160,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
                           SizedBox(
                             width: 50,
                           ),
                           //Container del octavo item
                           Container(
-                              width: 140.0,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
+                              width: 160,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
                           SizedBox(
                             width: 50,
                           ),
                           //Container del noveno item
                           Container(
-                              width: 140.0,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
+                              width: 160,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
                           SizedBox(
                             width: 50,
                           ),
                           //Container del decimo item
                           Container(
-                              width: 140.0,
-                              child: Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    mostrarMejoraComprada(context);
-                                    print("Compra de mejora");
-                                  },
-                                ),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: Color.fromARGB(255, 255, 208, 0),
-                                        width: 4),
-                                    image: DecorationImage(
-                                        image: AssetImage("assets/dragon.png"),
-                                        fit: BoxFit.cover)),
-                              )),
+                              width: 160,
+                              child: Column(children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: 0),
+                                    width: 140,
+                                    height: 150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        mejora1();
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/espada1.png"),
+                                            fit: BoxFit.cover))),
+                                Container(
+                                    height: 23,
+                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    child: Row(children: [
+                                      Container(
+                                          child: Text(precioMejora1.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white))),
+                                      Container(
+                                          width: 60,
+                                          height: 100,
+                                          child: Image.asset(
+                                              "assets/MonedasPrueba.png"))
+                                    ]))
+                              ])),
                         ],
                       ),
                     ),
