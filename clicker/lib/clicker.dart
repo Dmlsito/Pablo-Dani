@@ -1,5 +1,5 @@
 //ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last, avoid_print
-import "mejoras.dart";
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -87,17 +87,18 @@ int indexImagen = 0;
 // Vida inicial
 double vida = listaMonstruos[contador].vida;
 // Timers para variables por dps
-Timer? timer1;
-// Timer ? timer2;
 
+//Timers
+
+Timer? timer2;
+Timer? timer1;
 // Variables para dps
 double danoDps1 = 5;
 
 // Variables de tiempo para controlar los timers
 int segundos1 = 0;
+int segundos2 = 0;
 // int segundos2=0;
-
-Mejoras mejoraJuego = Mejoras();
 
 // Contador para cambiar de monstruo
 int contador = 0;
@@ -110,19 +111,28 @@ bool probabilidadCritico = true;
 int temporizadorDeCritico = 0;
 
 //Variables para controlar las mejoras
-bool mejora1 = false;
-bool mejora2 = false;
+bool bolaFuegoActivada = false;
+bool poderUsarBolaFuego = true;
 
 //Precios globales de mejoras para imprimnir por pantalla
 int precioMejoraGlobal1 = 100;
-int precioMejoraGlobal2 = 200;
+int precioMejoraGlobal2 = 50;
+int precioMejoraGlobal3 = 100;
+int precioMejoraGlobal4 = 50;
+
 // Precios mejoras
 int precioMejora1 = 100;
 int contadorMejora1 = 0;
 int contadorMejora2 = 0;
-int precioMejora2 = 200;
+int precioMejora2 = 50;
 int precioMejora3 = 100;
 int contadorMejora3 = 0;
+int precio1Mejora4 = 50;
+int precio2Mejora4 = 100;
+int precio3Mejora4 = 300;
+int precio4Mejora4 = 900;
+int contadorMejora4 = 0;
+
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
 double v = 1;
@@ -235,7 +245,7 @@ class StatesAppState extends State<StatesApp> {
     }
 
     //SnackBar para mostrar que se ha comprado una mejora
-    void dineroInsuficiente(BuildContext context) {
+    void bolaDeFuegoActivada(BuildContext context) {
       final snb = SnackBar(
         content: Row(
           children: [
@@ -243,7 +253,7 @@ class StatesAppState extends State<StatesApp> {
             SizedBox(
               width: 20,
             ),
-            Text("No tienes dinero suficiente")
+            Text("Bola de fuego activada")
           ],
         ),
       );
@@ -300,7 +310,7 @@ class StatesAppState extends State<StatesApp> {
       }
       if (contadorMejora2 == 1 && monedasJugador > (precioMejora2 * 2)) {
         setState(() {
-          precioMejora2 = precioMejoraGlobal2 + precioMejoraGlobal2 * 2;
+          precioMejora2 = precioMejoraGlobal2 * 2;
         });
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 20;
@@ -318,6 +328,7 @@ class StatesAppState extends State<StatesApp> {
       }
     }
 
+    //Mejora 3
     void dps1(contadorMejora3) {
       timer1 = Timer.periodic(Duration(seconds: 1), (timer) {
         segundos1 += 1;
@@ -337,6 +348,80 @@ class StatesAppState extends State<StatesApp> {
           }
         });
       });
+    }
+
+    //Mejora 4
+    void mejora4() {
+      if (contadorMejora4 == 0 && monedasJugador > precio1Mejora4) {
+        //Restamos monedas jugador
+        monedasJugador = monedasJugador - precio1Mejora4;
+        //Actualizamos el precio
+        precioMejoraGlobal4 = precio2Mejora4;
+        //Ataque de bola de fuego Lvl 1
+        double bolaFuegoV1 = 1000;
+        setState(() {
+          vida = vida - bolaFuegoV1;
+        });
+        contadorMejora4++;
+
+        mostrarMejoraComprada(context);
+      }
+      if (contadorMejora4 == 1 && monedasJugador > precio2Mejora4) {
+        monedasJugador = monedasJugador - precio2Mejora4;
+        precioMejoraGlobal4 = precio3Mejora4;
+        //Ataque de bola de fuego Lvl 2
+        double bolaFuegoV2 = 2000;
+        setState(() {
+          vida = vida - bolaFuegoV2;
+        });
+        contadorMejora4++;
+        mostrarMejoraComprada(context);
+      }
+      if (contadorMejora4 == 2 && monedasJugador > precio3Mejora4) {
+        //Ataque de bola de fuego Lvl 1
+        double bolaFuegoV3 = 3000;
+        precioMejoraGlobal4 = precio4Mejora4;
+        setState(() {
+          vida = vida - bolaFuegoV3;
+        });
+        contadorMejora4++;
+        monedasJugador = monedasJugador - precio3Mejora4;
+        mostrarMejoraComprada(context);
+      }
+      if (contadorMejora4 > 2 && bolaFuegoActivada == false) {
+        mostrarMaximaMejora(context);
+
+        timer2 = Timer.periodic(Duration(seconds: 1), (timer) {
+          //Solo empezara la cuenta atras cuando la variable que controla si ya hemos utilizado o no la habilidad se ponga a true
+          //sino la cuenta no empezara, con lo cual aunque pasen quince segundos no podremos usar la habilidad
+          if (poderUsarBolaFuego == true) {
+            segundos2++;
+          }
+          print(segundos2);
+
+          if (segundos2 == 20) {
+            bolaDeFuegoActivada(context);
+            //Cuando hayan pasado los veinte segundos podremos utilizar la habilidad
+            bolaFuegoActivada = true;
+            //Seteamos la variable a false, para que el temporizador no se vuelva a incrementar
+            poderUsarBolaFuego = false;
+            segundos2 = 0;
+          }
+        });
+      }
+      if (bolaFuegoActivada == true && monedasJugador > precio4Mejora4) {
+        //Ataque bola de fuego lvl final
+        double bolaFuegoVFinal = 10000;
+        setState(() {
+          vida = vida - bolaFuegoVFinal;
+        });
+        monedasJugador = monedasJugador - precio4Mejora4;
+
+        //Al usar la bola de fuego la seteamos a false
+        bolaFuegoActivada = false;
+        //Una vez de que se utilice seteamos esta variable para indicar que se podra utilizar de nuevo la habilidad
+        poderUsarBolaFuego = true;
+      }
     }
 
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
@@ -641,8 +726,8 @@ class StatesAppState extends State<StatesApp> {
                                     ),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image:
-                                                AssetImage("assets/arco.png"),
+                                            image: AssetImage(
+                                                "assets/DañoPasiva.png"),
                                             fit: BoxFit.cover))),
                                 Container(
                                     height: 23,
@@ -673,20 +758,21 @@ class StatesAppState extends State<StatesApp> {
                                     height: 150,
                                     child: InkWell(
                                       onTap: () {
-                                        mejora1();
+                                        mejora4();
                                       },
                                     ),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                "assets/espada1.png"),
+                                                "assets/BolaFuego.png"),
                                             fit: BoxFit.cover))),
                                 Container(
                                     height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    margin: EdgeInsets.only(top: 5, left: 35),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal4.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
