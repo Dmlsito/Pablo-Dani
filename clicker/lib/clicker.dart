@@ -478,7 +478,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           Container(
                               width: 100,
-                              height: 100,
+                              height: 50,
                               child: Image.asset("assets/MonedasPrueba.png")),
                         ])),
 
