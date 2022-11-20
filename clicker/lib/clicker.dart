@@ -21,7 +21,7 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
     nombre: "Pablo",
-    vida: 3000,
+    vida: 100000,
     imagenRuta: "assets/pequeñoCola1.png",
     identificador: 1,
   ),
@@ -145,9 +145,17 @@ int precio4Mejora4 = 900;
 int precioMejoraGlobal4 = 50;
 int contadorMejora4 = 0;
 
-//Precios y variables para controlar la posicion aleaotoria de las imagenes
-int rngLeft = 0;
-int rngRight = 0;
+//Precios y variables para controlar la posicion aleaotoria de las imagenes de la mejora5
+double rngLeft = 0;
+
+int contadorMejora5 = 0;
+int precioMejoraGlobal5 = 100;
+int precio1Mejora5 = 100;
+int precio2Mejora5 = 400;
+int precio3Mejora5 = 900;
+String imagenAleatoria = "";
+int monedasGanadasPorImagen = 0;
+int mostrarMejora5Maxima = 0;
 
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
@@ -456,7 +464,48 @@ class StatesAppState extends State<StatesApp> {
     }
 
     //Mejora5
-    void mejora5() {}
+    String mejora5() {
+      //Variable random que se asignara al valor de separacion con el borde izquierdo
+      Random randomLeft = Random();
+
+      //Valores de entre 1.00 y 99.00
+      rngLeft = randomLeft.nextDouble() * 100;
+
+      if (contadorMejora5 == 0 && monedasJugador > precio1Mejora5) {
+        monedasGanadasPorImagen = 500;
+        contadorMejora5++;
+        precioMejoraGlobal5 = precio2Mejora5;
+        monedasJugador = monedasJugador - precio1Mejora5;
+        imagenAleatoria = "assets/tioAltavoz.png";
+        return imagenAleatoria;
+      }
+      if (contadorMejora5 == 1 && monedasJugador > precio2Mejora5) {
+        monedasGanadasPorImagen = 750;
+        contadorMejora5++;
+        precioMejoraGlobal5 = precio3Mejora5;
+        monedasJugador = monedasJugador - precio2Mejora5;
+        imagenAleatoria = "assets/tioAltavoz.png";
+        return imagenAleatoria;
+      }
+      if (contadorMejora5 == 2 && monedasJugador > precio3Mejora5) {
+        monedasGanadasPorImagen = 1000;
+        contadorMejora5++;
+        monedasJugador = monedasJugador - precio3Mejora5;
+        imagenAleatoria = "assets/tioAltavoz.png";
+        return imagenAleatoria;
+      }
+      if (contadorMejora5 > 2 && monedasJugador > precio3Mejora5) {
+        //Con esto conseguimos que una vez que el usuario haya alcanzado el tope de mejora solo le muestre el mensaje de "Mejora maxima" la primera vez que
+        //clicka en ella dsp de alcanzar el nivel maximo
+        if (mostrarMejora5Maxima == 0) {
+          mostrarMaximaMejora(context);
+        }
+        mostrarMejora5Maxima++;
+
+        monedasJugador = monedasJugador - precio3Mejora5;
+      }
+      return "";
+    }
 
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
     void critico() {
@@ -564,7 +613,27 @@ class StatesAppState extends State<StatesApp> {
                         ],
                       ),
                     ),
-
+                    //Container que contendra la imagen en posicion aleatoria
+                    Container(
+                      child: Row(children: [
+                        Container(
+                            //Valores de margen aleatorios, MENOS EL TOP Y EL BOTTOM
+                            margin: EdgeInsets.only(right: 5, left: rngLeft),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(imagenAleatoria))),
+                            height: 32,
+                            width: 50,
+                            child: InkWell(onTap: () {
+                              setState(() {
+                                monedasJugador =
+                                    monedasJugador + monedasGanadasPorImagen;
+                              });
+                              //Una vez se haya clickado en la imagen esta desaparecera
+                              imagenAleatoria = "";
+                            })),
+                      ]),
+                    ),
                     //Container with monster´s image
                     Container(
                       margin: EdgeInsets.only(top: 50),
@@ -836,7 +905,8 @@ class StatesAppState extends State<StatesApp> {
                                     height: 150,
                                     child: InkWell(
                                       onTap: () {
-                                        mejora1();
+                                        mejora5();
+                                        print(rngLeft);
                                       },
                                     ),
                                     decoration: BoxDecoration(
@@ -850,7 +920,7 @@ class StatesAppState extends State<StatesApp> {
                                     child: Row(children: [
                                       Container(
                                           child: Text(
-                                              precioMejoraGlobal1.toString(),
+                                              precioMejoraGlobal5.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
