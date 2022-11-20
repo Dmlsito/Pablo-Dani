@@ -87,7 +87,7 @@ int indexImagen = 0;
 // Vida inicial
 double vida = listaMonstruos[contador].vida;
 // Timers para variables por dps
-
+String colorPrueba = "0xffF856DF";
 //Timers
 
 Timer? timer2;
@@ -133,6 +133,9 @@ int precio3Mejora2 = 1200;
 int precioMejoraGlobal2 = 200;
 int contadorMejora2 = 0;
 int mostrarMejora2Maxima = 0;
+bool mejora2V1 = false;
+bool mejora2V2 = false;
+bool mejora2V3 = false;
 
 //Precios de mejora3
 int precio1Mejora3 = 100;
@@ -141,6 +144,9 @@ int precio3Mejora3 = 1000;
 int precioMejoraGlobal3 = 100;
 int contadorMejora3 = 0;
 int mostrarMejora3Maxima = 0;
+bool mejora3V1 = false;
+bool mejora3V2 = false;
+bool mejora3V3 = false;
 
 //Precios de mejora 4
 int precio1Mejora4 = 50;
@@ -150,6 +156,9 @@ int precio4Mejora4 = 900;
 int precioMejoraGlobal4 = 50;
 int contadorMejora4 = 0;
 int mostrarMejora4Maxima = 0;
+bool mejora4V1 = false;
+bool mejora4V2 = false;
+bool mejora4V3 = false;
 
 //Precios y variables para controlar la posicion aleaotoria de las imagenes de la mejora5
 double rngLeft = 0;
@@ -162,6 +171,9 @@ int precio3Mejora5 = 900;
 String imagenAleatoria = "";
 int monedasGanadasPorImagen = 0;
 int mostrarMejora5Maxima = 0;
+bool mejora5V1 = false;
+bool mejora5V2 = false;
+bool mejora5V3 = false;
 
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
@@ -180,10 +192,12 @@ double vidaMax40 = (vida * 0.4);
 double vidaMax30 = (vida * 0.3);
 double vidaMax20 = (vida * 0.2);
 double vidaMax10 = (vida * 0.1);
-// En el caso 0 no necesito esta variable
 
+// En el caso 0 no necesito esta variable
+Color verde = Color(0xff00FF00);
 // Variable Color para la barra de vida
 Color ColorValue = Colors.greenAccent;
+Color transparent = Color.fromARGB(0, 255, 255, 128);
 
 //Mensaje snackbar
 String mensajeMaximaMejora = "Nivel Máximo de Mejora Alcanzado";
@@ -353,6 +367,7 @@ class StatesAppState extends State<StatesApp> {
     //Mejora2
     void mejora2() {
       if (contadorMejora2 == 0 && monedasJugador > precio1Mejora2) {
+        mejora2V1 = true;
         setState(() {
           precioMejoraGlobal2 = precio2Mejora2;
         });
@@ -362,6 +377,7 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador - precio1Mejora2;
       }
       if (contadorMejora2 == 1 && monedasJugador > precio2Mejora2) {
+        mejora2V2 = true;
         setState(() {
           precioMejoraGlobal2 = precio3Mejora2;
         });
@@ -371,6 +387,7 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador - precio2Mejora2;
       }
       if (contadorMejora2 == 2 && monedasJugador > precio3Mejora2) {
+        mejora2V3 = true;
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 25;
         contadorMejora2++;
@@ -412,6 +429,7 @@ class StatesAppState extends State<StatesApp> {
     //Mejora 4
     void mejora4() {
       if (contadorMejora4 == 0 && monedasJugador > precio1Mejora4) {
+        mejora4V1 = true;
         //Restamos monedas jugador
         monedasJugador = monedasJugador - precio1Mejora4;
         //Actualizamos el precio
@@ -426,6 +444,7 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejoraComprada(context);
       }
       if (contadorMejora4 == 1 && monedasJugador > precio2Mejora4) {
+        mejora4V2 = true;
         monedasJugador = monedasJugador - precio2Mejora4;
         precioMejoraGlobal4 = precio3Mejora4;
         //Ataque de bola de fuego Lvl 2
@@ -437,6 +456,7 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejoraComprada(context);
       }
       if (contadorMejora4 == 2 && monedasJugador > precio3Mejora4) {
+        mejora4V3 = true;
         //Ataque de bola de fuego Lvl 1
         double bolaFuegoV3 = 3000;
         precioMejoraGlobal4 = precio4Mejora4;
@@ -496,6 +516,7 @@ class StatesAppState extends State<StatesApp> {
       rngLeft = randomLeft.nextDouble() * 100;
 
       if (contadorMejora5 == 0 && monedasJugador > precio1Mejora5) {
+        mejora5V1 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 500;
         contadorMejora5++;
@@ -505,6 +526,7 @@ class StatesAppState extends State<StatesApp> {
         return imagenAleatoria;
       }
       if (contadorMejora5 == 1 && monedasJugador > precio2Mejora5) {
+        mejora5V1 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 750;
         contadorMejora5++;
@@ -514,6 +536,7 @@ class StatesAppState extends State<StatesApp> {
         return imagenAleatoria;
       }
       if (contadorMejora5 == 2 && monedasJugador > precio3Mejora5) {
+        mejora5V1 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 1000;
         contadorMejora5++;
@@ -586,19 +609,114 @@ class StatesAppState extends State<StatesApp> {
       return v;
     }
 
-    double controlarBarraMejora(valorMejora) {
-      setState(() {
-        if (mejora1V1) {
-          valorMejora = valorMejora + 0.33;
-        }
-        if (mejora1V2) {
-          valorMejora = valorMejora + 0.33;
-        }
-        if (mejora1V3) {
-          valorMejora = valorMejora + 0.33;
-        }
-      });
-      return valorMejora;
+    //Funciones de mejora 1 para mostrar el estado de nivel por pantalla
+    Color incremento1Mejora1() {
+      if (mejora1V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora1() {
+      if (mejora1V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora1() {
+      if (mejora1V3) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    //Fuciones de mejora 2 para mostrar el estado de nivel por pantalla
+    Color incremento1Mejora2() {
+      if (mejora2V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora2() {
+      if (mejora2V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora2() {
+      if (mejora2V3) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    //Funciones de mejora 3 para mostrar el estado de nivel por pantalla
+    Color incremento1Mejora3() {
+      if (mejora3V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora3() {
+      if (mejora3V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora3() {
+      if (mejora3V3) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    //Funciones de mejora 4 para mostrar el estado de nivel por pantalla
+    Color incremento1Mejora4() {
+      if (mejora4V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora4() {
+      if (mejora4V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora4() {
+      if (mejora4V3) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    //Funciones de mejora 5 para mostrar el estado de nivel por pantalla
+    Color incremento1Mejora5() {
+      if (mejora5V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora5() {
+      if (mejora5V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora5() {
+      if (mejora5V3) {
+        return verde;
+      }
+      return transparent;
     }
 
     return MaterialApp(
@@ -753,29 +871,36 @@ class StatesAppState extends State<StatesApp> {
                               width: 160,
 
                               //Columna que contendra la imagen y la fila con el precio de la mejora y la imagen de las monedas
-
                               child: Column(children: [
                                 Container(
+                                  margin: EdgeInsets.only(left: 30),
                                   height: 20,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black)),
                                   child: Row(children: [
-                                    Container(
-                                        margin: EdgeInsets.only(left: 35),
-                                        child: Text("Espada1",
-                                            style: TextStyle(
-                                                color: Colors.yellowAccent))),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/iconoAyuda.png"),
-                                              fit: BoxFit.cover)),
-                                      width: 20,
-                                      height: 20,
-                                      margin: EdgeInsets.only(left: 15),
-                                      child: InkWell(
-                                        onTap: () {},
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora1(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora1(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora1(),
+                                        width: 30,
+                                        height: 10,
                                       ),
                                     ),
                                   ]),
@@ -799,23 +924,22 @@ class StatesAppState extends State<StatesApp> {
                                             fit: BoxFit.cover))),
                                 //Este container contendra la fila
                                 Container(
-                                    height: 23,
-                                    margin: EdgeInsets.only(top: 10, left: 20),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 10, left: 5),
                                     //Creamos la fila
                                     child: Row(children: [
                                       Container(
-                                        width: 30,
-                                        child: LinearProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    ColorValue),
-                                            backgroundColor: Colors.redAccent,
-                                            value: controlarBarraMejora(
-                                                valorMejora)),
-                                      ),
+                                          margin: EdgeInsets.only(left: 4),
+                                          child: Text("Espada1",
+                                              style: TextStyle(
+                                                  color: Colors.yellowAccent))),
                                       //Container en el que aparecera el precio de la mejora
                                       Container(
-                                          margin: EdgeInsets.only(left: 20),
+                                          margin: EdgeInsets.only(left: 10),
                                           child: Text(
                                               precioMejoraGlobal1.toString(),
                                               style: TextStyle(
@@ -835,7 +959,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del segundo item
                           Container(
-                              width: 160.0,
+                              width: 140.0,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -873,7 +997,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del tercer item
                           Container(
-                              width: 160.0,
+                              width: 140.0,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -883,6 +1007,7 @@ class StatesAppState extends State<StatesApp> {
                                       onTap: () {
                                         if (contadorMejora3 == 0 &&
                                             monedasJugador > precio1Mejora3) {
+                                          mejora3V1 = true;
                                           setState(() {
                                             precioMejoraGlobal3 =
                                                 precio2Mejora3;
@@ -895,6 +1020,7 @@ class StatesAppState extends State<StatesApp> {
                                         }
                                         if (contadorMejora3 == 1 &&
                                             monedasJugador > precio2Mejora3) {
+                                          mejora3V2 = true;
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
                                           setState(() {
@@ -907,6 +1033,7 @@ class StatesAppState extends State<StatesApp> {
 
                                         if (contadorMejora3 == 2 &&
                                             monedasJugador > precio3Mejora3) {
+                                          mejora3V3 = true;
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
                                           monedasJugador =
@@ -945,7 +1072,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del cuarto item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -982,7 +1109,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del quinto item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -1020,7 +1147,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del sexto item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -1057,7 +1184,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del septimo item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -1094,7 +1221,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del octavo item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -1131,7 +1258,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del noveno item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
@@ -1168,7 +1295,7 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del decimo item
                           Container(
-                              width: 160,
+                              width: 140,
                               child: Column(children: [
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
