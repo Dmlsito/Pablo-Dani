@@ -503,6 +503,8 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejora5Maxima++;
 
         monedasJugador = monedasJugador - precio3Mejora5;
+        imagenAleatoria = "assets/tioAltavoz.png";
+        return imagenAleatoria;
       }
       return "";
     }
