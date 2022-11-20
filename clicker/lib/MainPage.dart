@@ -17,7 +17,7 @@ class MainPage extends StatelessWidget {
       home: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/FondoLogin.jpg"),
+                  image: AssetImage("assets/Pruebagif.gif"),
                   fit: BoxFit.cover)),
           child: Scaffold(
               backgroundColor: Colors.transparent,

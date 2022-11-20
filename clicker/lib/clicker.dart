@@ -98,7 +98,6 @@ double danoDps1 = 5;
 // Variables de tiempo para controlar los timers
 int segundos1 = 0;
 int segundos2 = 0;
-// int segundos2=0;
 
 // Contador para cambiar de monstruo
 int contador = 0;
@@ -123,6 +122,9 @@ int precio3Mejora1 = 800;
 int precioMejoraGlobal1 = 100;
 int contadorMejora1 = 0;
 int mostrarMejora1Maxima = 0;
+bool mejora1V1 = false;
+bool mejora1V2 = false;
+bool mejora1V3 = false;
 
 //Precios de mejora2
 int precio1Mejora2 = 200;
@@ -165,6 +167,8 @@ int mostrarMejora5Maxima = 0;
 // ir actualizando la barra de vida
 double v = 1;
 
+//Variable para ir actualizando la barra de mejora
+double valorMejora = 0;
 // Casos de vidaMax para comparacion
 double vidaMax100 = vida;
 double vidaMax90 = (vida * 0.9);
@@ -313,6 +317,7 @@ class StatesAppState extends State<StatesApp> {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio2Mejora1;
         });
+        mejora1V1 = true;
         print(precioMejoraGlobal1);
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 2;
@@ -324,12 +329,14 @@ class StatesAppState extends State<StatesApp> {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio3Mejora1;
         });
+        mejora1V2 = true;
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 3;
         contadorMejora1++;
         monedasJugador = monedasJugador - precio2Mejora1;
       }
       if (contadorMejora1 == 2 && monedasJugador > precio3Mejora1) {
+        mejora1V3 = true;
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 4;
         contadorMejora1++;
@@ -503,7 +510,7 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora5++;
         precioMejoraGlobal5 = precio3Mejora5;
         monedasJugador = monedasJugador - precio2Mejora5;
-        imagenAleatoria = "assets/tioAltavoz.png";
+        imagenAleatoria = "assets/.png";
         return imagenAleatoria;
       }
       if (contadorMejora5 == 2 && monedasJugador > precio3Mejora5) {
@@ -577,6 +584,21 @@ class StatesAppState extends State<StatesApp> {
       });
 
       return v;
+    }
+
+    double controlarBarraMejora(valorMejora) {
+      setState(() {
+        if (mejora1V1) {
+          valorMejora = valorMejora + 0.33;
+        }
+        if (mejora1V2) {
+          valorMejora = valorMejora + 0.33;
+        }
+        if (mejora1V3) {
+          valorMejora = valorMejora + 0.33;
+        }
+      });
+      return valorMejora;
     }
 
     return MaterialApp(
@@ -729,16 +751,45 @@ class StatesAppState extends State<StatesApp> {
                           //Este container contendra TODO
                           Container(
                               width: 160,
+
                               //Columna que contendra la imagen y la fila con el precio de la mejora y la imagen de las monedas
+
                               child: Column(children: [
+                                Container(
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black)),
+                                  child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(left: 35),
+                                        child: Text("Espada1",
+                                            style: TextStyle(
+                                                color: Colors.yellowAccent))),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/iconoAyuda.png"),
+                                              fit: BoxFit.cover)),
+                                      width: 20,
+                                      height: 20,
+                                      margin: EdgeInsets.only(left: 15),
+                                      child: InkWell(
+                                        onTap: () {},
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+
                                 //Container donde esta la imagen
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
                                     width: 140,
-                                    height: 150,
+                                    height: 120,
                                     child: InkWell(
                                       onTap: () {
                                         mejora1();
+                                        print(valorMejora);
                                       },
                                     ),
                                     decoration: BoxDecoration(
@@ -749,15 +800,27 @@ class StatesAppState extends State<StatesApp> {
                                 //Este container contendra la fila
                                 Container(
                                     height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    margin: EdgeInsets.only(top: 10, left: 20),
                                     //Creamos la fila
                                     child: Row(children: [
+                                      Container(
+                                        width: 30,
+                                        child: LinearProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    ColorValue),
+                                            backgroundColor: Colors.redAccent,
+                                            value: controlarBarraMejora(
+                                                valorMejora)),
+                                      ),
                                       //Container en el que aparecera el precio de la mejora
                                       Container(
+                                          margin: EdgeInsets.only(left: 20),
                                           child: Text(
                                               precioMejoraGlobal1.toString(),
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
                                       //Container para mostrar la imagen
                                       Container(
                                           width: 60,
@@ -789,7 +852,7 @@ class StatesAppState extends State<StatesApp> {
                                                 AssetImage("assets/arco.png"),
                                             fit: BoxFit.cover))),
                                 Container(
-                                    height: 23,
+                                    height: 20,
                                     margin: EdgeInsets.only(top: 5, left: 30),
                                     child: Row(children: [
                                       Container(
