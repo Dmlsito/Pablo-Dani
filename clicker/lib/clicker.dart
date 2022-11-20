@@ -115,23 +115,39 @@ bool bolaFuegoActivada = false;
 bool poderUsarBolaFuego = true;
 
 //Precios globales de mejoras para imprimnir por pantalla
-int precioMejoraGlobal1 = 100;
-int precioMejoraGlobal2 = 50;
-int precioMejoraGlobal3 = 100;
-int precioMejoraGlobal4 = 50;
 
-// Precios mejoras
-int precioMejora1 = 100;
+// Precios de mejora1
+int precio1Mejora1 = 100;
+int precio2Mejora1 = 400;
+int precio3Mejora1 = 800;
+int precioMejoraGlobal1 = 100;
 int contadorMejora1 = 0;
+
+//Precios de mejora2
+int precio1Mejora2 = 200;
+int precio2Mejora2 = 600;
+int precio3Mejora2 = 1200;
+int precioMejoraGlobal2 = 200;
 int contadorMejora2 = 0;
-int precioMejora2 = 50;
-int precioMejora3 = 100;
+
+//Precios de mejora3
+int precio1Mejora3 = 100;
+int precio2Mejora3 = 500;
+int precio3Mejora3 = 1000;
+int precioMejoraGlobal3 = 100;
 int contadorMejora3 = 0;
+
+//Precios de mejora 4
 int precio1Mejora4 = 50;
 int precio2Mejora4 = 100;
 int precio3Mejora4 = 300;
 int precio4Mejora4 = 900;
+int precioMejoraGlobal4 = 50;
 int contadorMejora4 = 0;
+
+//Precios y variables para controlar la posicion aleaotoria de las imagenes
+int rngLeft = 0;
+int rngRight = 0;
 
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
@@ -260,37 +276,52 @@ class StatesAppState extends State<StatesApp> {
       ScaffoldMessenger.of(context).showSnackBar(snb);
     }
 
+    void bolaDeFuegoDesactivada(BuildContext context) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text("No se puede utilizar la bola de fuego")
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
     //Lista de mejoras:
     //Todas las mejoras tienen el mismo funcionamiento
 
     //Mejora1
     void mejora1() {
-      if (contadorMejora1 == 0 && monedasJugador > precioMejora1) {
+      if (contadorMejora1 == 0 && monedasJugador > precio1Mejora1) {
         setState(() {
           //Seteamos el precio de la mejora
-          precioMejoraGlobal1 = precioMejoraGlobal1 * 2;
+          precioMejoraGlobal1 = precio2Mejora1;
         });
         print(precioMejoraGlobal1);
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 2;
         contadorMejora1++;
-        monedasJugador = monedasJugador - precioMejora1;
+        monedasJugador = monedasJugador - precio1Mejora1;
       }
-      if (contadorMejora1 == 1 && monedasJugador > (precioMejora1 * 2)) {
+      if (contadorMejora1 == 1 && monedasJugador > precio2Mejora1) {
         setState(() {
           //Seteamos el precio de la mejora
-          precioMejoraGlobal1 = precioMejoraGlobal1 * 3;
+          precioMejoraGlobal1 = precio3Mejora1;
         });
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 3;
         contadorMejora1++;
-        monedasJugador = monedasJugador - (precioMejora1 * 2);
+        monedasJugador = monedasJugador - precio2Mejora1;
       }
-      if (contadorMejora1 == 2 && monedasJugador > (precioMejora1 * 3)) {
+      if (contadorMejora1 == 2 && monedasJugador > precio3Mejora1) {
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 4;
         contadorMejora1++;
-        monedasJugador = monedasJugador - (precioMejora1 * 3);
+        monedasJugador = monedasJugador - precio3Mejora1;
       }
       if (contadorMejora1 > 2) {
         mostrarMaximaMejora(context);
@@ -299,29 +330,29 @@ class StatesAppState extends State<StatesApp> {
 
     //Mejora2
     void mejora2() {
-      if (contadorMejora2 == 0 && monedasJugador > precioMejora2) {
+      if (contadorMejora2 == 0 && monedasJugador > precio1Mejora2) {
         setState(() {
-          precioMejoraGlobal2 = precioMejoraGlobal2 * 2;
+          precioMejoraGlobal2 = precio2Mejora2;
         });
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 10;
         contadorMejora2++;
-        monedasJugador = monedasJugador - precioMejora2;
+        monedasJugador = monedasJugador - precio1Mejora2;
       }
-      if (contadorMejora2 == 1 && monedasJugador > (precioMejora2 * 2)) {
+      if (contadorMejora2 == 1 && monedasJugador > precio2Mejora2) {
         setState(() {
-          precioMejora2 = precioMejoraGlobal2 * 2;
+          precioMejoraGlobal2 = precio3Mejora2;
         });
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 20;
         contadorMejora2++;
-        monedasJugador = monedasJugador - (precioMejora2 * 2);
+        monedasJugador = monedasJugador - precio2Mejora2;
       }
-      if (contadorMejora2 == 2 && monedasJugador > (precioMejora2 * 3)) {
+      if (contadorMejora2 == 2 && monedasJugador > precio3Mejora2) {
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 25;
         contadorMejora2++;
-        monedasJugador = monedasJugador - (precioMejora2 * 3);
+        monedasJugador = monedasJugador - precio3Mejora2;
       }
       if (contadorMejora2 > 2) {
         mostrarMaximaMejora(context);
@@ -393,13 +424,13 @@ class StatesAppState extends State<StatesApp> {
 
         timer2 = Timer.periodic(Duration(seconds: 1), (timer) {
           //Solo empezara la cuenta atras cuando la variable que controla si ya hemos utilizado o no la habilidad se ponga a true
-          //sino la cuenta no empezara, con lo cual aunque pasen quince segundos no podremos usar la habilidad
+          //sino la cuenta no empezara, con lo cual aunque pase un minuto no podremos usar la habilidad
           if (poderUsarBolaFuego == true) {
             segundos2++;
           }
           print(segundos2);
 
-          if (segundos2 == 20) {
+          if (segundos2 == 60) {
             bolaDeFuegoActivada(context);
             //Cuando hayan pasado los veinte segundos podremos utilizar la habilidad
             bolaFuegoActivada = true;
@@ -423,6 +454,9 @@ class StatesAppState extends State<StatesApp> {
         poderUsarBolaFuego = true;
       }
     }
+
+    //Mejora5
+    void mejora5() {}
 
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
     void critico() {
@@ -694,29 +728,35 @@ class StatesAppState extends State<StatesApp> {
                                     child: InkWell(
                                       onTap: () {
                                         if (contadorMejora3 == 0 &&
-                                            monedasJugador > precioMejora3) {
+                                            monedasJugador > precio1Mejora3) {
+                                          setState(() {
+                                            precioMejoraGlobal3 =
+                                                precio2Mejora3;
+                                          });
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
 
                                           monedasJugador =
-                                              monedasJugador - precioMejora3;
+                                              monedasJugador - precio1Mejora3;
                                         }
                                         if (contadorMejora3 == 1 &&
-                                            monedasJugador >
-                                                (precioMejora3 * 2)) {
+                                            monedasJugador > precio2Mejora3) {
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
-                                          monedasJugador = monedasJugador -
-                                              (precioMejora3 * 2);
+                                          setState(() {
+                                            precioMejoraGlobal3 =
+                                                precio3Mejora3;
+                                          });
+                                          monedasJugador =
+                                              monedasJugador - precio2Mejora3;
                                         }
 
                                         if (contadorMejora3 == 2 &&
-                                            monedasJugador >
-                                                (precioMejora3 * 3)) {
+                                            monedasJugador > precio3Mejora3) {
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
-                                          monedasJugador = monedasJugador -
-                                              (precioMejora3 * 3);
+                                          monedasJugador =
+                                              monedasJugador - precio3Mejora3;
                                         }
 
                                         if (contadorMejora3 == 3) {
@@ -734,7 +774,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 30),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal3.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
@@ -808,7 +849,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 60),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
@@ -844,7 +886,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 60),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
@@ -880,7 +923,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 60),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
@@ -916,7 +960,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 60),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
@@ -952,7 +997,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 60),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
@@ -988,7 +1034,8 @@ class StatesAppState extends State<StatesApp> {
                                     margin: EdgeInsets.only(top: 5, left: 60),
                                     child: Row(children: [
                                       Container(
-                                          child: Text(precioMejora1.toString(),
+                                          child: Text(
+                                              precioMejoraGlobal1.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
