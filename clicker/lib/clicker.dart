@@ -122,6 +122,7 @@ int precio2Mejora1 = 400;
 int precio3Mejora1 = 800;
 int precioMejoraGlobal1 = 100;
 int contadorMejora1 = 0;
+int mostrarMejora1Maxima = 0;
 
 //Precios de mejora2
 int precio1Mejora2 = 200;
@@ -129,6 +130,7 @@ int precio2Mejora2 = 600;
 int precio3Mejora2 = 1200;
 int precioMejoraGlobal2 = 200;
 int contadorMejora2 = 0;
+int mostrarMejora2Maxima = 0;
 
 //Precios de mejora3
 int precio1Mejora3 = 100;
@@ -136,6 +138,7 @@ int precio2Mejora3 = 500;
 int precio3Mejora3 = 1000;
 int precioMejoraGlobal3 = 100;
 int contadorMejora3 = 0;
+int mostrarMejora3Maxima = 0;
 
 //Precios de mejora 4
 int precio1Mejora4 = 50;
@@ -144,6 +147,7 @@ int precio3Mejora4 = 300;
 int precio4Mejora4 = 900;
 int precioMejoraGlobal4 = 50;
 int contadorMejora4 = 0;
+int mostrarMejora4Maxima = 0;
 
 //Precios y variables para controlar la posicion aleaotoria de las imagenes de la mejora5
 double rngLeft = 0;
@@ -332,7 +336,10 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador - precio3Mejora1;
       }
       if (contadorMejora1 > 2) {
-        mostrarMaximaMejora(context);
+        if (mostrarMejora2Maxima == 0) {
+          mostrarMaximaMejora(context);
+        }
+        mostrarMejora1Maxima++;
       }
     }
 
@@ -362,8 +369,14 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora2++;
         monedasJugador = monedasJugador - precio3Mejora2;
       }
-      if (contadorMejora2 > 2) {
-        mostrarMaximaMejora(context);
+      if (contadorMejora2 > 2 && monedasJugador > precio3Mejora3) {
+        //clicka en ella dsp de alcanzar el nivel maximo
+        if (mostrarMejora2Maxima == 0) {
+          mostrarMaximaMejora(context);
+        }
+        monedasRecibidas = monedasRecibidas + 25;
+        mostrarMejora2Maxima++;
+        monedasJugador = monedasJugador - precio3Mejora3;
       }
     }
 
@@ -428,7 +441,11 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejoraComprada(context);
       }
       if (contadorMejora4 > 2 && bolaFuegoActivada == false) {
-        mostrarMaximaMejora(context);
+        //clicka en ella dsp de alcanzar el nivel maximo
+        if (mostrarMejora4Maxima == 0) {
+          mostrarMaximaMejora(context);
+        }
+        mostrarMejora4Maxima++;
 
         timer2 = Timer.periodic(Duration(seconds: 1), (timer) {
           //Solo empezara la cuenta atras cuando la variable que controla si ya hemos utilizado o no la habilidad se ponga a true
@@ -921,7 +938,7 @@ class StatesAppState extends State<StatesApp> {
                                             fit: BoxFit.cover))),
                                 Container(
                                     height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    margin: EdgeInsets.only(top: 5, left: 35),
                                     child: Row(children: [
                                       Container(
                                           child: Text(
