@@ -962,9 +962,42 @@ class StatesAppState extends State<StatesApp> {
                               width: 140.0,
                               child: Column(children: [
                                 Container(
-                                    margin: EdgeInsets.only(left: 0),
+                                  margin: EdgeInsets.only(left: 30),
+                                  height: 20,
+                                  child: Row(children: [
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora2(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora2(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora2(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(left: 0, top: 10),
                                     width: 140,
-                                    height: 150,
+                                    height: 110,
                                     child: InkWell(
                                       onTap: () {
                                         mejora2();
@@ -976,14 +1009,28 @@ class StatesAppState extends State<StatesApp> {
                                                 AssetImage("assets/arco.png"),
                                             fit: BoxFit.cover))),
                                 Container(
-                                    height: 20,
-                                    margin: EdgeInsets.only(top: 5, left: 30),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 10, left: 5),
+                                    //Creamos la fila
                                     child: Row(children: [
                                       Container(
+                                          margin: EdgeInsets.only(left: 4),
+                                          child: Text("Arco",
+                                              style: TextStyle(
+                                                  color: Colors.yellowAccent))),
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          margin: EdgeInsets.only(left: 10),
                                           child: Text(
                                               precioMejoraGlobal2.toString(),
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
+                                      //Container para mostrar la imagen
                                       Container(
                                           width: 60,
                                           height: 100,
@@ -1000,9 +1047,42 @@ class StatesAppState extends State<StatesApp> {
                               width: 140.0,
                               child: Column(children: [
                                 Container(
-                                    margin: EdgeInsets.only(left: 0),
+                                  margin: EdgeInsets.only(left: 30),
+                                  height: 20,
+                                  child: Row(children: [
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora3(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora3(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora3(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(left: 0, top: 20),
                                     width: 140,
-                                    height: 150,
+                                    height: 100,
                                     child: InkWell(
                                       onTap: () {
                                         if (contadorMejora3 == 0 &&
@@ -1051,14 +1131,28 @@ class StatesAppState extends State<StatesApp> {
                                                 "assets/DañoPasiva.png"),
                                             fit: BoxFit.cover))),
                                 Container(
-                                    height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 30),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 10, left: 5),
+                                    //Creamos la fila
                                     child: Row(children: [
                                       Container(
+                                          margin: EdgeInsets.only(left: 4),
+                                          child: Text("?????",
+                                              style: TextStyle(
+                                                  color: Colors.yellowAccent))),
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          margin: EdgeInsets.only(left: 10),
                                           child: Text(
                                               precioMejoraGlobal3.toString(),
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
+                                      //Container para mostrar la imagen
                                       Container(
                                           width: 60,
                                           height: 100,
@@ -1075,9 +1169,42 @@ class StatesAppState extends State<StatesApp> {
                               width: 140,
                               child: Column(children: [
                                 Container(
+                                  margin: EdgeInsets.only(left: 30),
+                                  height: 20,
+                                  child: Row(children: [
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora4(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora4(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora4(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Container(
                                     margin: EdgeInsets.only(left: 0),
                                     width: 140,
-                                    height: 150,
+                                    height: 120,
                                     child: InkWell(
                                       onTap: () {
                                         mejora4();
@@ -1089,14 +1216,28 @@ class StatesAppState extends State<StatesApp> {
                                                 "assets/BolaFuego.png"),
                                             fit: BoxFit.cover))),
                                 Container(
-                                    height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 35),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 10, left: 5),
+                                    //Creamos la fila
                                     child: Row(children: [
                                       Container(
+                                          margin: EdgeInsets.only(left: 2),
+                                          child: Text("Katon",
+                                              style: TextStyle(
+                                                  color: Colors.yellowAccent))),
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          margin: EdgeInsets.only(left: 10),
                                           child: Text(
                                               precioMejoraGlobal4.toString(),
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
+                                      //Container para mostrar la imagen
                                       Container(
                                           width: 60,
                                           height: 100,
@@ -1112,9 +1253,42 @@ class StatesAppState extends State<StatesApp> {
                               width: 140,
                               child: Column(children: [
                                 Container(
-                                    margin: EdgeInsets.only(left: 0),
+                                  margin: EdgeInsets.only(left: 30),
+                                  height: 20,
+                                  child: Row(children: [
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora5(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora5(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora5(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(left: 0, top: 4),
                                     width: 140,
-                                    height: 150,
+                                    height: 116,
                                     child: InkWell(
                                       onTap: () {
                                         mejora5();
@@ -1127,14 +1301,28 @@ class StatesAppState extends State<StatesApp> {
                                                 "assets/ImagenAleatoria.png"),
                                             fit: BoxFit.cover))),
                                 Container(
-                                    height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 35),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 10, left: 5),
+                                    //Creamos la fila
                                     child: Row(children: [
                                       Container(
+                                          margin: EdgeInsets.only(left: 2),
+                                          child: Text("Katon",
+                                              style: TextStyle(
+                                                  color: Colors.yellowAccent))),
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          margin: EdgeInsets.only(left: 10),
                                           child: Text(
                                               precioMejoraGlobal5.toString(),
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
+                                      //Container para mostrar la imagen
                                       Container(
                                           width: 60,
                                           height: 100,
