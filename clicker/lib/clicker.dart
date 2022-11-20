@@ -917,7 +917,7 @@ class StatesAppState extends State<StatesApp> {
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                "assets/espada1.png"),
+                                                "assets/ImagenAleatoria.png"),
                                             fit: BoxFit.cover))),
                                 Container(
                                     height: 23,
