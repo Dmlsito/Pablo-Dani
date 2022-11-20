@@ -472,6 +472,7 @@ class StatesAppState extends State<StatesApp> {
       rngLeft = randomLeft.nextDouble() * 100;
 
       if (contadorMejora5 == 0 && monedasJugador > precio1Mejora5) {
+        mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 500;
         contadorMejora5++;
         precioMejoraGlobal5 = precio2Mejora5;
@@ -480,6 +481,7 @@ class StatesAppState extends State<StatesApp> {
         return imagenAleatoria;
       }
       if (contadorMejora5 == 1 && monedasJugador > precio2Mejora5) {
+        mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 750;
         contadorMejora5++;
         precioMejoraGlobal5 = precio3Mejora5;
@@ -488,6 +490,7 @@ class StatesAppState extends State<StatesApp> {
         return imagenAleatoria;
       }
       if (contadorMejora5 == 2 && monedasJugador > precio3Mejora5) {
+        mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 1000;
         contadorMejora5++;
         monedasJugador = monedasJugador - precio3Mejora5;
