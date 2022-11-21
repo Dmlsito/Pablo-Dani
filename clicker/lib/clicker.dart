@@ -20,11 +20,10 @@ class ClickerMain extends StatelessWidget {
 
 List<monstruo> listaMonstruos = [
   monstruo(
-    nombre: "Pablo",
-    vida: 1000,
-    imagenRuta: "assets/caballeroAnimado.gif",
-    identificador: 1
-  ),
+      nombre: "Pablo",
+      vida: 120000,
+      imagenRuta: "assets/caballeroAnimado.gif",
+      identificador: 1),
   monstruo(
     nombre: "Daniel",
     vida: 6000,
@@ -796,9 +795,18 @@ class StatesAppState extends State<StatesApp> {
                             })),
                       ]),
                     ),
+
+                    Container(
+                        margin: EdgeInsets.only(bottom: 0),
+                        height: 27,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black)),
+                        child: Text(listaMonstruos[contador].nombre,
+                            style:
+                                TextStyle(fontSize: 25, fontFamily: "caps"))),
                     //Container with monster´s image
                     Container(
-                      margin: EdgeInsets.only(top: 50),
+                      margin: EdgeInsets.only(top: 0),
                       child: Column(children: [
                         InkWell(
                           onTap: () {

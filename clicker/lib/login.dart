@@ -17,8 +17,7 @@ class Register extends StatelessWidget {
       home: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/FondoRegister.jpg"),
-                  fit: BoxFit.cover)),
+                  image: AssetImage("assets/Register.gif"), fit: BoxFit.cover)),
           child: Scaffold(
               backgroundColor: Colors.transparent,
               body: Center(
