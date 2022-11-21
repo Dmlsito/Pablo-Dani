@@ -220,8 +220,6 @@ bool mejora6V3 = false;
 // Variables para ancho y alto de pantalla para ventana emergente
 var anchoPantalla, alturaPantalla, size;
 
-
-
 class StatesApp extends StatefulWidget {
   @override
   StatesAppState createState() => StatesAppState();
@@ -233,13 +231,11 @@ class StatesAppState extends State<StatesApp> {
 
   @override
   Widget build(BuildContext context) {
-
-      setState(() {
-      size= MediaQuery.of(context).size;
+    setState(() {
+      size = MediaQuery.of(context).size;
       alturaPantalla = size.height;
       anchoPantalla = size.width;
     });
-
 
     final usuario = ModalRoute.of(context)!.settings.arguments as Usuario;
     //Fucion vidaResta
@@ -464,6 +460,7 @@ class StatesAppState extends State<StatesApp> {
         double bolaFuegoV1 = 1000;
         setState(() {
           vida = vida - bolaFuegoV1;
+          player.play(AssetSource("SonidoBolaFuego.mp3"));
         });
         contadorMejora4++;
 
@@ -477,6 +474,7 @@ class StatesAppState extends State<StatesApp> {
         double bolaFuegoV2 = 2000;
         setState(() {
           vida = vida - bolaFuegoV2;
+          player.play(AssetSource("SonidoBolaFuego.mp3"));
         });
         contadorMejora4++;
         mostrarMejoraComprada(context);
@@ -488,6 +486,7 @@ class StatesAppState extends State<StatesApp> {
         precioMejoraGlobal4 = precio4Mejora4;
         setState(() {
           vida = vida - bolaFuegoV3;
+          player.play(AssetSource("SonidoBolaFuego.mp3"));
         });
         contadorMejora4++;
         monedasJugador = monedasJugador - precio3Mejora4;
@@ -552,7 +551,7 @@ class StatesAppState extends State<StatesApp> {
         return imagenAleatoria;
       }
       if (contadorMejora5 == 1 && monedasJugador >= precio2Mejora5) {
-        mejora5V1 = true;
+        mejora5V2 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 750;
         contadorMejora5++;
@@ -562,7 +561,7 @@ class StatesAppState extends State<StatesApp> {
         return imagenAleatoria;
       }
       if (contadorMejora5 == 2 && monedasJugador >= precio3Mejora5) {
-        mejora5V1 = true;
+        mejora5V3 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 1000;
         contadorMejora5++;
@@ -584,6 +583,7 @@ class StatesAppState extends State<StatesApp> {
       }
       return "";
     }
+
     void mejora6() {
       if (contadorMejora6 == 0 && monedasJugador > precio1Mejora6) {
         mostrarMejoraComprada(context);
@@ -648,7 +648,6 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador - precio3Mejora6;
       }
     }
-
 
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
     void critico() {
@@ -831,7 +830,7 @@ class StatesAppState extends State<StatesApp> {
       }
       return transparent;
     }
-    
+
     return MaterialApp(
         home: Container(
             decoration: BoxDecoration(
@@ -1005,50 +1004,76 @@ class StatesAppState extends State<StatesApp> {
                                         margin: EdgeInsets.only(right: 15),
                                         child: InkWell(
                                             onTap: () {
-                                              showDialog(context: context, builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  contentPadding: EdgeInsets.zero,
-                                                  content: Row(
-                                                     children: [
-                                                      Container(
-                                                        height:alturaPantalla *0.7,
-                                                        width: anchoPantalla*0.8,
-                                                        decoration: BoxDecoration(
-                                                          image: DecorationImage(fit: BoxFit.fill,
-                                                          image: AssetImage("assets/Prueba1.gif"))),
-                                                          
-                                                            child:Row(children: [
-                                                              // Container para la imagen del item y sus bordes
-                                                              Container(
-                                                                decoration: BoxDecoration(
-                                                                  borderRadius:BorderRadius.circular(10),
-                                                                  border: Border.all(color: Colors.black)),  
-                                                              margin: EdgeInsets.only(left: 30, bottom: 150),
-                                                              width: 100,
-                                                              height: 150,
-                                                              child: Image.asset("assets/espada1.png"),
-                                                              ),                                                       
-                                                              // Container para el texto de explicación sobre el item
-                                                              Container(
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:BorderRadius.circular(10),
-                                                                    border: Border.all(color: Colors.black),
-                                                                    color: Colors.brown[200]),
-                                                                    
-                                                                margin: EdgeInsets.only(left: 30,bottom: 150),
-                                                                width:300 ,
-                                                                height:100 ,
-                                                                child:Text("Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),),                                                            
-                                                            ],) 
-                                                                                                     
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.7,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 300,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
                                                       ),
-                                                      
-                                                     ], 
-                                                  ),
-                                                );
-                                              });
-
-
+                                                    );
+                                                  });
                                             },
                                             child: Image.asset(
                                                 "assets/iconoAyuda.png",
@@ -1086,7 +1111,7 @@ class StatesAppState extends State<StatesApp> {
                                 //Container donde esta la imagen
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
-                                    width: 140,
+                                    width: 160,
                                     height: 120,
                                     child: InkWell(
                                       onTap: () {
@@ -1132,16 +1157,94 @@ class StatesAppState extends State<StatesApp> {
                               ])),
 
                           SizedBox(
-                            width: 50,
+                            width: 30,
                           ),
                           //Container del segundo item
                           Container(
-                              width: 140.0,
+                              width: 160.0,
                               child: Column(children: [
                                 Container(
                                   margin: EdgeInsets.only(left: 30),
                                   height: 20,
                                   child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.7,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 300,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
                                     Transform(
                                       transform: Matrix4.rotationZ(1.56),
                                       alignment: Alignment.topCenter,
@@ -1221,12 +1324,90 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del tercer item
                           Container(
-                              width: 140.0,
+                              width: 160.0,
                               child: Column(children: [
                                 Container(
-                                  margin: EdgeInsets.only(left: 30),
+                                  margin: EdgeInsets.only(),
                                   height: 20,
                                   child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.7,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 300,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
                                     Transform(
                                       transform: Matrix4.rotationZ(1.56),
                                       alignment: Alignment.topCenter,
@@ -1343,12 +1524,90 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del cuarto item
                           Container(
-                              width: 140,
+                              width: 160,
                               child: Column(children: [
                                 Container(
                                   margin: EdgeInsets.only(left: 30),
                                   height: 20,
                                   child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.7,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 300,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
                                     Transform(
                                       transform: Matrix4.rotationZ(1.56),
                                       alignment: Alignment.topCenter,
@@ -1427,12 +1686,90 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del quinto item
                           Container(
-                              width: 140,
+                              width: 160,
                               child: Column(children: [
                                 Container(
                                   margin: EdgeInsets.only(left: 30),
                                   height: 20,
                                   child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.7,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 300,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
                                     Transform(
                                       transform: Matrix4.rotationZ(1.56),
                                       alignment: Alignment.topCenter,
@@ -1464,7 +1801,7 @@ class StatesAppState extends State<StatesApp> {
                                 ),
                                 Container(
                                     margin: EdgeInsets.only(left: 0, top: 4),
-                                    width: 140,
+                                    width: 120,
                                     height: 116,
                                     child: InkWell(
                                       onTap: () {
@@ -1512,12 +1849,90 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del sexto item
                           Container(
-                              width: 140,
+                              width: 160,
                               child: Column(children: [
                                 Container(
-                                  margin: EdgeInsets.only(left: 30),
+                                  margin: EdgeInsets.only(left: 0),
                                   height: 20,
                                   child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.7,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 300,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
                                     Transform(
                                       transform: Matrix4.rotationZ(1.56),
                                       alignment: Alignment.topCenter,
