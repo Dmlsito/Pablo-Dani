@@ -21,32 +21,32 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
     nombre: "Pablo",
-    vida: 100000,
-    imagenRuta: "assets/pequeñoCola1.png",
-    identificador: 1,
+    vida: 1000,
+    imagenRuta: "assets/caballeroAnimado.gif",
+    identificador: 1
   ),
   monstruo(
     nombre: "Daniel",
     vida: 6000,
-    imagenRuta: "assets/monstruo2.png",
+    imagenRuta: "assets/caballeroAnimadoPrueba2.gif",
     identificador: 2,
   ),
   monstruo(
     nombre: "Nelson",
     vida: 12000,
-    imagenRuta: "assets/plantaCarnivora3.png",
+    imagenRuta: "assets/caballeroAnimado2.gif",
     identificador: 3,
   ),
   monstruo(
     nombre: "Laura",
     vida: 24000,
-    imagenRuta: "assets/monstruo1Mundo2.png",
+    imagenRuta: "assets/animadoMundoFuego1.gif",
     identificador: 4,
   ),
   monstruo(
     nombre: "Hugo",
     vida: 16000,
-    imagenRuta: "assets/monstruo2Mundo2.png",
+    imagenRuta: "assets/animadoMundoFuego1.gif",
     identificador: 5,
   ),
   monstruo(
@@ -326,7 +326,7 @@ class StatesAppState extends State<StatesApp> {
 
     //Mejora1
     void mejora1() {
-      if (contadorMejora1 == 0 && monedasJugador > precio1Mejora1) {
+      if (contadorMejora1 == 0 && monedasJugador >= precio1Mejora1) {
         setState(() {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio2Mejora1;
@@ -338,7 +338,7 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora1++;
         monedasJugador = monedasJugador - precio1Mejora1;
       }
-      if (contadorMejora1 == 1 && monedasJugador > precio2Mejora1) {
+      if (contadorMejora1 == 1 && monedasJugador >= precio2Mejora1) {
         setState(() {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio3Mejora1;
@@ -349,7 +349,7 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora1++;
         monedasJugador = monedasJugador - precio2Mejora1;
       }
-      if (contadorMejora1 == 2 && monedasJugador > precio3Mejora1) {
+      if (contadorMejora1 == 2 && monedasJugador >= precio3Mejora1) {
         mejora1V3 = true;
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 4;
@@ -366,7 +366,7 @@ class StatesAppState extends State<StatesApp> {
 
     //Mejora2
     void mejora2() {
-      if (contadorMejora2 == 0 && monedasJugador > precio1Mejora2) {
+      if (contadorMejora2 == 0 && monedasJugador >= precio1Mejora2) {
         mejora2V1 = true;
         setState(() {
           precioMejoraGlobal2 = precio2Mejora2;
@@ -376,7 +376,7 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora2++;
         monedasJugador = monedasJugador - precio1Mejora2;
       }
-      if (contadorMejora2 == 1 && monedasJugador > precio2Mejora2) {
+      if (contadorMejora2 == 1 && monedasJugador >= precio2Mejora2) {
         mejora2V2 = true;
         setState(() {
           precioMejoraGlobal2 = precio3Mejora2;
@@ -386,14 +386,14 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora2++;
         monedasJugador = monedasJugador - precio2Mejora2;
       }
-      if (contadorMejora2 == 2 && monedasJugador > precio3Mejora2) {
+      if (contadorMejora2 == 2 && monedasJugador >= precio3Mejora2) {
         mejora2V3 = true;
         mostrarMejoraComprada(context);
         monedasRecibidas = monedasRecibidas + 25;
         contadorMejora2++;
         monedasJugador = monedasJugador - precio3Mejora2;
       }
-      if (contadorMejora2 > 2 && monedasJugador > precio3Mejora3) {
+      if (contadorMejora2 > 2 && monedasJugador >= precio3Mejora3) {
         //clicka en ella dsp de alcanzar el nivel maximo
         if (mostrarMejora2Maxima == 0) {
           mostrarMaximaMejora(context);
@@ -428,7 +428,7 @@ class StatesAppState extends State<StatesApp> {
 
     //Mejora 4
     void mejora4() {
-      if (contadorMejora4 == 0 && monedasJugador > precio1Mejora4) {
+      if (contadorMejora4 == 0 && monedasJugador >= precio1Mejora4) {
         mejora4V1 = true;
         //Restamos monedas jugador
         monedasJugador = monedasJugador - precio1Mejora4;
@@ -443,7 +443,7 @@ class StatesAppState extends State<StatesApp> {
 
         mostrarMejoraComprada(context);
       }
-      if (contadorMejora4 == 1 && monedasJugador > precio2Mejora4) {
+      if (contadorMejora4 == 1 && monedasJugador >= precio2Mejora4) {
         mejora4V2 = true;
         monedasJugador = monedasJugador - precio2Mejora4;
         precioMejoraGlobal4 = precio3Mejora4;
@@ -455,7 +455,7 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora4++;
         mostrarMejoraComprada(context);
       }
-      if (contadorMejora4 == 2 && monedasJugador > precio3Mejora4) {
+      if (contadorMejora4 == 2 && monedasJugador >= precio3Mejora4) {
         mejora4V3 = true;
         //Ataque de bola de fuego Lvl 1
         double bolaFuegoV3 = 3000;
@@ -515,7 +515,7 @@ class StatesAppState extends State<StatesApp> {
       //Valores de entre 1.00 y 99.00
       rngLeft = randomLeft.nextDouble() * 100;
 
-      if (contadorMejora5 == 0 && monedasJugador > precio1Mejora5) {
+      if (contadorMejora5 == 0 && monedasJugador >= precio1Mejora5) {
         mejora5V1 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 500;
@@ -525,7 +525,7 @@ class StatesAppState extends State<StatesApp> {
         imagenAleatoria = "assets/tioAltavoz.png";
         return imagenAleatoria;
       }
-      if (contadorMejora5 == 1 && monedasJugador > precio2Mejora5) {
+      if (contadorMejora5 == 1 && monedasJugador >= precio2Mejora5) {
         mejora5V1 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 750;
@@ -535,7 +535,7 @@ class StatesAppState extends State<StatesApp> {
         imagenAleatoria = "assets/.png";
         return imagenAleatoria;
       }
-      if (contadorMejora5 == 2 && monedasJugador > precio3Mejora5) {
+      if (contadorMejora5 == 2 && monedasJugador >= precio3Mejora5) {
         mejora5V1 = true;
         mostrarMejoraComprada(context);
         monedasGanadasPorImagen = 1000;
@@ -544,7 +544,7 @@ class StatesAppState extends State<StatesApp> {
         imagenAleatoria = "assets/tioAltavoz.png";
         return imagenAleatoria;
       }
-      if (contadorMejora5 > 2 && monedasJugador > precio3Mejora5) {
+      if (contadorMejora5 > 2 && monedasJugador >= precio3Mejora5) {
         //Con esto conseguimos que una vez que el usuario haya alcanzado el tope de mejora solo le muestre el mensaje de "Mejora maxima" la primera vez que
         //clicka en ella dsp de alcanzar el nivel maximo
         if (mostrarMejora5Maxima == 0) {
@@ -1086,7 +1086,7 @@ class StatesAppState extends State<StatesApp> {
                                     child: InkWell(
                                       onTap: () {
                                         if (contadorMejora3 == 0 &&
-                                            monedasJugador > precio1Mejora3) {
+                                            monedasJugador >= precio1Mejora3) {
                                           mejora3V1 = true;
                                           setState(() {
                                             precioMejoraGlobal3 =
@@ -1099,7 +1099,7 @@ class StatesAppState extends State<StatesApp> {
                                               monedasJugador - precio1Mejora3;
                                         }
                                         if (contadorMejora3 == 1 &&
-                                            monedasJugador > precio2Mejora3) {
+                                            monedasJugador >= precio2Mejora3) {
                                           mejora3V2 = true;
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
@@ -1112,7 +1112,7 @@ class StatesAppState extends State<StatesApp> {
                                         }
 
                                         if (contadorMejora3 == 2 &&
-                                            monedasJugador > precio3Mejora3) {
+                                            monedasJugador >= precio3Mejora3) {
                                           mejora3V3 = true;
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
