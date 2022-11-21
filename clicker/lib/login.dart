@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'Usuario.dart';
+import 'clicker.dart';
 import 'main.dart';
+import "Usuario.dart";
 
 class Register extends StatelessWidget {
   String nombre = '';
@@ -67,7 +68,7 @@ class Register extends StatelessWidget {
                         ),
                         OutlinedButton(
                             onPressed: () {
-                              login(context, nombre, contrasena);
+                              login(context);
                             },
                             child:
                                 Text("Login", style: TextStyle(fontSize: 20))),
@@ -77,7 +78,7 @@ class Register extends StatelessWidget {
     );
   }
 
-  login(BuildContext context, String nombre, String contrasena) {
+  login(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       Navigator.of(context).pushNamed("/Clicker",

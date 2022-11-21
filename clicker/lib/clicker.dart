@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'Usuario.dart';
 import 'main.dart';
 import 'monstruo.dart';
 import 'dart:math';
@@ -21,7 +22,7 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
-      vida: 120000,
+      vida: 3000,
       imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
@@ -87,6 +88,8 @@ int indexImagen = 0;
 double vida = listaMonstruos[contador].vida;
 // Timers para variables por dps
 String colorPrueba = "0xffF856DF";
+Color colorLetras = Color(0xff660000);
+
 //Timers
 
 Timer? timer2;
@@ -215,6 +218,7 @@ class StatesAppState extends State<StatesApp> {
 
   @override
   Widget build(BuildContext context) {
+    final usuario = ModalRoute.of(context)!.settings.arguments as Usuario;
     //Fucion vidaResta
     void vidaResta() {
       // Resto uno de vida y sumo 5 monedas
@@ -799,11 +803,14 @@ class StatesAppState extends State<StatesApp> {
                     Container(
                         margin: EdgeInsets.only(bottom: 0),
                         height: 27,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: Text(listaMonstruos[contador].nombre,
-                            style:
-                                TextStyle(fontSize: 25, fontFamily: "caps"))),
+                        child: Text(
+                            usuario.nombre.toString() +
+                                " VS " +
+                                listaMonstruos[contador].nombre,
+                            style: TextStyle(
+                                fontSize: 28,
+                                color: colorLetras,
+                                fontFamily: "caps"))),
                     //Container with monster´s image
                     Container(
                       margin: EdgeInsets.only(top: 0),
