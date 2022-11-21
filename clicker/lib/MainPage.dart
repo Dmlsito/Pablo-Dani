@@ -1,24 +1,58 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
 import 'Usuario.dart';
 import 'main.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+
+
 
 class MainPage extends StatelessWidget {
+  @override
+  Widget build(Object context) {
+    return Scaffold(
+      body: Container(child: StatesApp()),
+    );
+  }
+}
+
+
+
+
+
+//Objeto player para la musica
+final player = AudioPlayer();
+
+void playFile(String url) {
+      player.play(AssetSource(url));
+    }
+
+class StatesApp extends StatefulWidget {
+  @override
+  clase1 createState() => clase1();
+}
+
+class clase1 extends State<StatesApp> {
+
+
   String nombre = '';
   String contrasena = "";
+
+ 
 
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+   
     return MaterialApp(
       home: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/posible3.gif"), fit: BoxFit.cover)),
           child: Scaffold(
+            // Esto es para que el gif de fondo se vea y no este tapado por este background
               backgroundColor: Colors.transparent,
               body: Center(
                 child: Form(
@@ -35,7 +69,8 @@ class MainPage extends StatelessWidget {
                           margin:
                               EdgeInsets.only(top: 100, left: 80, right: 80),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -55,7 +90,8 @@ class MainPage extends StatelessWidget {
                           height: 50,
                           margin: EdgeInsets.only(top: 20, left: 80, right: 80),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
                             decoration:
@@ -72,27 +108,67 @@ class MainPage extends StatelessWidget {
                         ),
                         Container(
                             margin: EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 2,color: Colors.grey)),
                             child: OutlinedButton(
                                 onPressed: () {
-                                  login(context, nombre, contrasena);
+                                  login(context);
                                 },
                                 child: Text("Login",
-                                    style: TextStyle(fontSize: 20)))),
+                                    style: TextStyle(fontSize: 20, color: Colors.grey)))),
                         Container(
                             margin: EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 2,color: Colors.grey)),
                             child: OutlinedButton(
                                 onPressed: () {
                                   register(context);
                                 },
                                 child: Text("Register",
-                                    style: TextStyle(fontSize: 20)))),
+                                    style: TextStyle(fontSize: 20, color: Colors.grey)))),
+                        Container(
+                          margin: EdgeInsets.only(top: 350,left: 450) ,
+                          decoration: BoxDecoration(),
+                          child: Row(
+                          children: [
+                              Container(
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)),
+                            child: IconButton(
+                              onPressed: (() => setState(() {
+                                    player.play(AssetSource("musicaCruzi.mp3"));
+                                  })),
+                              icon: Icon(Icons.speaker),
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Container(
+                              child: Text("Play",
+                                  style: TextStyle(color: Colors.grey))),
+
+                          Container(
+                            margin: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)),
+                            child: IconButton(
+                              onPressed: (() => setState(() {
+                                    player.stop();
+                                  })),
+                              icon: Icon(Icons.speaker),
+                              color: Colors.grey,
+                            ),
+                          ),
+                           Container(
+                              child: Text("Stop",
+                                  style: TextStyle(color: Colors.grey)))
+                          ],
+                        ),),           
                       ],
                     )),
               ))),
     );
   }
 
-  login(BuildContext context, String nombre, String contrasena) {
+  login(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       Navigator.of(context).pushNamed("/Clicker",
