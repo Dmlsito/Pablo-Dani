@@ -1015,7 +1015,7 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.7,
+                                                                  0.5,
                                                               width:
                                                                   anchoPantalla *
                                                                       0.8,
@@ -1063,7 +1063,7 @@ class StatesAppState extends State<StatesApp> {
                                                                             30,
                                                                         bottom:
                                                                             150),
-                                                                    width: 300,
+                                                                    width: 150,
                                                                     height: 100,
                                                                     child: Text(
                                                                         "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
@@ -1182,7 +1182,7 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.7,
+                                                                  0.5,
                                                               width:
                                                                   anchoPantalla *
                                                                       0.8,
@@ -1230,7 +1230,7 @@ class StatesAppState extends State<StatesApp> {
                                                                             30,
                                                                         bottom:
                                                                             150),
-                                                                    width: 300,
+                                                                    width: 150,
                                                                     height: 100,
                                                                     child: Text(
                                                                         "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
@@ -1345,7 +1345,7 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.7,
+                                                                  0.5,
                                                               width:
                                                                   anchoPantalla *
                                                                       0.8,
@@ -1393,7 +1393,7 @@ class StatesAppState extends State<StatesApp> {
                                                                             30,
                                                                         bottom:
                                                                             150),
-                                                                    width: 300,
+                                                                    width: 150,
                                                                     height: 100,
                                                                     child: Text(
                                                                         "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
@@ -1545,7 +1545,7 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.7,
+                                                                  0.5,
                                                               width:
                                                                   anchoPantalla *
                                                                       0.8,
@@ -1593,7 +1593,7 @@ class StatesAppState extends State<StatesApp> {
                                                                             30,
                                                                         bottom:
                                                                             150),
-                                                                    width: 300,
+                                                                    width: 150,
                                                                     height: 100,
                                                                     child: Text(
                                                                         "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
@@ -1707,7 +1707,7 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.7,
+                                                                  0.5,
                                                               width:
                                                                   anchoPantalla *
                                                                       0.8,
@@ -1755,7 +1755,7 @@ class StatesAppState extends State<StatesApp> {
                                                                             30,
                                                                         bottom:
                                                                             150),
-                                                                    width: 300,
+                                                                    width: 150,
                                                                     height: 100,
                                                                     child: Text(
                                                                         "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
@@ -1870,7 +1870,7 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.7,
+                                                                  0.5,
                                                               width:
                                                                   anchoPantalla *
                                                                       0.8,
@@ -1918,7 +1918,7 @@ class StatesAppState extends State<StatesApp> {
                                                                             30,
                                                                         bottom:
                                                                             150),
-                                                                    width: 300,
+                                                                    width: 150,
                                                                     height: 100,
                                                                     child: Text(
                                                                         "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
