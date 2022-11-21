@@ -22,7 +22,7 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
-      vida: 3000,
+      vida: 113000,
       imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
@@ -891,6 +891,13 @@ class StatesAppState extends State<StatesApp> {
                                   margin: EdgeInsets.only(left: 30),
                                   height: 20,
                                   child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {},
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
                                     Transform(
                                       transform: Matrix4.rotationZ(1.56),
                                       alignment: Alignment.topCenter,

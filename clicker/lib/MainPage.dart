@@ -5,9 +5,6 @@ import 'Usuario.dart';
 import 'main.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-
-
-
 class MainPage extends StatelessWidget {
   @override
   Widget build(Object context) {
@@ -17,16 +14,12 @@ class MainPage extends StatelessWidget {
   }
 }
 
-
-
-
-
 //Objeto player para la musica
 final player = AudioPlayer();
 
 void playFile(String url) {
-      player.play(AssetSource(url));
-    }
+  player.play(AssetSource(url));
+}
 
 class StatesApp extends StatefulWidget {
   @override
@@ -34,25 +27,20 @@ class StatesApp extends StatefulWidget {
 }
 
 class clase1 extends State<StatesApp> {
-
-
   String nombre = '';
   String contrasena = "";
-
- 
 
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-   
     return MaterialApp(
       home: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/posible3.gif"), fit: BoxFit.cover)),
           child: Scaffold(
-            // Esto es para que el gif de fondo se vea y no este tapado por este background
+              // Esto es para que el gif de fondo se vea y no este tapado por este background
               backgroundColor: Colors.transparent,
               body: Center(
                 child: Form(
@@ -60,18 +48,16 @@ class clase1 extends State<StatesApp> {
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 100),
+                          margin: EdgeInsets.only(top: 50),
                           child: Text("Bienvenido",
                               style: TextStyle(fontSize: 40)),
                         ),
                         Container(
                           height: 50,
-                          margin:
-                              EdgeInsets.only(top: 100, left: 80, right: 80),
+                          margin: EdgeInsets.only(top: 50, left: 80, right: 80),
                           decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10)
-                          ),
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
                             decoration: InputDecoration(
                               labelText: "Nombre",
@@ -90,14 +76,13 @@ class clase1 extends State<StatesApp> {
                           height: 50,
                           margin: EdgeInsets.only(top: 20, left: 80, right: 80),
                           decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10)
-                          ),
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
                             decoration:
                                 InputDecoration(labelText: "Contraseña"),
                             onSaved: (value) {
-                              nombre = value!;
+                              contrasena = value!;
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -108,60 +93,69 @@ class clase1 extends State<StatesApp> {
                         ),
                         Container(
                             margin: EdgeInsets.only(top: 20),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 2,color: Colors.grey)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(width: 2, color: Colors.grey)),
                             child: OutlinedButton(
                                 onPressed: () {
                                   login(context);
                                 },
                                 child: Text("Login",
-                                    style: TextStyle(fontSize: 20, color: Colors.grey)))),
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey)))),
                         Container(
                             margin: EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 2,color: Colors.grey)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(width: 2, color: Colors.grey)),
                             child: OutlinedButton(
                                 onPressed: () {
                                   register(context);
                                 },
                                 child: Text("Register",
-                                    style: TextStyle(fontSize: 20, color: Colors.grey)))),
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey)))),
                         Container(
-                          margin: EdgeInsets.only(top: 350,left: 450) ,
+                          margin: EdgeInsets.only(top: 350, left: 450),
                           decoration: BoxDecoration(),
                           child: Row(
-                          children: [
+                            children: [
                               Container(
-                            margin: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey)),
-                            child: IconButton(
-                              onPressed: (() => setState(() {
-                                    player.play(AssetSource("musicaCruzi.mp3"));
-                                  })),
-                              icon: Icon(Icons.speaker),
-                              color: Colors.grey,
-                            ),
+                                margin: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey)),
+                                child: IconButton(
+                                  onPressed: (() => setState(() {
+                                        player.play(
+                                            AssetSource("musicaCruzi.mp3"));
+                                      })),
+                                  icon: Icon(Icons.speaker),
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Container(
+                                  child: Text("Play",
+                                      style: TextStyle(color: Colors.grey))),
+                              Container(
+                                margin: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey)),
+                                child: IconButton(
+                                  onPressed: (() => setState(() {
+                                        player.stop();
+                                      })),
+                                  icon: Icon(Icons.speaker),
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Container(
+                                  child: Text("Stop",
+                                      style: TextStyle(color: Colors.grey)))
+                            ],
                           ),
-                          Container(
-                              child: Text("Play",
-                                  style: TextStyle(color: Colors.grey))),
-
-                          Container(
-                            margin: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey)),
-                            child: IconButton(
-                              onPressed: (() => setState(() {
-                                    player.stop();
-                                  })),
-                              icon: Icon(Icons.speaker),
-                              color: Colors.grey,
-                            ),
-                          ),
-                           Container(
-                              child: Text("Stop",
-                                  style: TextStyle(color: Colors.grey)))
-                          ],
-                        ),),           
+                        ),
                       ],
                     )),
               ))),
