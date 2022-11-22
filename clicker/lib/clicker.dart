@@ -878,7 +878,7 @@ class StatesAppState extends State<StatesApp> {
                                   style: TextStyle(color: Colors.white))),
                           //Container with world´s title
                           Container(
-                            margin: EdgeInsets.all(30),
+                            margin: EdgeInsets.all(20),
                             alignment: Alignment.topRight,
                             child: Text("Mundo 1",
                                 style: TextStyle(
