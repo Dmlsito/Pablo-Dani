@@ -1139,10 +1139,10 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -1157,14 +1157,8 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 10,left:0,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
@@ -1173,6 +1167,7 @@ class StatesAppState extends State<StatesApp> {
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -1183,14 +1178,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
@@ -1306,10 +1302,10 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -1324,22 +1320,17 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 10,left:0,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
                                                                         .asset(
-                                                                            "assets/espada1.png"),
+                                                                            "assets/arco.png"),
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -1350,14 +1341,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
@@ -1469,10 +1461,10 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -1487,22 +1479,17 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 10,left:0,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
                                                                         .asset(
-                                                                            "assets/espada1.png"),
+                                                                            "assets/DañoPasiva.png"),
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -1513,14 +1500,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
@@ -1669,10 +1657,10 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -1687,22 +1675,17 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 10,left:0,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
                                                                         .asset(
-                                                                            "assets/espada1.png"),
+                                                                            "assets/BolaFuego.png"),
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -1713,14 +1696,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
@@ -1831,10 +1815,10 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -1849,22 +1833,17 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 10,left:0,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
                                                                         .asset(
-                                                                            "assets/espada1.png"),
+                                                                            "assets/ImagenAleatoria.png"),
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -1875,14 +1854,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
@@ -1992,12 +1972,12 @@ class StatesAppState extends State<StatesApp> {
                                                           EdgeInsets.zero,
                                                       content: Row(
                                                         children: [
-                                                          Container(
+                                                         Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -2012,22 +1992,17 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 10,left:0,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
                                                                         .asset(
-                                                                            "assets/espada1.png"),
+                                                                            "assets/Calavera1.png"),
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -2038,14 +2013,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
@@ -2156,10 +2132,10 @@ class StatesAppState extends State<StatesApp> {
                                                         children: [
                                                           Container(
                                                               height: alturaPantalla *
-                                                                  0.5,
+                                                                  0.6,
                                                               width:
                                                                   anchoPantalla *
-                                                                      0.8,
+                                                                      0.79,
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       fit: BoxFit
@@ -2174,22 +2150,17 @@ class StatesAppState extends State<StatesApp> {
                                                                         borderRadius:
                                                                             BorderRadius.circular(
                                                                                 10),
-                                                                        border: Border.all(
-                                                                            color:
-                                                                                Colors.black)),
-                                                                    margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
-                                                                        bottom:
-                                                                            150),
+                                                                        ),
+                                                                    margin: EdgeInsets.only(right: 5,left:4,bottom:150),
                                                                     width: 100,
                                                                     height: 150,
                                                                     child: Image
                                                                         .asset(
-                                                                            "assets/espada1.png"),
+                                                                            "assets/Bomba.png"),
                                                                   ),
                                                                   // Container para el texto de explicación sobre el item
                                                                   Container(
+                                                                    padding: EdgeInsets.all(5),
                                                                     decoration: BoxDecoration(
                                                                         borderRadius:
                                                                             BorderRadius.circular(
@@ -2200,14 +2171,15 @@ class StatesAppState extends State<StatesApp> {
                                                                         color: Colors
                                                                             .brown[200]),
                                                                     margin: EdgeInsets.only(
-                                                                        left:
-                                                                            30,
+                                                                      right:0 ,left: 10,
+                                                                        
+                                                                            
                                                                         bottom:
                                                                             150),
-                                                                    width: 150,
-                                                                    height: 100,
+                                                                    width: 180,
+                                                                    height: 140,
                                                                     child: Text(
-                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.", style: TextStyle(fontSize: 15)),
                                                                   ),
                                                                 ],
                                                               )),
