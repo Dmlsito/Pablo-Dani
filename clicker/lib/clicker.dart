@@ -2268,7 +2268,7 @@ class StatesAppState extends State<StatesApp> {
                                         border: Border.all(
                                             color: Colors.yellowAccent)),
                                     height: 25,
-                                    margin: EdgeInsets.only(top: 10, left: 0),
+                                    margin: EdgeInsets.only(top: 11, left: 0),
                                     //Creamos la fila
                                     child: Row(children: [
                                       Container(
