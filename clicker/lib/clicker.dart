@@ -959,7 +959,7 @@ class StatesAppState extends State<StatesApp> {
 
                     //Container with coins and amount
                     Container(
-                        margin: EdgeInsets.only(top: 30, left: 10),
+                        margin: EdgeInsets.only(top: 13, left: 10),
                         child: Row(children: [
                           Container(
                             padding: EdgeInsets.only(right: 10),

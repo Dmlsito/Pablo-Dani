@@ -118,7 +118,8 @@ class clase1 extends State<StatesApp> {
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.grey)))),
                         Container(
-                          margin: EdgeInsets.only(top: 350, left: 450),
+                          width: 250,
+                          margin: EdgeInsets.only(top: 300, right: 0),
                           decoration: BoxDecoration(),
                           child: Row(
                             children: [
