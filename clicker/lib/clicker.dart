@@ -22,7 +22,7 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
-      vida: 113000,
+      vida: 120000,
       imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
@@ -177,6 +177,34 @@ bool mejora5V1 = false;
 bool mejora5V2 = false;
 bool mejora5V3 = false;
 
+
+//Variables de mejora6
+int contadorMejora6 = 0;
+int precioMejoraGlobal6 = 50;
+int precio1Mejora6 = 50;
+int precio2Mejora6 = 300;
+int precio3Mejora6 = 600;
+bool mejora6V1 = false;
+bool mejora6V2 = false;
+bool mejora6V3 = false;
+
+
+//Variables de mejora7
+int contadorMejora7 = 0;
+int precioMejoraGlobal7 = 50;
+int precio1Mejora7 = 50;
+int precio2Mejora7 = 300;
+int precio3Mejora7 = 500;
+bool mejora7V1 = false;
+bool mejora7V2 = false;
+bool mejora7V3 = false;
+int bombas = 0;
+int cantidadBombasV1 = 3;
+int cantidadBombasV2 = 3;
+int cantidadBombasV3 = 3;
+int danoBomba = 200;
+
+
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
 double v = 1;
@@ -207,15 +235,7 @@ String mensajeMaximaMejora = "Nivel Máximo de Mejora Alcanzado";
 // Varible para música
 final player = AudioPlayer();
 
-//Variables de mejora6
-int contadorMejora6 = 0;
-int precioMejoraGlobal6 = 50;
-int precio1Mejora6 = 50;
-int precio2Mejora6 = 300;
-int precio3Mejora6 = 600;
-bool mejora6V1 = false;
-bool mejora6V2 = false;
-bool mejora6V3 = false;
+
 
 // Variables para ancho y alto de pantalla para ventana emergente
 var anchoPantalla, alturaPantalla, size;
@@ -649,6 +669,72 @@ class StatesAppState extends State<StatesApp> {
       }
     }
 
+    //Mejora7
+
+    void mejora7(){
+
+      if(contadorMejora7 == 0 && monedasJugador > precio1Mejora7){
+        mostrarMejoraComprada(context);
+        setState(() {
+          //Actualizamos el numero de bombas que tenemos
+           bombas = bombas + cantidadBombasV1;
+        });
+        //Actualizamos el precio del jugador
+        monedasJugador = monedasJugador - precio1Mejora7;
+        //Actualizamos el precio de la mejora
+        precioMejoraGlobal7 = precio2Mejora7;
+        mejora7V1 = true;
+        //Incrementamos el contador
+        contadorMejora7++;
+        
+      }
+      if(contadorMejora7 == 1 && monedasJugador > precio2Mejora7){
+        mostrarMejoraComprada(context);
+        setState(() {
+          //Actualizamos el numero de bombas que tenemos
+           bombas = bombas + cantidadBombasV2;
+        });
+        //Actualizamos el precio del jugador
+        monedasJugador = monedasJugador - precio2Mejora7;
+        //Actualizamos el precio de la mejora
+        precioMejoraGlobal7 = precio3Mejora7;
+        mejora7V2 = true;
+        //Incrementamos el contador
+        contadorMejora7++;
+        
+      }
+      if(contadorMejora7 == 2 && monedasJugador > precio3Mejora7){
+        mostrarMejoraComprada(context);
+        mostrarMaximaMejora(context);
+        setState(() {
+          //Actualizamos el numero de bombas que tenemos
+           bombas = bombas + cantidadBombasV3;
+        });
+        //Actualizamos el precio del jugador
+        monedasJugador = monedasJugador - precio3Mejora7;
+        mejora7V3 = true;
+        //Incrementamos el contador
+        contadorMejora7++;
+        
+      }
+      if(contadorMejora7 > 2 &&  monedasJugador > precio3Mejora7 ){
+        setState(() {
+          bombas = cantidadBombasV3;
+        });
+        monedasJugador = monedasJugador - precio3Mejora7;
+      }
+    }
+
+    void usarBomba(){
+      if(bombas > 0){
+        setState(() {
+          //Al usar la bomba se le quitara vida al monstruo
+          vida = vida - danoBomba;
+          bombas = bombas - 1;
+        });
+      }
+    }
+
     //Si el rng (numero aleatorio entre 0 y 9) es igual a 4 el golpe global sera un critico, sino sera un golpeSencillo
     void critico() {
       Random random = Random();
@@ -831,6 +917,30 @@ class StatesAppState extends State<StatesApp> {
       return transparent;
     }
 
+    //Funciones de mejora 7 para mostrar el estado de nivel por pantalla
+    Color incremento1Mejora7() {
+      if (mejora7V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora7() {
+      if (mejora7V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora7() {
+      if (mejora7V3) {
+        return verde;
+      }
+      return transparent;
+    }
+
+
+
     return MaterialApp(
         home: Container(
             decoration: BoxDecoration(
@@ -959,6 +1069,7 @@ class StatesAppState extends State<StatesApp> {
 
                     //Container with coins and amount
                     Container(
+                      decoration: BoxDecoration(),
                         margin: EdgeInsets.only(top: 13, left: 10),
                         child: Row(children: [
                           Container(
@@ -972,11 +1083,18 @@ class StatesAppState extends State<StatesApp> {
                               height: 50,
                               child: Image.asset("assets/MonedasPrueba.png")),
                           Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black)),
-                            margin: EdgeInsets.only(left: 40),
-                            child: Text("Bomba"),
-                          )
+                            margin: EdgeInsets.only(left: 40, top: 0),
+                            child:Text(bombas.toString(), style: TextStyle(fontSize: 50, color: Colors.white),)),
+                          Container(
+                            height: 50,
+                            margin: EdgeInsets.only(left: 5, top: 0),
+                            child: InkWell(
+                              child: Image.asset("assets/Bomba.png"),
+                              onTap: (){
+                                usarBomba();
+                              },
+                            )),
+                          
                         ])),
 
                     // Container del scroll()
@@ -2017,31 +2135,156 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del septimo item
                           Container(
-                              width: 140,
+                              width: 160,
                               child: Column(children: [
                                 Container(
-                                    margin: EdgeInsets.only(left: 0),
-                                    width: 140,
-                                    height: 150,
+                                  margin: EdgeInsets.only(left:0),
+                                  height: 20,
+                                  child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.5,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.8,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black)),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/espada1.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            30,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 150,
+                                                                    height: 100,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar."),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora7(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora7(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora7(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(left: 0, top: 5),
+                                    width: 110,
+                                    height: 113,
                                     child: InkWell(
                                       onTap: () {
-                                        mejora1();
+                                        mejora7();
                                       },
                                     ),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: AssetImage(
-                                                "assets/espada1.png"),
+                                                "assets/Bomba.png"),
                                             fit: BoxFit.cover))),
-                                Container(
-                                    height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 60),
+                               Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 10, left: 0),
+                                    //Creamos la fila
                                     child: Row(children: [
                                       Container(
-                                          child: Text(
-                                              precioMejoraGlobal1.toString(),
+                                          margin: EdgeInsets.only(left: 2),
+                                          child: Text("Katon",
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.yellowAccent))),
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          margin: EdgeInsets.only(left: 10),
+                                          child: Text(
+                                              precioMejoraGlobal7.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
+                                      //Container para mostrar la imagen
                                       Container(
                                           width: 60,
                                           height: 100,
@@ -2059,7 +2302,7 @@ class StatesAppState extends State<StatesApp> {
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
                                     width: 140,
-                                    height: 150,
+                                    height: 116,
                                     child: InkWell(
                                       onTap: () {
                                         mejora1();
