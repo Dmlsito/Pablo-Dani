@@ -23,7 +23,7 @@ List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
       vida: 30000,
-      imagenRuta: "assets/caballeroAnimado.gif",
+      imagenRuta: "assets/pruebaBoss2.gif",
       identificador: 1),
   monstruo(
     nombre: "Daniel",
@@ -95,6 +95,7 @@ Color colorLetras = Color(0xff660000);
 Timer? timer2;
 Timer? timer1;
 Timer? timer3;
+Timer? timer4;
 // Variables para dps
 double danoDps1 = 5;
 
@@ -230,9 +231,18 @@ int danoHielo = 100;
 bool lluviaHeladaV1 = true;
 bool lluviaHeladaV2 = true;
 bool lluviaHeladaV3 = true;
-int duracionTormentaV1 = 0;
-int duracionTormentaV2 = 0;
-int duracionTormentaV3 = 0;
+int duracionTormenta = 0;
+
+//Variables de mejora10
+int contadorMejora10 = 0;
+bool mejora10V1 = false;
+bool mejora10V2 = false;
+bool mejora10V3 = false;
+int precio1Mejora10 = 50;
+int precio2Mejora10 = 100;
+int precio3Mejora10 = 150;
+int precioMejoraGlobal10 = 50;
+int contadorTiempoVeneno = 0;
 
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
@@ -390,6 +400,7 @@ class StatesAppState extends State<StatesApp> {
       ScaffoldMessenger.of(context).showSnackBar(snb);
     }
 
+    //SnackBars de bufos
     void bufoEspada(BuildContext context) {
       final snb = SnackBar(
         content: Row(
@@ -399,6 +410,21 @@ class StatesAppState extends State<StatesApp> {
               width: 20,
             ),
             Text("La espada ha sido bufado")
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
+    void bufoVeneno(BuildContext context) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text("El veneno ha sido bufado")
           ],
         ),
       );
@@ -420,6 +446,7 @@ class StatesAppState extends State<StatesApp> {
       ScaffoldMessenger.of(context).showSnackBar(snb);
     }
 
+    //SnackBars de mejoras de escarcha
     void escarchaON(BuildContext context) {
       final snb = SnackBar(
         content: Row(
@@ -444,6 +471,52 @@ class StatesAppState extends State<StatesApp> {
               width: 20,
             ),
             Text("La tormenta ha finaizado")
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
+    //SnackBar de mejora10:
+    void venenoV1(BuildContext context) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text("Veneno de nivel bajo aplicado")
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
+    void venenoV2(BuildContext context) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text("Veneno de nivel medio aplicado")
+          ],
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snb);
+    }
+
+    void venenoV3(BuildContext context) {
+      final snb = SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.thumb_up),
+            SizedBox(
+              width: 20,
+            ),
+            Text("Veneno de nivel alto aplicado")
           ],
         ),
       );
@@ -828,7 +901,6 @@ class StatesAppState extends State<StatesApp> {
       }
     }
 
-    //Mejora 9
     void mejora9() {
       if (contadorMejora9 == 0 && monedasJugador > precio1Mejora9) {
         mejora9V1 = true;
@@ -836,6 +908,7 @@ class StatesAppState extends State<StatesApp> {
           //Actualizamos el precio de la mejora
           precioMejoraGlobal9 = precio2Mejora9;
           monedasJugador = monedasJugador - precio1Mejora9;
+          player.play(AssetSource("RuidoTormenta.mp3"));
         });
         contadorMejora9++;
         mostrarMejoraComprada(context);
@@ -843,14 +916,16 @@ class StatesAppState extends State<StatesApp> {
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV1 == true) {
             //Empiza la tormenta
-            duracionTormentaV1++;
+            duracionTormenta++;
 
             setState(() {
               //Le restamos el daño que hara por segundo la lluvia helada
               vida = vida - danoHielo;
             });
             //El tiempo de duracion de la tormenta sera de treinte segundos
-            if (duracionTormentaV1 == 30) {
+            if (duracionTormenta == 30) {
+              //Indicamos que el contador de la tormenta se reinicie
+              duracionTormenta = 0;
               //Indicamos que la lluvia helada ha parado
               lluviaHeladaV1 = false;
               escarchaOF(context);
@@ -862,6 +937,7 @@ class StatesAppState extends State<StatesApp> {
         mejora9V2 = true;
         mostrarMejoraComprada(context);
         setState(() {
+          player.play(AssetSource("RuidoTormenta.mp3"));
           precioMejoraGlobal9 = precio3Mejora9;
           monedasJugador = monedasJugador - precio2Mejora9;
         });
@@ -870,13 +946,14 @@ class StatesAppState extends State<StatesApp> {
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV2 == true) {
             //Empiza la tormenta
-            duracionTormentaV2++;
+            duracionTormenta++;
 
             setState(() {
               vida = vida - danoHielo;
             });
             //La duracion de la tormenta sera de sesenta segundos
-            if (duracionTormentaV2 == 60) {
+            if (duracionTormenta == 60) {
+              duracionTormenta = 0;
               lluviaHeladaV2 = false;
               escarchaOF(context);
             }
@@ -888,23 +965,23 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejoraComprada(context);
         mostrarMaximaMejora(context);
         setState(() {
+          player.play(AssetSource("RuidoTormenta.mp3"));
           monedasJugador = monedasJugador - precio3Mejora9;
         });
         contadorMejora9++;
         escarchaON(context);
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV3 == true) {
-            //Empiza la tormenta
-            duracionTormentaV3++;
+            duracionTormenta++;
 
             setState(() {
               vida = vida - danoHielo;
             });
             // La duracion de la tormenta sera de un minuto y medio
-            if (duracionTormentaV3 == 90) {
+            if (duracionTormenta == 90) {
               lluviaHeladaV3 = false;
-              //Reseteamos para que cuando el jugador compre de nuevo la mejora el contador empiece de nuevo
-              duracionTormentaV3 = 0;
+
+              duracionTormenta = 0;
               escarchaOF(context);
             }
           }
@@ -913,25 +990,104 @@ class StatesAppState extends State<StatesApp> {
       if (contadorMejora9 > 2 && monedasJugador > precio3Mejora9) {
         mostrarMejoraComprada(context);
         setState(() {
+          player.play(AssetSource("RuidoTormenta.mp3"));
           monedasJugador = monedasJugador - precio3Mejora9;
         });
         contadorMejora9++;
         escarchaON(context);
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV3 == true) {
-            //Empiza la tormenta
-            duracionTormentaV3++;
+            duracionTormenta++;
 
             setState(() {
               vida = vida - danoHielo;
             });
-
-            if (duracionTormentaV3 == 90) {
+            //La duracion de la tormenta sera de 90 segundos
+            if (duracionTormenta == 90) {
+              duracionTormenta = 0;
               lluviaHeladaV3 = false;
               escarchaOF(context);
             }
           }
         });
+      }
+    }
+
+    //Mejora 10
+
+    void mejora10() {
+      if (contadorMejora10 == 0 && monedasJugador > precio1Mejora10) {
+        //Seteamos el indicador de mejora a true
+        mejora10V1 = true;
+        //Mostramos un snackBar que nos diga que la mejora esta comprada
+        mostrarMejoraComprada(context);
+        //Mostramos un snackBar para indicar que el monstruo ha sido envenenado
+        venenoV1(context);
+        //Incrementamos el contador de la mejora
+        contadorMejora10++;
+        setState(() {
+          //Sonido de la habilidad
+          player.play(AssetSource("Veneno.mp3"));
+          //Actualizamos el precio una vez que compramos la mejora
+          precioMejoraGlobal10 = precio2Mejora10;
+          //Actualizamos la cantidad de monedas que tendra el jugador una vez ha comprado la mejora
+          monedasJugador = monedasJugador - precio1Mejora10;
+        });
+
+        //Creamos un timer para controlar que hara esta mejora por segundo
+        timer4 = Timer.periodic(Duration(seconds: 1), (timer) {
+          //Incrementamos la duracion del veneno
+          contadorTiempoVeneno++;
+          setState(() {
+            //El valor que le estamos restando a la vida sera el el daño veneno es decir el daño dps por segundo
+            vida = vida - 100;
+          });
+        });
+      }
+      if (contadorMejora10 == 1 && monedasJugador > precio2Mejora10) {
+        mejora10V2 = true;
+        mostrarMejoraComprada(context);
+        venenoV2(context);
+        contadorMejora10++;
+        setState(() {
+          player.play(AssetSource("Veneno.mp3"));
+          precioMejoraGlobal10 = precio3Mejora10;
+          monedasJugador = monedasJugador - precio2Mejora10;
+        });
+
+        timer4 = Timer.periodic(Duration(seconds: 1), (timer) {
+          contadorTiempoVeneno++;
+          setState(() {
+            vida = vida - 200;
+          });
+        });
+      }
+      if (contadorMejora10 == 2 && monedasJugador > precio3Mejora10) {
+        mejora10V3 = true;
+        mostrarMejoraComprada(context);
+        mostrarMaximaMejora(context);
+        venenoV3(context);
+        contadorMejora10++;
+        setState(() {
+          monedasJugador = monedasJugador - precio2Mejora10;
+        });
+
+        timer4 = Timer.periodic(Duration(seconds: 1), (timer) {
+          contadorTiempoVeneno++;
+          setState(() {
+            player.play(AssetSource("Veneno.mp3"));
+            vida = vida - 300;
+          });
+        });
+      }
+
+      if (contadorMejora10 > 2 && mejora8Utilizada == false) {
+        setState(() {
+          player.play(AssetSource("Veneno.mp3"));
+          monedasJugador = monedasJugador;
+          vida = vida - 500;
+        });
+        bufoVeneno(context);
       }
     }
 
@@ -953,6 +1109,8 @@ class StatesAppState extends State<StatesApp> {
           ? golpeGlobal = golpeCritico
           : golpeGlobal = golpeSencillo;
     }
+
+    //Funcion para controlar la aparicion del estado de veneno
 
     //Funcion para barra de vida
     double controladorBarra(v) {
@@ -1170,6 +1328,29 @@ class StatesAppState extends State<StatesApp> {
       return transparent;
     }
 
+    //Funciones de mejora 10 para mostrar el estado de nivel por pantalla
+
+    Color incremento1Mejora10() {
+      if (mejora10V1) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento2Mejora10() {
+      if (mejora10V2) {
+        return verde;
+      }
+      return transparent;
+    }
+
+    Color incremento3Mejora10() {
+      if (mejora10V3) {
+        return verde;
+      }
+      return transparent;
+    }
+
     return MaterialApp(
         home: Container(
             decoration: BoxDecoration(
@@ -1248,6 +1429,8 @@ class StatesAppState extends State<StatesApp> {
                       ]),
                     ),
 
+                    //Container con el nombre de usuario y mosntruo
+
                     Container(
                         margin: EdgeInsets.only(bottom: 0),
                         height: 27,
@@ -1259,6 +1442,7 @@ class StatesAppState extends State<StatesApp> {
                                 fontSize: 28,
                                 color: colorLetras,
                                 fontFamily: "caps"))),
+
                     //Container with monster´s image
                     Container(
                       margin: EdgeInsets.only(top: 0),
@@ -2961,31 +3145,164 @@ class StatesAppState extends State<StatesApp> {
                           ),
                           //Container del decimo item
                           Container(
-                              width: 140,
+                              width: 160,
                               child: Column(children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 0),
+                                  height: 20,
+                                  child: Row(children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      content: Row(
+                                                        children: [
+                                                          Container(
+                                                              height: alturaPantalla *
+                                                                  0.6,
+                                                              width:
+                                                                  anchoPantalla *
+                                                                      0.79,
+                                                              decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      image: AssetImage(
+                                                                          "assets/Prueba1.gif"))),
+                                                              child: Row(
+                                                                children: [
+                                                                  // Container para la imagen del item y sus bordes
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                    ),
+                                                                    margin: EdgeInsets.only(
+                                                                        right:
+                                                                            10,
+                                                                        left: 0,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 100,
+                                                                    height: 150,
+                                                                    child: Image
+                                                                        .asset(
+                                                                            "assets/Veneno.png"),
+                                                                  ),
+                                                                  // Container para el texto de explicación sobre el item
+                                                                  Container(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .all(5),
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                10),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black),
+                                                                        color: Colors
+                                                                            .brown[200]),
+                                                                    margin: EdgeInsets.only(
+                                                                        right:
+                                                                            0,
+                                                                        left:
+                                                                            10,
+                                                                        bottom:
+                                                                            150),
+                                                                    width: 180,
+                                                                    height: 140,
+                                                                    child: Text(
+                                                                        "Espada: Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                15)),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                                "assets/iconoAyuda.png",
+                                                color: Colors.yellowAccent))),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento1Mejora10(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento2Mejora10(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                    Transform(
+                                      transform: Matrix4.rotationZ(1.56),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        color: incremento3Mejora10(),
+                                        width: 30,
+                                        height: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
                                 Container(
                                     margin: EdgeInsets.only(left: 0),
                                     width: 140,
-                                    height: 150,
+                                    height: 116,
                                     child: InkWell(
                                       onTap: () {
-                                        mejora1();
+                                        mejora10();
                                       },
                                     ),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/espada1.png"),
+                                            image:
+                                                AssetImage("assets/Veneno.png"),
                                             fit: BoxFit.cover))),
                                 Container(
-                                    height: 23,
-                                    margin: EdgeInsets.only(top: 5, left: 60),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.yellowAccent)),
+                                    height: 25,
+                                    margin: EdgeInsets.only(top: 11, left: 0),
+                                    //Creamos la fila
                                     child: Row(children: [
                                       Container(
-                                          child: Text(
-                                              precioMejoraGlobal1.toString(),
+                                          margin: EdgeInsets.only(left: 2),
+                                          child: Text("Veneno",
                                               style: TextStyle(
-                                                  color: Colors.white))),
+                                                  color: Colors.yellowAccent))),
+                                      //Container en el que aparecera el precio de la mejora
+                                      Container(
+                                          margin: EdgeInsets.only(left: 10),
+                                          child: Text(
+                                              precioMejoraGlobal10.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14))),
+                                      //Container para mostrar la imagen
                                       Container(
                                           width: 60,
                                           height: 100,
