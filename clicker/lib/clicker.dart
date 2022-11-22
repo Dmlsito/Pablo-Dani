@@ -971,6 +971,12 @@ class StatesAppState extends State<StatesApp> {
                               width: 100,
                               height: 50,
                               child: Image.asset("assets/MonedasPrueba.png")),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black)),
+                            margin: EdgeInsets.only(left: 40),
+                            child: Text("Bomba"),
+                          )
                         ])),
 
                     // Container del scroll()
