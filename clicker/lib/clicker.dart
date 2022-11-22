@@ -23,7 +23,7 @@ List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
       vida: 30000,
-      imagenRuta: "assets/caballeroAnimado.gif",
+      imagenRuta: "assets/pruebaBoss2.gif",
       identificador: 1),
   monstruo(
     nombre: "Daniel",
