@@ -1076,15 +1076,15 @@ class StatesAppState extends State<StatesApp> {
                             padding: EdgeInsets.only(right: 10),
                             child: Text(monedasJugador.toString(),
                                 style: TextStyle(
-                                    fontSize: 50, color: Colors.white)),
+                                    fontSize: 25, color: Colors.white)),
                           ),
                           Container(
-                              width: 100,
+                              width: 70,
                               height: 50,
                               child: Image.asset("assets/MonedasPrueba.png")),
                           Container(
                             margin: EdgeInsets.only(left: 40, top: 0),
-                            child:Text(bombas.toString(), style: TextStyle(fontSize: 50, color: Colors.white),)),
+                            child:Text(bombas.toString(), style: TextStyle(fontSize: 25, color: Colors.white),)),
                           Container(
                             height: 50,
                             margin: EdgeInsets.only(left: 5, top: 0),
