@@ -204,6 +204,18 @@ int cantidadBombasV2 = 3;
 int cantidadBombasV3 = 3;
 int danoBomba = 200;
 
+//Variables de mejora 8
+int contadorMejora8 = 0;
+bool mejora8V1 = false;
+bool mejora8V2 = false;
+bool mejora8V3 = false;
+int precio1Mejora8 = 100;
+int precio2Mejora8 = 200;
+int precio3Mejora8 = 300;
+int precioMejoraGlobal8 = 100;
+bool mejora8Utilizada =  true;
+
+
 
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
@@ -368,41 +380,67 @@ class StatesAppState extends State<StatesApp> {
 
     //Mejora1
     void mejora1() {
-      if (contadorMejora1 == 0 && monedasJugador >= precio1Mejora1) {
+      if (contadorMejora1 == 0 && monedasJugador >= precio1Mejora1 || mejora8Utilizada == false) {
         setState(() {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio2Mejora1;
         });
         mejora1V1 = true;
-        print(precioMejoraGlobal1);
+        
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 2;
         contadorMejora1++;
+        //Controlamos si el jugador ha comprado la mejora8
+        if(mejora8Utilizada == false){
+          //La mejora le sale gratis
+          monedasJugador = monedasJugador;
+          //Cuando se realiza la compra la mejora desaparecera, porque es de un unico uso
+          mejora8Utilizada = true;
+        }else{
         monedasJugador = monedasJugador - precio1Mejora1;
+        
+        }
       }
-      if (contadorMejora1 == 1 && monedasJugador >= precio2Mejora1) {
+      if (contadorMejora1 == 1 && monedasJugador >= precio2Mejora1 || mejora8Utilizada == false) {
+         
         setState(() {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio3Mejora1;
         });
         mejora1V2 = true;
+      
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 3;
         contadorMejora1++;
+        if(mejora8Utilizada == false){
+          monedasJugador = monedasJugador;
+           mejora8Utilizada = true;
+        }else{
         monedasJugador = monedasJugador - precio2Mejora1;
+        }
       }
-      if (contadorMejora1 == 2 && monedasJugador >= precio3Mejora1) {
+      if (contadorMejora1 == 2 && monedasJugador >= precio3Mejora1 || mejora8Utilizada == false) {
         mejora1V3 = true;
         mostrarMejoraComprada(context);
+        mostrarMaximaMejora(context);
         golpeSencillo = golpeSencillo * 4;
         contadorMejora1++;
+         if(mejora8Utilizada == false){
+          monedasJugador = monedasJugador;
+           mejora8Utilizada = true;
+        }else{
         monedasJugador = monedasJugador - precio3Mejora1;
-      }
-      if (contadorMejora1 > 2) {
-        if (mostrarMejora2Maxima == 0) {
-          mostrarMaximaMejora(context);
         }
-        mostrarMejora1Maxima++;
+      }
+      if (contadorMejora1 > 2 && monedasJugador > precio3Mejora1 || mejora8Utilizada == false) {
+        contadorMejora1++;
+         if(mejora8Utilizada == false){
+          monedasJugador = monedasJugador;
+          mejora8Utilizada = true;
+        }else{
+        monedasJugador = monedasJugador - precio3Mejora1;
+        }
+
       }
     }
 
@@ -725,6 +763,19 @@ class StatesAppState extends State<StatesApp> {
       }
     }
 
+    
+    void mejora8(){
+      if(contadorMejora8 == 0 && monedasJugador > precio1Mejora8){
+        mostrarMejoraComprada(context);
+        monedasJugador = monedasJugador - precio1Mejora8;
+        contadorMejora8++;
+        precioMejoraGlobal8 = precio2Mejora8;
+        //Seteamos la mejora a false para que se puede utilizar 
+        mejora8Utilizada = false;
+
+      }
+    }
+    
     void usarBomba(){
       if(bombas > 0){
         setState(() {
@@ -2277,7 +2328,7 @@ class StatesAppState extends State<StatesApp> {
                                     height: 116,
                                     child: InkWell(
                                       onTap: () {
-                                        mejora1();
+                                        mejora8();
                                       },
                                     ),
                                     decoration: BoxDecoration(
@@ -2291,7 +2342,7 @@ class StatesAppState extends State<StatesApp> {
                                     child: Row(children: [
                                       Container(
                                           child: Text(
-                                              precioMejoraGlobal1.toString(),
+                                              precioMejoraGlobal8.toString(),
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       Container(
