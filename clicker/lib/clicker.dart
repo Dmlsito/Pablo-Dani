@@ -22,49 +22,49 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
-      vida: 30000,
-      imagenRuta: "assets/pruebaBoss2.gif",
+      vida: 3000,
+      imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
     nombre: "Daniel",
     vida: 6000,
-    imagenRuta: "assets/caballeroAnimadoPrueba2.gif",
+    imagenRuta: "assets/caballeroBebiendo.gif",
     identificador: 2,
   ),
   monstruo(
     nombre: "Nelson",
-    vida: 12000,
+    vida: 1200,
     imagenRuta: "assets/caballeroAnimado2.gif",
     identificador: 3,
   ),
   monstruo(
     nombre: "Laura",
     vida: 24000,
-    imagenRuta: "assets/animadoMundoFuego1.gif",
+    imagenRuta: "assets/dinosaurioBailando.gif",
     identificador: 4,
   ),
   monstruo(
     nombre: "Hugo",
     vida: 16000,
-    imagenRuta: "assets/animadoMundoFuego1.gif",
+    imagenRuta: "assets/dragon3.gif",
     identificador: 5,
   ),
   monstruo(
     nombre: "Adrian",
     vida: 1000,
-    imagenRuta: "assets/monstruo3Mundo2.png",
+    imagenRuta: "assets/dragonNegro.gif",
     identificador: 6,
   ),
   monstruo(
     nombre: "Oscar",
     vida: 640,
-    imagenRuta: "assets/monstruo1Mundo3.png",
+    imagenRuta: "assets/animado3Mundo1.gif",
     identificador: 7,
   ),
   monstruo(
     nombre: "Alfonso",
     vida: 1280,
-    imagenRuta: "assets/monstruo2Mundo3.png",
+    imagenRuta: "assets/bichoraro.gif",
     identificador: 8,
   ),
   monstruo(
@@ -73,11 +73,30 @@ List<monstruo> listaMonstruos = [
     imagenRuta: "assets/monstruo3Mundo3.png",
     identificador: 9,
   ),
+   monstruo(
+    nombre: "Oscar",
+    vida: 640,
+    imagenRuta: "assets/kakashi.gif",
+    identificador: 10,
+  ),
+  monstruo(
+    nombre: "Alfonso",
+    vida: 1280,
+    imagenRuta: "assets/itachi.gif",
+    identificador: 11,
+  ),
+  monstruo(
+    nombre: "Suso",
+    vida: 2560,
+    imagenRuta: "assets/naruto.gif",
+    identificador: 12,
+  ),
 ];
 List<String> listaMundos = [
   "assets/Mundo1.jpg",
   "assets/Mundo2.jpg",
-  "assets/Mundo3.jpg"
+  "assets/Mundo3.jpg",
+  "assets/Mundo5.jpg"
 ];
 
 // Ruta de imagen inicial
@@ -301,9 +320,9 @@ class StatesAppState extends State<StatesApp> {
       setState(() {
         temporizadorDeCritico++;
         vida = vida - golpeGlobal;
-        print("Vida: " + vida.toString());
+        // print("Vida: " + vida.toString());
         monedasJugador = monedasJugador + monedasRecibidas;
-        print("Monedas: " + monedasJugador.toString());
+        // print("Monedas: " + monedasJugador.toString());
         if (vida < 0) {
           contador++;
           // Cambiamos de monstruo en función al contador por lo que asignamos a las variables su vida y su ruta de imagen
@@ -325,8 +344,11 @@ class StatesAppState extends State<StatesApp> {
           if (contador >= 3 && contador <= 6) {
             indexImagen = 1;
           }
-          if (contador >= 6) {
+          if (contador >= 6 && contador >= 9) {
             indexImagen = 2;
+          }
+          if(contador >= 10 && contador <= 13){
+            indexImagen = 3;
           }
         }
       });
@@ -736,7 +758,7 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora5++;
         precioMejoraGlobal5 = precio2Mejora5;
         monedasJugador = monedasJugador - precio1Mejora5;
-        imagenAleatoria = "assets/tioAltavoz.png";
+        imagenAleatoria = "assets/ImagenAleatoria.png";
         return imagenAleatoria;
       }
       if (contadorMejora5 == 1 && monedasJugador >= precio2Mejora5) {
@@ -755,7 +777,7 @@ class StatesAppState extends State<StatesApp> {
         monedasGanadasPorImagen = 1000;
         contadorMejora5++;
         monedasJugador = monedasJugador - precio3Mejora5;
-        imagenAleatoria = "assets/tioAltavoz.png";
+        imagenAleatoria = "assets/ImagenAleatoria.png";
         return imagenAleatoria;
       }
       if (contadorMejora5 > 2 && monedasJugador >= precio3Mejora5) {
@@ -767,7 +789,7 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejora5Maxima++;
 
         monedasJugador = monedasJugador - precio3Mejora5;
-        imagenAleatoria = "assets/tioAltavoz.png";
+        imagenAleatoria = "assets/ImagenAleatoria.png";
         return imagenAleatoria;
       }
       return "";
@@ -1114,6 +1136,9 @@ class StatesAppState extends State<StatesApp> {
 
     //Funcion para barra de vida
     double controladorBarra(v) {
+
+      print(v);
+
       setState(() {
         if (vida <= vidaMax100 && vida > vidaMax90) {
           v = v;
