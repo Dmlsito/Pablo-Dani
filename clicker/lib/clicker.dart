@@ -2164,7 +2164,7 @@ class StatesAppState extends State<StatesApp> {
                                                                           left:
                                                                               30),
                                                                       child: Text(
-                                                                          "Desgarro",
+                                                                          "Sangrado",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
                                                                               color: Colors.white)))
