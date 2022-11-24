@@ -1575,7 +1575,7 @@ class StatesAppState extends State<StatesApp> {
                             critico();
                             vidaResta();
                             setState(() {
-                              playFile("music/musicaCruzi.mp3");
+                              // playFile("assets/Theme.mp3");
                             });
                           },
                           // ignore: sized_box_for_whitespace
@@ -2020,7 +2020,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Ganas más monedas por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -2212,7 +2212,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Comienzas a hacer daño por segundo.\nExisten 3 niveles de mejora que se pueden comprar aumentando tu DPS.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -2465,7 +2465,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Realizas un daño directo contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar aumentando el daño realizado.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -2655,7 +2655,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Surge una caja en una posición aleatoria, clickando ganas una cantidad directa de monedas.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -2848,7 +2848,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Al comprarla tienes la posibilidad de matar directamente al enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -3038,7 +3038,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Ganas 3 bombas que puedes lanzar haciendo daño directo al enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -3229,7 +3229,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Te da la posibilidad de superar el limite de mejora de la espada, el arco o el veneno.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
@@ -3393,7 +3393,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Al comprarla, comienza una tormenta durante un tiempo que realiza daño al enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 fontFamily: "caps",
@@ -3583,7 +3583,7 @@ class StatesAppState extends State<StatesApp> {
                                                                         width:
                                                                             180,
                                                                         child: Text(
-                                                                            "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
+                                                                            "Enveneas al enemigo, realizandole daño por segundo.\nExisten 3 niveles de mejora que se pueden comprar.",
                                                                             style: TextStyle(
                                                                                 fontSize: 18,
                                                                                 color: Colors.white,
