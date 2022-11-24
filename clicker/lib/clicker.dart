@@ -22,72 +22,72 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
-      vida: 3000.00,
+      vida: 3000,
       imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
     nombre: "Daniel",
-    vida: 6000.00,
+    vida: 6000,
     imagenRuta: "assets/caballeroBebiendo.gif",
     identificador: 2,
   ),
   monstruo(
     nombre: "Nelson",
-    vida: 1200.00,
+    vida: 1200,
     imagenRuta: "assets/caballeroAnimado2.gif",
     identificador: 3,
   ),
   monstruo(
     nombre: "Laura",
-    vida: 24000.00,
+    vida: 24000,
     imagenRuta: "assets/dinosaurioBailando.gif",
     identificador: 4,
   ),
   monstruo(
     nombre: "Hugo",
-    vida: 16000.00,
+    vida: 16000,
     imagenRuta: "assets/dragon3.gif",
     identificador: 5,
   ),
   monstruo(
     nombre: "Adrian",
-    vida: 1000.00,
+    vida: 1000,
     imagenRuta: "assets/dragonNegro.gif",
     identificador: 6,
   ),
   monstruo(
     nombre: "Oscar",
-    vida: 640000.00,
+    vida: 640,
     imagenRuta: "assets/animado3Mundo1.gif",
     identificador: 7,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 1280.00,
+    vida: 1280,
     imagenRuta: "assets/bichoraro.gif",
     identificador: 8,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 2560.00,
+    vida: 2560,
     imagenRuta: "assets/monstruo3Mundo3.png",
     identificador: 9,
   ),
    monstruo(
     nombre: "Oscar",
-    vida: 6400.00,
+    vida: 640,
     imagenRuta: "assets/kakashi.gif",
     identificador: 10,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 12800.00,
+    vida: 1280,
     imagenRuta: "assets/itachi.gif",
     identificador: 11,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 25600.00,
+    vida: 2560,
     imagenRuta: "assets/naruto.gif",
     identificador: 12,
   ),
@@ -344,13 +344,12 @@ class StatesAppState extends State<StatesApp> {
           if (contador >= 3 && contador <= 6) {
             indexImagen = 1;
           }
-          if (contador >= 6 && contador <= 9) {
+          if (contador >= 6 && contador >= 9) {
             indexImagen = 2;
           }
-           if(contador >= 9 && contador <= 12){
-             indexImagen = 3;
-           }
-
+          if(contador >= 10 && contador <= 13){
+            indexImagen = 3;
+          }
         }
       });
     }
@@ -555,8 +554,6 @@ class StatesAppState extends State<StatesApp> {
         setState(() {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio2Mejora1;
-          monedasJugador = monedasJugador - precio1Mejora1;
-           player.play(AssetSource("SonidoEspada.mp3"));
         });
         mejora1V1 = true;
 
@@ -565,14 +562,12 @@ class StatesAppState extends State<StatesApp> {
         contadorMejora1++;
         //Controlamos si el jugador ha comprado la mejora8
 
-        
+        monedasJugador = monedasJugador - precio1Mejora1;
       }
       if (contadorMejora1 == 1 && monedasJugador >= precio2Mejora1) {
         setState(() {
           //Seteamos el precio de la mejora
           precioMejoraGlobal1 = precio3Mejora1;
-           monedasJugador = monedasJugador - precio2Mejora1;
-           player.play(AssetSource("SonidoEspada.mp3"));
         });
         mejora1V2 = true;
 
@@ -580,27 +575,19 @@ class StatesAppState extends State<StatesApp> {
         golpeSencillo = golpeSencillo * 3;
         contadorMejora1++;
 
-        
+        monedasJugador = monedasJugador - precio2Mejora1;
       }
       if (contadorMejora1 == 2 && monedasJugador >= precio3Mejora1) {
-        setState(() {
-           player.play(AssetSource("SonidoEspada.mp3"));
-           monedasJugador = monedasJugador - precio3Mejora1;
-        });
         mejora1V3 = true;
         mostrarMejoraComprada(context);
         mostrarMaximaMejora(context);
         golpeSencillo = golpeSencillo * 4;
         contadorMejora1++;
-       
+        monedasJugador = monedasJugador - precio3Mejora1;
       }
       //Bufo extra
       if (contadorMejora1 > 2 && mejora8Utilizada == false) {
-         setState(() {
-           player.play(AssetSource("SonidoEspada.mp3"));
-           monedasJugador = monedasJugador;
-        });
-        
+        monedasJugador = monedasJugador;
         //Indicamos que el bufo ya se ha utilizado
 
         bufoEspada(context);
@@ -613,33 +600,24 @@ class StatesAppState extends State<StatesApp> {
       if (contadorMejora2 == 0 && monedasJugador >= precio1Mejora2) {
         mejora2V1 = true;
         setState(() {
-            player.play(AssetSource("SonidoFlecha.mp3"));
           precioMejoraGlobal2 = precio2Mejora2;
-          monedasJugador = monedasJugador - precio1Mejora2;
         });
         mostrarMejoraComprada(context);
         monedasRecibidas = 10;
         contadorMejora2++;
-        
+        monedasJugador = monedasJugador - precio1Mejora2;
       }
       if (contadorMejora2 == 1 && monedasJugador >= precio2Mejora2) {
         mejora2V2 = true;
         setState(() {
-           player.play(AssetSource("SonidoFlecha.mp3"));
           precioMejoraGlobal2 = precio3Mejora2;
-          monedasJugador = monedasJugador - precio2Mejora2;
         });
         mostrarMejoraComprada(context);
         monedasRecibidas = 20;
         contadorMejora2++;
-        
+        monedasJugador = monedasJugador - precio2Mejora2;
       }
       if (contadorMejora2 == 2 && monedasJugador >= precio3Mejora2) {
-        setState(() {
-           player.play(AssetSource("SonidoFlecha.mp3"));
-       
-          monedasJugador = monedasJugador - precio2Mejora2;
-        });
         mejora2V3 = true;
         mostrarMejoraComprada(context);
         mostrarMaximaMejora(context);
@@ -648,11 +626,6 @@ class StatesAppState extends State<StatesApp> {
         monedasJugador = monedasJugador - precio3Mejora2;
       }
       if (contadorMejora2 > 2 && mejora8Utilizada == false) {
-        setState(() {
-           player.play(AssetSource("SonidoFlecha.mp3"));
-         
-          monedasJugador = monedasJugador - precio2Mejora2;
-        });
         monedasJugador = monedasJugador;
         bufoArco(context);
         monedasRecibidas = 60;
