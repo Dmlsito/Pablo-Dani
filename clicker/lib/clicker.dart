@@ -309,6 +309,7 @@ String mensajeMaximaMejora = "Nivel Máximo de Mejora Alcanzado";
 
 // Varible para música
 final player = AudioPlayer();
+final player2 = AudioPlayer();
 
 // Variables para ancho y alto de pantalla para ventana emergente
 var anchoPantalla, alturaPantalla, size;
@@ -1494,7 +1495,7 @@ class StatesAppState extends State<StatesApp> {
                                                     onPressed: () =>
                                                         setState(() {
                                                           //Comienzo de la musica
-                                                          player.play(
+                                                          player2.play(
                                                               AssetSource(
                                                                   "Theme.mp3"));
                                                         }),
