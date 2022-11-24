@@ -7,7 +7,6 @@ import 'clicker.dart';
 import 'main.dart';
 import "Usuario.dart";
 
-
 class Register extends StatelessWidget {
   @override
   Widget build(Object context) {
@@ -23,18 +22,17 @@ void playFile(String url) {
   player.play(AssetSource(url));
 }
 
-
 class StatesApp extends StatefulWidget {
-
   @override
   clase2 createState() => clase2();
 }
+
 class clase2 extends State<StatesApp> {
   String nombre = '';
   String contrasena = "";
 
   final formKey = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -77,6 +75,7 @@ class clase2 extends State<StatesApp> {
                             color: Colors.white,
                           ),
                           child: TextFormField(
+                            obscureText: true,
                             decoration:
                                 InputDecoration(labelText: "Contraseña"),
                             onSaved: (value) {
@@ -106,8 +105,7 @@ class clase2 extends State<StatesApp> {
                                     border: Border.all(color: Colors.grey)),
                                 child: IconButton(
                                   onPressed: (() => setState(() {
-                                        player.play(
-                                            AssetSource("musicaCruzi.mp3"));
+                                        player.play(AssetSource("Theme.mp3"));
                                       })),
                                   icon: Icon(Icons.speaker),
                                   color: Colors.grey,
@@ -133,7 +131,7 @@ class clase2 extends State<StatesApp> {
                                       style: TextStyle(color: Colors.grey)))
                             ],
                           ),
-                        ),        
+                        ),
                       ],
                     )),
               ))),
@@ -147,6 +145,4 @@ class clase2 extends State<StatesApp> {
           arguments: Usuario(nombre: nombre, contrasena: contrasena));
     }
   }
-  
-  
 }

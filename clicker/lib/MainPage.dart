@@ -49,8 +49,11 @@ class clase1 extends State<StatesApp> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(top: 50),
-                          child: Text("Bienvenido",
-                              style: TextStyle(fontSize: 40)),
+                          child: Text("NelsonEsMiPadre.exe",
+                              style: TextStyle(
+                                fontSize: 35,
+                                fontFamily: "caps",
+                              )),
                         ),
                         Container(
                           height: 50,
@@ -79,6 +82,7 @@ class clase1 extends State<StatesApp> {
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(10)),
                           child: TextFormField(
+                            obscureText: true,
                             decoration:
                                 InputDecoration(labelText: "Contraseña"),
                             onSaved: (value) {
@@ -128,8 +132,7 @@ class clase1 extends State<StatesApp> {
                                     border: Border.all(color: Colors.grey)),
                                 child: IconButton(
                                   onPressed: (() => setState(() {
-                                        player.play(
-                                            AssetSource("musicaCruzi.mp3"));
+                                        player.play(AssetSource("Theme.mp3"));
                                       })),
                                   icon: Icon(Icons.speaker),
                                   color: Colors.grey,
