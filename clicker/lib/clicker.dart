@@ -1427,7 +1427,7 @@ class StatesAppState extends State<StatesApp> {
                     Container(
                         width: 45,
                         height: 30,
-                        margin: EdgeInsets.only(top: 40, right: 300),
+                        margin: EdgeInsets.only(top: 30, right: 300),
                         decoration: BoxDecoration(color: Colors.white),
                         child: InkWell(
                           child: Image.asset("assets/menu.png"),
@@ -1513,11 +1513,11 @@ class StatesAppState extends State<StatesApp> {
                         )),
 
                     Container(
-                      margin: EdgeInsets.all(20),
+                      margin: EdgeInsets.all(5),
                       alignment: Alignment.topRight,
                       child: Text("Mundo " + contador.toString(),
                           style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 28,
                               color: colorLetras,
                               fontFamily: "caps")),
                     ),
