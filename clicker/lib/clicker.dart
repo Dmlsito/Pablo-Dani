@@ -1660,6 +1660,12 @@ class StatesAppState extends State<StatesApp> {
                             height: 30,
                             margin: EdgeInsets.only(left: 30),
                             child: InkWell(
+                              onTap: (() {
+                                setState(() {
+                                  player.play(
+                                      AssetSource("assets/PasoPagina.mp3"));
+                                });
+                              }),
                               child: OutlinedButton(
                                 child: Text("STATS"),
                                 onPressed: (() {
@@ -1804,6 +1810,7 @@ class StatesAppState extends State<StatesApp> {
                                         margin: EdgeInsets.only(right: 15),
                                         child: InkWell(
                                             onTap: () {
+                                              setState(() {});
                                               showDialog(
                                                   context: context,
                                                   builder:
