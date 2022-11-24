@@ -174,6 +174,9 @@ int mostrarMejora3Maxima = 0;
 bool mejora3V1 = false;
 bool mejora3V2 = false;
 bool mejora3V3 = false;
+bool controladorContador1 = false;
+bool controladorContador2 = false;
+bool controladorContador3 = false;
 
 //Precios de mejora 4
 int precio1Mejora4 = 50;
@@ -657,23 +660,27 @@ class StatesAppState extends State<StatesApp> {
         segundos1 += 1;
 
         setState(() {
-          if (contadorMejora3 == 1) {
+          if (contadorMejora3 == 1 && controladorContador1 == true) {
+            double danoV1 = 5;
             vida = vida - danoDps1;
             monedasJugador = monedasJugador + 5;
-            danoDpsTotal = 5;
+            // danoDpsTotal = 5;
+            mostrarDanoDps = danoV1;
           }
-          if (contadorMejora3 == 2) {
+          if (contadorMejora3 == 2 && controladorContador2 == true) {
+            double danoV2 = 20;
             vida = vida - (danoDps1 * 2);
             monedasJugador = monedasJugador + 10;
-            danoDpsTotal = 10;
+            // danoDpsTotal = 10;
+            mostrarDanoDps = danoV2;
           }
-          if (contadorMejora3 == 3) {
+          if (contadorMejora3 == 3 && controladorContador3 == true) {
+            double danoV3 = 30;
             vida = vida - (danoDps1 * 3);
             monedasJugador = monedasJugador + 15;
-            danoDpsTotal = 15;
+            // danoDpsTotal = 15;
+            mostrarDanoDps = danoV3;
           }
-          //Variable para ayuda
-          mostrarDanoDps = danoDpsTotal;
         });
       });
     }
@@ -1430,7 +1437,7 @@ class StatesAppState extends State<StatesApp> {
                         margin: EdgeInsets.only(top: 30, right: 300),
                         decoration: BoxDecoration(color: Colors.white),
                         child: InkWell(
-                          child: Image.asset("assets/menu.png"),
+                          child: Image.asset("assets/menu1.png"),
                           onTap: () {
                             showDialog(
                                 context: context,
@@ -2282,6 +2289,7 @@ class StatesAppState extends State<StatesApp> {
                                       onTap: () {
                                         if (contadorMejora3 == 0 &&
                                             monedasJugador >= precio1Mejora3) {
+                                          controladorContador1 = true;
                                           mejora3V1 = true;
                                           setState(() {
                                             precioMejoraGlobal3 =
@@ -2296,6 +2304,9 @@ class StatesAppState extends State<StatesApp> {
                                         }
                                         if (contadorMejora3 == 1 &&
                                             monedasJugador >= precio2Mejora3) {
+                                          controladorContador1 = false;
+                                          controladorContador2 = true;
+
                                           mejora3V2 = true;
                                           contadorMejora3++;
                                           dps1(contadorMejora3);
@@ -2311,6 +2322,9 @@ class StatesAppState extends State<StatesApp> {
 
                                         if (contadorMejora3 == 2 &&
                                             monedasJugador >= precio3Mejora3) {
+                                          controladorContador2 = false;
+                                          controladorContador3 = true;
+
                                           mostrarMaximaMejora(context);
                                           mejora3V3 = true;
                                           contadorMejora3++;
