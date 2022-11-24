@@ -1427,7 +1427,7 @@ class StatesAppState extends State<StatesApp> {
                     Container(
                         width: 45,
                         height: 30,
-                        margin: EdgeInsets.only(top: 25, right: 300),
+                        margin: EdgeInsets.only(top: 40, right: 300),
                         decoration: BoxDecoration(color: Colors.white),
                         child: InkWell(
                           child: Image.asset("assets/menu.png"),
@@ -1436,55 +1436,78 @@ class StatesAppState extends State<StatesApp> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                      // contentPadding: EdgeInsets.zero,
-                                      content: Container(
-                                          height: alturaPantalla * 0.6,
-                                          width: anchoPantalla * 0.79,
-                                          decoration: BoxDecoration(
-                                            color: Colors.brown,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                  margin:
-                                                      EdgeInsets.only(top: 20),
-                                                  child: IconButton(
+                                    content: Container(
+                                      height: alturaPantalla * 0.3,
+                                      width: anchoPantalla * 0.79,
+                                      decoration:
+                                          BoxDecoration(color: Colors.brown),
+                                      child: Column(children: [
+                                        Container(
+                                          child: Center(
+                                              child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 60, bottom: 10),
+                                                  child: Text(
+                                                    "Música",
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ))),
+                                        ),
+                                        Container(
+                                            child: Row(
+                                          children: [
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 40),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.white)),
+                                                child: IconButton(
                                                     onPressed: () =>
                                                         setState(() {
-                                                      player.play(AssetSource(
-                                                          "musicaCruzi.mp3"));
-                                                    }),
+                                                          //Comienzo de la musica
+                                                          player.play(
+                                                              AssetSource(
+                                                                  "Theme.mp3"));
+                                                        }),
                                                     icon: Icon(Icons.speaker),
-                                                    color: Colors.white,
-                                                  )),
-                                              Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 20, left: 10),
-                                                  child: Text("Play",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.white))),
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                    top: 20, left: 10),
+                                                    color: Colors.white)),
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(
+                                                  "Play",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.white)),
                                                 child: IconButton(
-                                                  onPressed: (() =>
-                                                      setState(() {
-                                                        player.stop();
-                                                      })),
-                                                  icon: Icon(Icons.speaker),
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 20, left: 10),
-                                                  child: Text("Stop",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.white))),
-                                            ],
-                                          )));
+                                                    onPressed: () =>
+                                                        setState(() {
+                                                          player.stop();
+                                                        }),
+                                                    icon: Icon(Icons
+                                                        .speaker_notes_off),
+                                                    color: Colors.white)),
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(
+                                                  "Stop",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ))
+                                          ],
+                                        )),
+                                      ]),
+                                    ),
+                                    // contentPadding: EdgeInsets.zero,
+                                  );
                                 });
                           },
                         )),
@@ -1493,7 +1516,10 @@ class StatesAppState extends State<StatesApp> {
                       margin: EdgeInsets.all(20),
                       alignment: Alignment.topRight,
                       child: Text("Mundo " + contador.toString(),
-                          style: TextStyle(fontSize: 25, color: Colors.white)),
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: colorLetras,
+                              fontFamily: "caps")),
                     ),
                     //Container que contendra la imagen en posicion aleatoria
                     Container(
@@ -1623,35 +1649,67 @@ class StatesAppState extends State<StatesApp> {
                                                     image: DecorationImage(
                                                         fit: BoxFit.fill,
                                                         image: AssetImage(
-                                                            "assets/Prueba1.gif"))),
-                                                child: Column(
+                                                            listaMundos[
+                                                                indexImagen]))),
+                                                child: Stack(
                                                   children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.black),
-                                                          color: Colors
-                                                              .brown[200]),
-                                                      child: Text(
+                                                    Center(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        margin: EdgeInsets.only(
+                                                          top: 10,
+                                                          bottom: 40,
+                                                        ),
+                                                        width: 300,
+                                                        height: 700,
+                                                        child: Image.asset(
+                                                            "assets/Pergamino.png",
+                                                            fit: BoxFit.cover),
+                                                      ),
+                                                    ),
+                                                    Center(
+                                                        child: Container(
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    bottom:
+                                                                        370),
+                                                            child: Text(
+                                                                "ESTADISTICAS",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        30,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontFamily:
+                                                                        "caps")))),
+                                                    Center(
+                                                      child: Container(
+                                                        width: 200,
+                                                        margin: EdgeInsets.only(
+                                                            bottom: 260),
+                                                        decoration:
+                                                            BoxDecoration(),
+                                                        child: Text(
                                                           "Daño que se inflinge de forma pasiva: " +
                                                               mostrarDanoDps
                                                                   .toString() +
-                                                              " de daño por segundo"),
+                                                              " de daño por segundo",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontFamily:
+                                                                  "caps"),
+                                                        ),
+                                                      ),
                                                     ),
                                                     Container(
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.black),
-                                                          color: Colors
-                                                              .brown[200]),
+                                                      decoration:
+                                                          BoxDecoration(),
                                                     ),
                                                   ],
                                                 ),
@@ -1761,8 +1819,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -1785,7 +1845,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Espada",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -1854,7 +1915,7 @@ class StatesAppState extends State<StatesApp> {
                                     child: Row(children: [
                                       Container(
                                           margin: EdgeInsets.only(left: 4),
-                                          child: Text("Espada1",
+                                          child: Text("Espada",
                                               style: TextStyle(
                                                   color: Colors.yellowAccent))),
                                       //Container en el que aparecera el precio de la mejora
@@ -1953,8 +2014,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -1978,7 +2041,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Arco",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -2142,8 +2206,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -2167,7 +2233,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Sangrado",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -2385,8 +2452,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -2409,7 +2478,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Katon",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -2572,8 +2642,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -2597,7 +2669,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Random",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -2665,7 +2738,8 @@ class StatesAppState extends State<StatesApp> {
                                           margin: EdgeInsets.only(left: 2),
                                           child: Text("Random",
                                               style: TextStyle(
-                                                  color: Colors.yellowAccent))),
+                                                  color: Colors.yellowAccent,
+                                                  fontFamily: "caps"))),
                                       //Container en el que aparecera el precio de la mejora
                                       Container(
                                           margin: EdgeInsets.only(left: 10),
@@ -2761,8 +2835,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -2785,7 +2861,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Parca",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -2948,8 +3025,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -2973,7 +3052,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Bomba",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -3136,8 +3216,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -3161,7 +3243,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Bufo",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -3297,8 +3380,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                fontFamily: "caps",
+                                                                                color: Colors.white))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -3321,7 +3406,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Tormenta",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
@@ -3484,8 +3570,10 @@ class StatesAppState extends State<StatesApp> {
                                                                             180,
                                                                         child: Text(
                                                                             "Ganas más daño por cada golpe que efectuas contra el enemigo.\nExisten 3 niveles de mejora que se pueden comprar.",
-                                                                            style:
-                                                                                TextStyle(fontSize: 18, color: Colors.white))),
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                color: Colors.white,
+                                                                                fontFamily: "caps"))),
                                                                   ),
                                                                   Center(
                                                                     child: Container(
@@ -3509,7 +3597,8 @@ class StatesAppState extends State<StatesApp> {
                                                                           "Veneno",
                                                                           style: TextStyle(
                                                                               fontSize: 40,
-                                                                              color: Colors.white)))
+                                                                              color: Colors.white,
+                                                                              fontFamily: "caps")))
                                                                 ]),
                                                           ),
                                                         ],
