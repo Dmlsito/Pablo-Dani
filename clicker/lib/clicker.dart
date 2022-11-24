@@ -22,7 +22,7 @@ class ClickerMain extends StatelessWidget {
 List<monstruo> listaMonstruos = [
   monstruo(
       nombre: "Pablo",
-      vida: 300000.00,
+      vida: 3000.00,
       imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
@@ -115,6 +115,7 @@ Timer? timer2;
 Timer? timer1;
 Timer? timer3;
 Timer? timer4;
+Timer? timer5;
 // Variables para dps
 double danoDps1 = 5;
 
@@ -179,6 +180,7 @@ bool controladorContador2 = false;
 bool controladorContador3 = false;
 
 //Precios de mejora 4
+double danoFuego = 0;
 int precio1Mejora4 = 50;
 int precio2Mejora4 = 100;
 int precio3Mejora4 = 300;
@@ -189,6 +191,15 @@ int mostrarMejora4Maxima = 0;
 bool mejora4V1 = false;
 bool mejora4V2 = false;
 bool mejora4V3 = false;
+
+//Ataque de bola de fuego Lvl 1
+double bolaFuegoV1 = 1000;
+//Ataque de bola de fuego Lvl 2
+double bolaFuegoV2 = 2000;
+//Ataque de bola de fuego Lvl 3
+double bolaFuegoV3 = 3000;
+//Ataque bola de fuego lvl final
+double bolaFuegoVFinal = 10000;
 
 //Precios y variables para controlar la posicion aleaotoria de las imagenes de la mejora5
 double rngLeft = 0;
@@ -254,6 +265,8 @@ bool lluviaHeladaV1 = true;
 bool lluviaHeladaV2 = true;
 bool lluviaHeladaV3 = true;
 int duracionTormenta = 0;
+int tiempoTormenta = 30;
+int tiempoAmostrar = 0;
 
 //Variables de mejora10
 int contadorMejora10 = 0;
@@ -265,6 +278,7 @@ int precio2Mejora10 = 100;
 int precio3Mejora10 = 150;
 int precioMejoraGlobal10 = 50;
 int contadorTiempoVeneno = 0;
+int veneno = 0;
 
 // Variable para comparar con la vidaMax de un monstruo e
 // ir actualizando la barra de vida
@@ -689,13 +703,14 @@ class StatesAppState extends State<StatesApp> {
     void mejora4() {
       if (contadorMejora4 == 0 && monedasJugador >= precio1Mejora4) {
         mejora4V1 = true;
+        //Seteamos el daño de la bola de fuego
+        danoFuego = bolaFuegoV1;
 
         //Actualizamos el precio
         precioMejoraGlobal4 = precio2Mejora4;
-        //Ataque de bola de fuego Lvl 1
-        double bolaFuegoV1 = 1000;
+
         setState(() {
-          vida = vida - bolaFuegoV1;
+          vida = vida - danoFuego;
           player.play(AssetSource("SonidoBolaFuego.mp3"));
           //Restamos monedas jugador
           monedasJugador = monedasJugador - precio1Mejora4;
@@ -706,12 +721,12 @@ class StatesAppState extends State<StatesApp> {
       }
       if (contadorMejora4 == 1 && monedasJugador >= precio2Mejora4) {
         mejora4V2 = true;
+        danoFuego = bolaFuegoV2;
 
         precioMejoraGlobal4 = precio3Mejora4;
-        //Ataque de bola de fuego Lvl 2
-        double bolaFuegoV2 = 2000;
+
         setState(() {
-          vida = vida - bolaFuegoV2;
+          vida = vida - danoFuego;
           player.play(AssetSource("SonidoBolaFuego.mp3"));
           monedasJugador = monedasJugador - precio2Mejora4;
         });
@@ -719,12 +734,12 @@ class StatesAppState extends State<StatesApp> {
         mostrarMejoraComprada(context);
       }
       if (contadorMejora4 == 2 && monedasJugador >= precio3Mejora4) {
+        danoFuego = bolaFuegoV3;
         mejora4V3 = true;
-        //Ataque de bola de fuego Lvl 1
-        double bolaFuegoV3 = 3000;
+
         precioMejoraGlobal4 = precio4Mejora4;
         setState(() {
-          vida = vida - bolaFuegoV3;
+          vida = vida - danoFuego;
           player.play(AssetSource("SonidoBolaFuego.mp3"));
           monedasJugador = monedasJugador - precio3Mejora4;
         });
@@ -753,10 +768,9 @@ class StatesAppState extends State<StatesApp> {
         });
       }
       if (bolaFuegoActivada == true && monedasJugador > precio4Mejora4) {
-        //Ataque bola de fuego lvl final
-        double bolaFuegoVFinal = 10000;
+        danoFuego = bolaFuegoVFinal;
         setState(() {
-          vida = vida - bolaFuegoVFinal;
+          vida = vida - danoFuego;
           monedasJugador = monedasJugador - precio4Mejora4;
           player.play(AssetSource("SonidoBolaFuego.mp3"));
         });
@@ -969,7 +983,9 @@ class StatesAppState extends State<StatesApp> {
 
     void mejora9() {
       if (contadorMejora9 == 0 && monedasJugador > precio1Mejora9) {
+        duracionTormenta = 30;
         mejora9V1 = true;
+
         setState(() {
           //Actualizamos el precio de la mejora
           precioMejoraGlobal9 = precio2Mejora9;
@@ -981,17 +997,16 @@ class StatesAppState extends State<StatesApp> {
         escarchaON(context);
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV1 == true) {
-            //Empiza la tormenta
-            duracionTormenta++;
-
             setState(() {
+              //Empiza la tormenta
+              duracionTormenta = duracionTormenta - 1;
               //Le restamos el daño que hara por segundo la lluvia helada
               vida = vida - danoHielo;
             });
             //El tiempo de duracion de la tormenta sera de treinte segundos
-            if (duracionTormenta == 30) {
+            if (duracionTormenta == 0) {
               //Indicamos que el contador de la tormenta se reinicie
-              duracionTormenta = 0;
+              duracionTormenta = 30;
               //Indicamos que la lluvia helada ha parado
               lluviaHeladaV1 = false;
               escarchaOF(context);
@@ -1000,6 +1015,7 @@ class StatesAppState extends State<StatesApp> {
         });
       }
       if (contadorMejora9 == 1 && monedasJugador > precio2Mejora9) {
+        duracionTormenta = 60;
         mejora9V2 = true;
         mostrarMejoraComprada(context);
         setState(() {
@@ -1011,15 +1027,13 @@ class StatesAppState extends State<StatesApp> {
         escarchaON(context);
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV2 == true) {
-            //Empiza la tormenta
-            duracionTormenta++;
-
             setState(() {
+              duracionTormenta--;
               vida = vida - danoHielo;
             });
             //La duracion de la tormenta sera de sesenta segundos
-            if (duracionTormenta == 60) {
-              duracionTormenta = 0;
+            if (duracionTormenta == 0) {
+              duracionTormenta = 60;
               lluviaHeladaV2 = false;
               escarchaOF(context);
             }
@@ -1027,6 +1041,7 @@ class StatesAppState extends State<StatesApp> {
         });
       }
       if (contadorMejora9 == 2 && monedasJugador > precio3Mejora9) {
+        duracionTormenta = 90;
         mejora9V3 = true;
         mostrarMejoraComprada(context);
         mostrarMaximaMejora(context);
@@ -1038,16 +1053,17 @@ class StatesAppState extends State<StatesApp> {
         escarchaON(context);
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV3 == true) {
-            duracionTormenta++;
+            duracionTormenta--;
 
             setState(() {
+              duracionTormenta--;
               vida = vida - danoHielo;
             });
             // La duracion de la tormenta sera de un minuto y medio
-            if (duracionTormenta == 90) {
+            if (duracionTormenta == 0) {
               lluviaHeladaV3 = false;
 
-              duracionTormenta = 0;
+              duracionTormenta = 90;
               escarchaOF(context);
             }
           }
@@ -1063,9 +1079,10 @@ class StatesAppState extends State<StatesApp> {
         escarchaON(context);
         timer3 = Timer.periodic(Duration(seconds: 1), (timer) {
           if (lluviaHeladaV3 == true) {
-            duracionTormenta++;
+            duracionTormenta--;
 
             setState(() {
+              duracionTormenta--;
               vida = vida - danoHielo;
             });
             //La duracion de la tormenta sera de 90 segundos
@@ -1083,6 +1100,7 @@ class StatesAppState extends State<StatesApp> {
 
     void mejora10() {
       if (contadorMejora10 == 0 && monedasJugador > precio1Mejora10) {
+        veneno = 100;
         //Seteamos el indicador de mejora a true
         mejora10V1 = true;
         //Mostramos un snackBar que nos diga que la mejora esta comprada
@@ -1106,11 +1124,12 @@ class StatesAppState extends State<StatesApp> {
           contadorTiempoVeneno++;
           setState(() {
             //El valor que le estamos restando a la vida sera el el daño veneno es decir el daño dps por segundo
-            vida = vida - 100;
+            vida = vida - veneno;
           });
         });
       }
       if (contadorMejora10 == 1 && monedasJugador > precio2Mejora10) {
+        veneno = 200;
         mejora10V2 = true;
         mostrarMejoraComprada(context);
         venenoV2(context);
@@ -1124,11 +1143,12 @@ class StatesAppState extends State<StatesApp> {
         timer4 = Timer.periodic(Duration(seconds: 1), (timer) {
           contadorTiempoVeneno++;
           setState(() {
-            vida = vida - 200;
+            vida = vida - veneno;
           });
         });
       }
       if (contadorMejora10 == 2 && monedasJugador > precio3Mejora10) {
+        veneno = 300;
         mejora10V3 = true;
         mostrarMejoraComprada(context);
         mostrarMaximaMejora(context);
@@ -1142,16 +1162,17 @@ class StatesAppState extends State<StatesApp> {
           contadorTiempoVeneno++;
           setState(() {
             player.play(AssetSource("Veneno.mp3"));
-            vida = vida - 300;
+            vida = vida - veneno;
           });
         });
       }
 
       if (contadorMejora10 > 2 && mejora8Utilizada == false) {
+        veneno = 500;
         setState(() {
           player.play(AssetSource("SonidoBufo.mp3"));
           monedasJugador = monedasJugador;
-          vida = vida - 500;
+          vida = vida - veneno;
         });
         bufoVeneno(context);
       }
@@ -1689,7 +1710,7 @@ class StatesAppState extends State<StatesApp> {
                                                                 "ESTADISTICAS",
                                                                 style: TextStyle(
                                                                     fontSize:
-                                                                        30,
+                                                                        35,
                                                                     color: Colors
                                                                         .white,
                                                                     fontFamily:
@@ -1698,14 +1719,29 @@ class StatesAppState extends State<StatesApp> {
                                                       child: Container(
                                                         width: 200,
                                                         margin: EdgeInsets.only(
-                                                            bottom: 260),
+                                                            bottom: 170),
                                                         decoration:
                                                             BoxDecoration(),
                                                         child: Text(
-                                                          "Daño que se inflinge de forma pasiva: " +
+                                                          "Daño golpeSencillo: " +
+                                                              golpeSencillo
+                                                                  .toString() +
+                                                              "\n \n"
+                                                                  "Daño sangrado: " +
                                                               mostrarDanoDps
                                                                   .toString() +
-                                                              " de daño por segundo",
+                                                              "\n \n"
+                                                                  "Daño de katon: " +
+                                                              danoFuego
+                                                                  .toString() +
+                                                              "\n \n"
+                                                                  "Duracion tormenta: " +
+                                                              duracionTormenta
+                                                                  .toString() +
+                                                              "s" +
+                                                              "\n \n"
+                                                                  "Daño veneno/s: " +
+                                                              veneno.toString(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -1714,10 +1750,16 @@ class StatesAppState extends State<StatesApp> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Container(
+                                                    Center(
+                                                        child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 200),
+                                                      height: 200,
+                                                      child: Image.asset(
+                                                          "assets/Casco.png"),
                                                       decoration:
                                                           BoxDecoration(),
-                                                    ),
+                                                    )),
                                                   ],
                                                 ),
                                               )
