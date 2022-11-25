@@ -27,19 +27,19 @@ List<monstruo> listaMonstruos = [
       identificador: 1),
   monstruo(
     nombre: "Daniel",
-    vida: 600000,
+    vida: 6000.00,
     imagenRuta: "assets/caballeroBebiendo.gif",
     identificador: 2,
   ),
   monstruo(
     nombre: "Nelson",
-    vida: 1200,
+    vida: 2000.00,
     imagenRuta: "assets/caballeroAnimado2.gif",
     identificador: 3,
   ),
   monstruo(
     nombre: "Laura",
-    vida: 24000,
+    vida: 240000.00,
     imagenRuta: "assets/dinosaurioBailando.gif",
     identificador: 4,
   ),
@@ -365,10 +365,10 @@ class StatesAppState extends State<StatesApp> {
           if (contador >= 3 && contador <= 6) {
             indexImagen = 1;
           }
-          if (contador >= 6 && contador >= 9) {
+          if (contador >= 6 && contador <= 9) {
             indexImagen = 2;
           }
-          if (contador >= 10 && contador <= 13) {
+          if (contador >= 9 && contador <= 13) {
             indexImagen = 3;
           }
         }
