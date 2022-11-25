@@ -51,7 +51,7 @@ class clase1 extends State<StatesApp> {
                           margin: EdgeInsets.only(top: 50),
                           child: Text("NelsonEsMiPadre.exe",
                               style: TextStyle(
-                                fontSize: 35,
+                                fontSize: 33,
                                 fontFamily: "caps",
                               )),
                         ),

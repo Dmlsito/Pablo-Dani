@@ -21,36 +21,36 @@ class ClickerMain extends StatelessWidget {
 
 List<monstruo> listaMonstruos = [
   monstruo(
-      nombre: "Pablo",
-      vida: 3000.00,
+      nombre: "Morgoth",
+      vida: 30000.00,
       imagenRuta: "assets/caballeroAnimado.gif",
       identificador: 1),
   monstruo(
-    nombre: "Daniel",
-    vida: 6000.00,
+    nombre: "Atreus",
+    vida: 60000.00,
     imagenRuta: "assets/caballeroBebiendo.gif",
     identificador: 2,
   ),
   monstruo(
-    nombre: "Nelson",
-    vida: 2000.00,
+    nombre: "Inivir",
+    vida: 80000.00,
     imagenRuta: "assets/caballeroAnimado2.gif",
     identificador: 3,
   ),
   monstruo(
-    nombre: "Laura",
+    nombre: "Bailongo",
     vida: 240000.00,
     imagenRuta: "assets/dinosaurioBailando.gif",
     identificador: 4,
   ),
   monstruo(
-    nombre: "Hugo",
+    nombre: "Draconiano",
     vida: 16000,
     imagenRuta: "assets/dragon3.gif",
     identificador: 5,
   ),
   monstruo(
-    nombre: "Adrian",
+    nombre: "Balrock",
     vida: 1000,
     imagenRuta: "assets/dragonNegro.gif",
     identificador: 6,
@@ -70,7 +70,7 @@ List<monstruo> listaMonstruos = [
   monstruo(
     nombre: "Suso",
     vida: 2560,
-    imagenRuta: "assets/monstruo3Mundo3.png",
+    imagenRuta: "assets/animado2.gif",
     identificador: 9,
   ),
   monstruo(
@@ -239,7 +239,7 @@ int bombas = 0;
 int cantidadBombasV1 = 3;
 int cantidadBombasV2 = 6;
 int cantidadBombasV3 = 9;
-int danoBomba = 200;
+int danoBomba = 400;
 
 //Variables de mejora 8
 int contadorMejora8 = 0;
@@ -756,7 +756,6 @@ class StatesAppState extends State<StatesApp> {
           if (poderUsarBolaFuego == true) {
             segundos2++;
           }
-          
 
           if (segundos2 == 60) {
             bolaDeFuegoActivada(context);
@@ -1952,7 +1951,6 @@ class StatesAppState extends State<StatesApp> {
                                     child: InkWell(
                                       onTap: () {
                                         mejora1();
-                                        
                                       },
                                     ),
                                     decoration: BoxDecoration(
