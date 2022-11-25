@@ -756,7 +756,7 @@ class StatesAppState extends State<StatesApp> {
           if (poderUsarBolaFuego == true) {
             segundos2++;
           }
-          print(segundos2);
+          
 
           if (segundos2 == 60) {
             bolaDeFuegoActivada(context);
@@ -1952,7 +1952,7 @@ class StatesAppState extends State<StatesApp> {
                                     child: InkWell(
                                       onTap: () {
                                         mejora1();
-                                        print(valorMejora);
+                                        
                                       },
                                     ),
                                     decoration: BoxDecoration(
