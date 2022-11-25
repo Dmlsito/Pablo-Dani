@@ -45,49 +45,49 @@ List<monstruo> listaMonstruos = [
   ),
   monstruo(
     nombre: "Draconiano",
-    vida: 16000,
+    vida: 300000.00,
     imagenRuta: "assets/dragon3.gif",
     identificador: 5,
   ),
   monstruo(
     nombre: "Balrock",
-    vida: 1000,
+    vida: 50000.00,
     imagenRuta: "assets/dragonNegro.gif",
     identificador: 6,
   ),
   monstruo(
     nombre: "Oscar",
-    vida: 640,
+    vida: 750000.00,
     imagenRuta: "assets/animado3Mundo1.gif",
     identificador: 7,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 1280,
+    vida: 800000.00,
     imagenRuta: "assets/bichoraro.gif",
     identificador: 8,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 2560,
+    vida: 900000.00,
     imagenRuta: "assets/animado2.gif",
     identificador: 9,
   ),
   monstruo(
     nombre: "Oscar",
-    vida: 640,
+    vida: 1000000.00,
     imagenRuta: "assets/kakashi.gif",
     identificador: 10,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 1280,
+    vida: 1200000.00,
     imagenRuta: "assets/itachi.gif",
     identificador: 11,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 2560,
+    vida: 200000.00,
     imagenRuta: "assets/naruto.gif",
     identificador: 12,
   ),
@@ -203,7 +203,7 @@ double bolaFuegoVFinal = 10000;
 
 //Precios y variables para controlar la posicion aleaotoria de las imagenes de la mejora5
 double rngLeft = 0;
-
+double rngTop = 0;
 int contadorMejora5 = 0;
 int precioMejoraGlobal5 = 100;
 int precio1Mejora5 = 100;
@@ -612,7 +612,6 @@ class StatesAppState extends State<StatesApp> {
       //Bufo extra
       if (contadorMejora1 > 2 && mejora8Utilizada == false) {
         setState(() {
-          monedasJugador = monedasJugador - precio3Mejora1;
           player.play(AssetSource("SonidoBufo.mp3"));
         });
         //Indicamos que el bufo ya se ha utilizado
@@ -786,9 +785,11 @@ class StatesAppState extends State<StatesApp> {
     String mejora5() {
       //Variable random que se asignara al valor de separacion con el borde izquierdo
       Random randomLeft = Random();
+      Random randomTop = Random();
 
       //Valores de entre 1.00 y 99.00
-      rngLeft = randomLeft.nextDouble() * 100;
+      rngLeft = randomLeft.nextDouble() * 200;
+      rngTop = randomTop.nextDouble() * 300;
 
       if (contadorMejora5 == 0 && monedasJugador >= precio1Mejora5) {
         setState(() {
@@ -1449,13 +1450,15 @@ class StatesAppState extends State<StatesApp> {
                     fit: BoxFit.cover)),
             child: Scaffold(
               backgroundColor: Colors.transparent,
-              body: Center(
-                child: Column(
+              body: Column(children: [
+                Stack(
                   children: [
                     Container(
                         width: 45,
                         height: 30,
-                        margin: EdgeInsets.only(top: 30, right: 300),
+                        margin: EdgeInsets.only(
+                            top: alturaPantalla * 0.07,
+                            left: anchoPantalla * 0.05),
                         decoration: BoxDecoration(color: Colors.white),
                         child: InkWell(
                           child: Image.asset("assets/menu1.png"),
@@ -1517,7 +1520,7 @@ class StatesAppState extends State<StatesApp> {
                                                 child: IconButton(
                                                     onPressed: () =>
                                                         setState(() {
-                                                          player.stop();
+                                                          player2.stop();
                                                         }),
                                                     icon: Icon(Icons
                                                         .speaker_notes_off),
@@ -1541,11 +1544,13 @@ class StatesAppState extends State<StatesApp> {
                         )),
 
                     Container(
-                      margin: EdgeInsets.all(5),
+                      margin: EdgeInsets.only(
+                          top: alturaPantalla * 0.1,
+                          right: anchoPantalla * 0.05),
                       alignment: Alignment.topRight,
                       child: Text("Mundo " + contador.toString(),
                           style: TextStyle(
-                              fontSize: 28,
+                              fontSize: 35,
                               color: colorLetras,
                               fontFamily: "caps")),
                     ),
@@ -1554,29 +1559,33 @@ class StatesAppState extends State<StatesApp> {
                       child: Row(children: [
                         Container(
                             //Valores de margen aleatorios, MENOS EL TOP Y EL BOTTOM
-                            margin: EdgeInsets.only(right: 5, left: rngLeft),
+                            margin: EdgeInsets.only(top: rngTop, left: rngLeft),
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(imagenAleatoria))),
-                            height: 32,
-                            width: 50,
-                            child: InkWell(onTap: () {
-                              setState(() {
-                                player.play(
-                                    AssetSource("SonidoImagenEncontrada.mp3"));
-                                monedasJugador =
-                                    monedasJugador + monedasGanadasPorImagen;
-                              });
-                              //Una vez se haya clickado en la imagen esta desaparecera
-                              imagenAleatoria = "";
-                            })),
+                            child: Container(
+                                width: 50,
+                                height: 32,
+                                child: InkWell(onTap: () {
+                                  setState(() {
+                                    player.play(AssetSource(
+                                        "SonidoImagenEncontrada.mp3"));
+                                    monedasJugador = monedasJugador +
+                                        monedasGanadasPorImagen;
+                                  });
+                                  //Una vez se haya clickado en la imagen esta desaparecera
+                                  imagenAleatoria = "";
+                                }))),
                       ]),
                     ),
 
                     //Container con el nombre de usuario y mosntruo
 
                     Container(
-                        margin: EdgeInsets.only(bottom: 0),
+                        margin: EdgeInsets.only(
+                          top: alturaPantalla * 0.23,
+                          left: anchoPantalla * 0.15,
+                        ),
                         height: 27,
                         child: Text(
                             usuario.nombre.toString() +
@@ -1589,7 +1598,9 @@ class StatesAppState extends State<StatesApp> {
 
                     //Container with monster´s image
                     Container(
-                      margin: EdgeInsets.only(top: 0),
+                      margin: EdgeInsets.only(
+                          top: alturaPantalla * 0.25,
+                          left: anchoPantalla * 0.03),
                       child: Column(children: [
                         InkWell(
                           onTap: () {
@@ -1613,6 +1624,9 @@ class StatesAppState extends State<StatesApp> {
                     ),
                     //Container with life bar
                     Container(
+                      margin: EdgeInsets.only(
+                          top: alturaPantalla * 0.6,
+                          left: anchoPantalla * 0.14),
                       width: 300,
                       height: 20,
                       child: LinearProgressIndicator(
@@ -1627,7 +1641,8 @@ class StatesAppState extends State<StatesApp> {
                     //Container with coins and amount
                     Container(
                         decoration: BoxDecoration(),
-                        margin: EdgeInsets.only(top: 13, left: 10),
+                        margin: EdgeInsets.only(
+                            top: alturaPantalla * 0.65, left: 20),
                         child: Row(children: [
                           Container(
                             padding: EdgeInsets.only(right: 10),
@@ -1788,7 +1803,7 @@ class StatesAppState extends State<StatesApp> {
                               image: AssetImage("assets/fondoScroll.jpg"),
                               fit: BoxFit.cover),
                           border: Border.all(color: Colors.yellowAccent)),
-                      margin: EdgeInsets.symmetric(vertical: 20.0),
+                      margin: EdgeInsets.only(top: alturaPantalla * 0.72),
                       height: 220.0,
                       child: ListView(
                         // This next line does the trick.
@@ -3749,7 +3764,7 @@ class StatesAppState extends State<StatesApp> {
                     ),
                   ],
                 ),
-              ),
+              ]),
             )));
   }
 }
