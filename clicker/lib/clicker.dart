@@ -1,4 +1,4 @@
-//ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last, avoid_print
+//ignore_for_file: unnecessary_import, use_key_in_widget_constructors, override_on_non_overriding_member, avoid_unnecessary_containers, prefer_const_constructors, prefer_interpolation_to_compose_strings, duplicate_ignore, prefer_const_literals_to_create_immutables, sort_child_properties_last, avoid_print, unused_local_variable
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'monstruo.dart';
 import 'dart:math';
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:async/async.dart';
 
 class ClickerMain extends StatelessWidget {
   @override
@@ -27,67 +28,67 @@ List<monstruo> listaMonstruos = [
       identificador: 1),
   monstruo(
     nombre: "Atreus",
-    vida: 60000.00,
+    vida: 600.00,
     imagenRuta: "assets/caballeroBebiendo.gif",
     identificador: 2,
   ),
   monstruo(
     nombre: "Inivir",
-    vida: 80000.00,
+    vida: 800.00,
     imagenRuta: "assets/caballeroAnimado2.gif",
     identificador: 3,
   ),
   monstruo(
     nombre: "Bailongo",
-    vida: 240000.00,
+    vida: 240.00,
     imagenRuta: "assets/dinosaurioBailando.gif",
     identificador: 4,
   ),
   monstruo(
     nombre: "Draconiano",
-    vida: 300000.00,
+    vida: 3000.00,
     imagenRuta: "assets/dragon3.gif",
     identificador: 5,
   ),
   monstruo(
     nombre: "Balrock",
-    vida: 50000.00,
+    vida: 500.00,
     imagenRuta: "assets/dragonNegro.gif",
     identificador: 6,
   ),
   monstruo(
     nombre: "Oscar",
-    vida: 750000.00,
-    imagenRuta: "assets/animado3Mundo1.gif",
+    vida: 750.00,
+    imagenRuta: "assets/animado3mundo1.gif",
     identificador: 7,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 800000.00,
+    vida: 800.00,
     imagenRuta: "assets/bichoraro.gif",
     identificador: 8,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 900000.00,
+    vida: 900.00,
     imagenRuta: "assets/animado2.gif",
     identificador: 9,
   ),
   monstruo(
     nombre: "Oscar",
-    vida: 1000000.00,
+    vida: 300.00,
     imagenRuta: "assets/kakashi.gif",
     identificador: 10,
   ),
   monstruo(
     nombre: "Alfonso",
-    vida: 1200000.00,
+    vida: 1200.00,
     imagenRuta: "assets/itachi.gif",
     identificador: 11,
   ),
   monstruo(
     nombre: "Suso",
-    vida: 200000.00,
+    vida: 200.00,
     imagenRuta: "assets/naruto.gif",
     identificador: 12,
   ),
@@ -109,6 +110,9 @@ double vida = listaMonstruos[contador].vida;
 String colorPrueba = "0xffF856DF";
 Color colorLetras = Color(0xff660000);
 
+//Cosas que hay que reiniciar
+//Variables del timer, contadorDelMonstruo, indexImagen, monedasJugador, golpeSencillo, monedasRecibidas, dañoPorDps,
+//Booleanos indicadorMejora, todos los precios, numeroBombas, controladoresDeMierdaMejora3,
 //Timers
 
 Timer? timer2;
@@ -153,6 +157,7 @@ int mostrarMejora1Maxima = 0;
 bool mejora1V1 = false;
 bool mejora1V2 = false;
 bool mejora1V3 = false;
+bool mejora1Comprada = false;
 
 //Precios de mejora2
 int precio1Mejora2 = 200;
@@ -579,8 +584,8 @@ class StatesAppState extends State<StatesApp> {
           monedasJugador = monedasJugador - precio1Mejora1;
           //Sonido de la mejora
           player.play(AssetSource("SonidoEspada.mp3"));
+          mejora1V1 = true;
         });
-        mejora1V1 = true;
 
         mostrarMejoraComprada(context);
         golpeSencillo = golpeSencillo * 2;
@@ -1087,8 +1092,8 @@ class StatesAppState extends State<StatesApp> {
               vida = vida - danoHielo;
             });
             //La duracion de la tormenta sera de 90 segundos
-            if (duracionTormenta == 90) {
-              duracionTormenta = 0;
+            if (duracionTormenta == 0) {
+              duracionTormenta = 90;
               lluviaHeladaV3 = false;
               escarchaOF(context);
             }
@@ -1237,7 +1242,7 @@ class StatesAppState extends State<StatesApp> {
           v = v - 0.9;
         }
         if (vida == 0) {
-          v = 0;
+          v = 0.0;
         }
       });
 
@@ -1442,6 +1447,79 @@ class StatesAppState extends State<StatesApp> {
       return transparent;
     }
 
+    reinicio() {
+      setState(() {
+        contador = 0;
+        indexImagen = 0;
+        monedasJugador = 0;
+        monedasRecibidas = 5;
+        golpeSencillo = 100;
+        vida = listaMonstruos[contador].vida;
+        rutaMonstruo = listaMonstruos[contador].imagenRuta;
+        v = 1;
+        bombas = 0;
+        contadorMejora1 = 0;
+        contadorMejora2 = 0;
+        contadorMejora3 = 0;
+        contadorMejora4 = 0;
+        contadorMejora5 = 0;
+        contadorMejora6 = 0;
+        contadorMejora7 = 0;
+        contadorMejora8 = 0;
+        contadorMejora9 = 0;
+        contadorMejora10 = 0;
+
+        precioMejoraGlobal1 = precio1Mejora1;
+        precioMejoraGlobal2 = precio1Mejora2;
+        precioMejoraGlobal3 = precio1Mejora3;
+        precioMejoraGlobal4 = precio1Mejora4;
+        precioMejoraGlobal5 = precio1Mejora5;
+        precioMejoraGlobal6 = precio1Mejora6;
+        precioMejoraGlobal7 = precio1Mejora7;
+        precioMejoraGlobal8 = precio1Mejora8;
+        precioMejoraGlobal9 = precio1Mejora9;
+        precioMejoraGlobal10 = precio1Mejora10;
+
+        controladorContador1 = false;
+        controladorContador2 = false;
+        controladorContador3 = false;
+        mejora8Utilizada = true;
+
+        mejora1V1 = false;
+        mejora1V2 = false;
+        mejora1V3 = false;
+        mejora2V1 = false;
+        mejora2V2 = false;
+        mejora2V3 = false;
+        mejora3V1 = false;
+        mejora3V2 = false;
+        mejora3V3 = false;
+        mejora4V1 = false;
+        mejora4V2 = false;
+        mejora4V3 = false;
+        mejora5V1 = false;
+        mejora5V2 = false;
+        mejora5V3 = false;
+        mejora6V1 = false;
+        mejora6V2 = false;
+        mejora6V3 = false;
+        mejora7V1 = false;
+        mejora7V2 = false;
+        mejora7V3 = false;
+        mejora9V1 = false;
+        mejora9V2 = false;
+        mejora9V3 = false;
+        mejora10V1 = false;
+        mejora10V2 = false;
+        mejora10V3 = false;
+        lluviaHeladaV1 = false;
+        lluviaHeladaV2 = false;
+        lluviaHeladaV3 = false;
+        veneno = 0;
+      });
+      Navigator.of(context).pushNamed("/Login");
+    }
+
     return MaterialApp(
         home: Container(
             decoration: BoxDecoration(
@@ -1548,7 +1626,7 @@ class StatesAppState extends State<StatesApp> {
                           top: alturaPantalla * 0.1,
                           right: anchoPantalla * 0.05),
                       alignment: Alignment.topRight,
-                      child: Text("Mundo " + contador.toString(),
+                      child: Text("Mundo " + indexImagen.toString(),
                           style: TextStyle(
                               fontSize: 35,
                               color: colorLetras,
@@ -1684,110 +1762,112 @@ class StatesAppState extends State<StatesApp> {
                               child: OutlinedButton(
                                 child: Text("STATS"),
                                 onPressed: (() {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          contentPadding: EdgeInsets.zero,
-                                          content: Row(
-                                            children: [
-                                              Container(
-                                                height: alturaPantalla * 0.6,
-                                                width: anchoPantalla * 0.79,
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        fit: BoxFit.fill,
-                                                        image: AssetImage(
-                                                            listaMundos[
-                                                                indexImagen]))),
-                                                child: Stack(
-                                                  children: [
-                                                    Center(
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(),
-                                                        padding:
-                                                            EdgeInsets.all(5),
-                                                        margin: EdgeInsets.only(
-                                                          top: 10,
-                                                          bottom: 40,
-                                                        ),
-                                                        width: 300,
-                                                        height: 700,
-                                                        child: Image.asset(
-                                                            "assets/Pergamino.png",
-                                                            fit: BoxFit.cover),
-                                                      ),
-                                                    ),
-                                                    Center(
-                                                        child: Container(
-                                                            decoration:
-                                                                BoxDecoration(),
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        370),
-                                                            child: Text(
-                                                                "ESTADISTICAS",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        35,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontFamily:
-                                                                        "caps")))),
-                                                    Center(
-                                                      child: Container(
-                                                        width: 200,
-                                                        margin: EdgeInsets.only(
-                                                            bottom: 170),
-                                                        decoration:
-                                                            BoxDecoration(),
-                                                        child: Text(
-                                                          "Daño golpeSencillo: " +
-                                                              golpeSencillo
-                                                                  .toString() +
-                                                              "\n \n"
-                                                                  "Daño sangrado: " +
-                                                              mostrarDanoDps
-                                                                  .toString() +
-                                                              "\n \n"
-                                                                  "Daño de katon: " +
-                                                              danoFuego
-                                                                  .toString() +
-                                                              "\n \n"
-                                                                  "Duracion tormenta: " +
-                                                              duracionTormenta
-                                                                  .toString() +
-                                                              "s" +
-                                                              "\n \n"
-                                                                  "Daño veneno/s: " +
-                                                              veneno.toString(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontFamily:
-                                                                  "caps"),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Center(
-                                                        child: Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 200),
-                                                      height: 200,
-                                                      child: Image.asset(
-                                                          "assets/Casco.png"),
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                    )),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      });
+                                  print(mejora1V1);
+                                  reinicio();
+                                  // showDialog(
+                                  //     context: context,
+                                  //     builder: (BuildContext context) {
+                                  //       return AlertDialog(
+                                  //         contentPadding: EdgeInsets.zero,
+                                  //         content: Row(
+                                  //           children: [
+                                  //             Container(
+                                  //               height: alturaPantalla * 0.6,
+                                  //               width: anchoPantalla * 0.79,
+                                  //               decoration: BoxDecoration(
+                                  //                   image: DecorationImage(
+                                  //                       fit: BoxFit.fill,
+                                  //                       image: AssetImage(
+                                  //                           listaMundos[
+                                  //                               indexImagen]))),
+                                  //               child: Stack(
+                                  //                 children: [
+                                  //                   Center(
+                                  //                     child: Container(
+                                  //                       decoration:
+                                  //                           BoxDecoration(),
+                                  //                       padding:
+                                  //                           EdgeInsets.all(5),
+                                  //                       margin: EdgeInsets.only(
+                                  //                         top: 10,
+                                  //                         bottom: 40,
+                                  //                       ),
+                                  //                       width: 300,
+                                  //                       height: 700,
+                                  //                       child: Image.asset(
+                                  //                           "assets/Pergamino.png",
+                                  //                           fit: BoxFit.cover),
+                                  //                     ),
+                                  //                   ),
+                                  //                   Center(
+                                  //                       child: Container(
+                                  //                           decoration:
+                                  //                               BoxDecoration(),
+                                  //                           margin:
+                                  //                               EdgeInsets.only(
+                                  //                                   bottom:
+                                  //                                       370),
+                                  //                           child: Text(
+                                  //                               "ESTADISTICAS",
+                                  //                               style: TextStyle(
+                                  //                                   fontSize:
+                                  //                                       35,
+                                  //                                   color: Colors
+                                  //                                       .white,
+                                  //                                   fontFamily:
+                                  //                                       "caps")))),
+                                  //                   Center(
+                                  //                     child: Container(
+                                  //                       width: 200,
+                                  //                       margin: EdgeInsets.only(
+                                  //                           bottom: 170),
+                                  //                       decoration:
+                                  //                           BoxDecoration(),
+                                  //                       child: Text(
+                                  //                         "Daño golpeSencillo: " +
+                                  //                             golpeSencillo
+                                  //                                 .toString() +
+                                  //                             "\n \n"
+                                  //                                 "Daño sangrado: " +
+                                  //                             mostrarDanoDps
+                                  //                                 .toString() +
+                                  //                             "\n \n"
+                                  //                                 "Daño de katon: " +
+                                  //                             danoFuego
+                                  //                                 .toString() +
+                                  //                             "\n \n"
+                                  //                                 "Duracion tormenta: " +
+                                  //                             duracionTormenta
+                                  //                                 .toString() +
+                                  //                             "s" +
+                                  //                             "\n \n"
+                                  //                                 "Daño veneno/s: " +
+                                  //                             veneno.toString(),
+                                  //                         style: TextStyle(
+                                  //                             color:
+                                  //                                 Colors.white,
+                                  //                             fontFamily:
+                                  //                                 "caps"),
+                                  //                       ),
+                                  //                     ),
+                                  //                   ),
+                                  //                   Center(
+                                  //                       child: Container(
+                                  //                     margin: EdgeInsets.only(
+                                  //                         top: 200),
+                                  //                     height: 200,
+                                  //                     child: Image.asset(
+                                  //                         "assets/Casco.png"),
+                                  //                     decoration:
+                                  //                         BoxDecoration(),
+                                  //                   )),
+                                  //                 ],
+                                  //               ),
+                                  //             )
+                                  //           ],
+                                  //         ),
+                                  //       );
+                                  //     });
                                 }),
                               ),
                             ),
@@ -1965,6 +2045,7 @@ class StatesAppState extends State<StatesApp> {
                                     height: 120,
                                     child: InkWell(
                                       onTap: () {
+                                        mejora1Comprada = true;
                                         mejora1();
                                       },
                                     ),
