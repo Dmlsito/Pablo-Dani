@@ -1,0 +1,16 @@
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\bin\Debug\WpfSimulacroMarcos.exe.config
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\bin\Debug\WpfSimulacroMarcos.exe
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\bin\Debug\WpfSimulacroMarcos.pdb
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.csproj.AssemblyReference.cache
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.csproj.SuggestedBindingRedirects.cache
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\MainWindow.g.cs
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\App.g.cs
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos_MarkupCompile.cache
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos_MarkupCompile.lref
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\MainWindow.baml
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.g.resources
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.Properties.Resources.resources
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.csproj.GenerateResource.cache
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.csproj.CoreCompileInputs.cache
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.exe
+C:\Users\FP\source\repos\WpfSimulacroMarcos\WpfSimulacroMarcos\obj\Debug\WpfSimulacroMarcos.pdb

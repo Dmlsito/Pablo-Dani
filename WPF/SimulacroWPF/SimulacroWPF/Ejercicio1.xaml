@@ -1,0 +1,17 @@
+﻿<Window x:Class="SimulacroWPF.Ejercicio1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimulacroWPF"
+        mc:Ignorable="d"
+        Title="Ejercicio1" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Label Foreground="Brown" Content="Ejercicio 1" Name="labelContenido"></Label>
+            <TextBox Margin="5" Name="textBox"></TextBox>
+            <Button Margin="5" Content="Saludar" Click="Button_Click"></Button>
+            <Label Margin="5" Name="labelMostrado"></Label>
+        </StackPanel>
+    </Grid>
+</Window>

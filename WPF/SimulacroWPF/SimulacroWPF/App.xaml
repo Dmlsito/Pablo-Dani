@@ -1,0 +1,30 @@
+﻿<Application x:Class="SimulacroWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SimulacroWPF"
+             StartupUri="MainWindow.xaml">
+    
+    <!--
+        El primer Application.Resources marca un estilo para toda la aplicación para los botones
+    
+        El segundo Application.Resources marca un estilo que nombro de una forma determinada para luego llamarlo
+    -->
+    
+    <!--
+     <Application.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Aqua"/>
+        </Style>
+
+    </Application.Resources>
+    -->
+    
+    <Application.Resources>
+        <Style x:Key="EjemploDeclaracion" TargetType="TextBlock">
+            <Setter Property="Background" Value="Azure"></Setter>
+            <Setter Property="FontSize" Value="30"></Setter>
+        </Style>
+    </Application.Resources>
+    
+    
+</Application>

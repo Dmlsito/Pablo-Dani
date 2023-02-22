@@ -1,0 +1,23 @@
+﻿<Window x:Class="SimulacroWPF.DataBinding"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimulacroWPF"
+        mc:Ignorable="d"
+        Title="DataBinding" Height="450" Width="800">
+    
+    <!--
+            El Data binding en lo que aparece dentro de la etiqueta "Text" del segundo TextBlock, lo que hace es replicar lo que 
+            se escribe en el TextBox 1 en el 2, si pongo mode TwoWay se actualizaria lo que escribe el uno en el otro
+    -->
+        
+    
+    <StackPanel HorizontalAlignment="Center">
+        <TextBox Name="Area1" Width="100" Margin="100" Text=""></TextBox>
+        <TextBox Name="Area2" Width="100" Margin="5"
+                 Text="{Binding ElementName=Area1,Path=Text, Mode=OneWay}"
+                 ></TextBox>
+        
+    </StackPanel>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="SimulacroWPF.ControlesHijo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimulacroWPF"
+        mc:Ignorable="d"
+        Title="ControlesHijo" Height="450" Width="800">
+    
+    <!--
+        Seteando así las propiedades de los botones que esten dentro de el wrap panel unicamente, aunque puedo cambiar 
+        Pero si seteo en las propiedades de un boton en especifico las propiedades de forma diferente, estas prevalecen por encima de las marcadas por el WrapPanel
+    -->
+    <StackPanel>
+        <WrapPanel>
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="Purple"></Setter>
+                    <Setter Property="Background" Value="Black"></Setter>
+                </Style>
+            </WrapPanel.Resources>
+
+            <Button Content="Boton 1" BorderBrush="Blue" BorderThickness="3" Width="500" Height="30" Margin="60"></Button>
+            <Button Content="Boton 2" Margin="5,30,20,10"></Button>
+            <Button Content="Boton 3" Margin="0,100"  Foreground="Aqua" Background="Beige"></Button>
+            
+        </WrapPanel>
+    </StackPanel>
+</Window>
